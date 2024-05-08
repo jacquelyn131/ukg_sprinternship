@@ -3,8 +3,17 @@ package com.example.ukgtime;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Arrays;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -13,11 +22,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 
 @SpringBootApplication
-public class UkgTimeApplication {
+public class UkgTimeApplication implements CommandLineRunner {
 
+	private static final Logger log = LoggerFactory.getLogger(UkgTimeApplication.class);
 	public static void main(String[] args) throws IOException, FirebaseAuthException {
 		SpringApplication.run(UkgTimeApplication.class, args);
-		
+
+
 		// FirebaseOptions options = FirebaseOptions.builder()
 		// .setCredentials(GoogleCredentials.getApplicationDefault())
 		// .setDatabaseUrl("https://<DATABASE_NAME>.firebaseio.com/")
@@ -32,6 +43,26 @@ public class UkgTimeApplication {
 
 		FirebaseApp app = FirebaseApp.initializeApp(options);
 		FirebaseAuth defaultAuth = FirebaseAuth.getInstance(app);
+
+
+	}
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+
+	@Override
+	public void run(String... strings) throws Exception {
+
+		log.info("Creating tables");
+
+		jdbcTemplate.execute("DROP TABLE employees IF EXISTS");
+		jdbcTemplate.execute("CREATE TABLE employees(" +
+				"id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255), ssn CHAR(9), company_id INTEGER, " +
+				"dob DATE, profile_image MEDIUMBLOB");
+		// split up the array of whole names into an array of first/last names
+		List<Object[]> splitUpNames = Arrays.asList("John Woo", "Jeff Dean", "Josh Bloch", "Josh Long").stream()
+				.map(name-> name.split(" "))
+				.collect(Collectors.toList());
+
 	}
 
 }
