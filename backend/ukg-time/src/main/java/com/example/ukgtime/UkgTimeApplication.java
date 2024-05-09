@@ -34,15 +34,15 @@ public class UkgTimeApplication implements CommandLineRunner {
 		// .setDatabaseUrl("https://<DATABASE_NAME>.firebaseio.com/")
 		// .build();
 
-		//FileInputStream serviceAccount = new FileInputStream("keys\\firebaseKeys.json");
+		FileInputStream serviceAccount = new FileInputStream("keys\\firebaseKeys.json");
 
-//		@SuppressWarnings("deprecation")
-//		FirebaseOptions options = new FirebaseOptions.Builder()
-//		.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//		.build();
-//
-//		FirebaseApp app = FirebaseApp.initializeApp(options);
-//		FirebaseAuth defaultAuth = FirebaseAuth.getInstance(app);
+		@SuppressWarnings("deprecation")
+		FirebaseOptions options = new FirebaseOptions.Builder()
+		.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+		.build();
+
+		FirebaseApp app = FirebaseApp.initializeApp(options);
+		FirebaseAuth defaultAuth = FirebaseAuth.getInstance(app);
 
 
 	}
