@@ -6,16 +6,16 @@ public class Employee {
     private long employeeId;
     private String ssn;
     private String firstName, lastName;
-    private int company_id;
+    private int companyId;
     private String dob;
     private byte[] profileImage;
 
-    public Employee(long employeeId, String ssn, String firstName, String lastName, int company_id, String dob, byte[] profileImage) {
+    public Employee(long employeeId, String ssn, String firstName, String lastName, int companyId, String dob, byte[] profileImage) {
         this.employeeId = employeeId;
         this.ssn = ssn;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.company_id = company_id;
+        this.companyId = companyId;
         this.dob = dob;
         this.profileImage = profileImage;
     }
@@ -28,7 +28,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return String.format();
+        return String.format("Employee[id: %d, ssn: '%s', firstName: '%s', lastName: '%s'" +
+            "companyId: %d, dob: '%s', profileImage: '%s']", employeeId, ssn, firstName, lastName,
+                companyId, dob, profileImage.toString());
     }
 
     public long getEmployeeId() {
@@ -63,12 +65,12 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public int getCompany_id() {
-        return company_id;
+    public int getcompanyId() {
+        return companyId;
     }
 
-    public void setCompany_id(int company_id) {
-        this.company_id = company_id;
+    public void setcompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     public String getDob() {
