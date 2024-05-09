@@ -30,7 +30,7 @@ public class Employee {
     public String toString() {
         return String.format("Employee[id: %d, ssn: '%s', firstName: '%s', lastName: '%s'" +
             "companyId: %d, dob: '%s', profileImage: '%s']", employeeId, ssn, firstName, lastName,
-                companyId, dob, profileImage.toString());
+                companyId, dob, profileImage);
     }
 
     public long getEmployeeId() {
