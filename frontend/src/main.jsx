@@ -5,19 +5,21 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import App from './App.jsx';
-import Root from './routes/Root.jsx';
-import ErrorPage from './ErrorPage.jsx';
-import SignUp from './components/SignUp.jsx';
+import Layout from './layout/Layout.jsx';
+import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
+
+
+import SignInPage from './pages/SignIn/SignInPage.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <App /> },
       { path: '*', element: <ErrorPage />, error: true, message: 'Not Found'},
-      { path: '/signup', element: <SignUp />}
+      { path: '/signin', element: <SignInPage />},
     ],
   },
 ]);
