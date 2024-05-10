@@ -1,19 +1,25 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import SplashPage from './components/homepage/homepage.js'
-// import ErrorPage from "./Components/ErrorPage/ErrorPage.js"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { Button, Stack } from "react-bootstrap";
 
 const App = () => {
 
   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<SplashPage />} />
-//       </Routes>
-//     </BrowserRouter>
 
 
-      <div>Hello, world</div>
+      <div>Hello, world
+
+<Stack direction="horizontal" gap={2}>
+  <Button as="a" variant="primary">
+    Test Button
+  </Button>
+  <Button as="a" variant="success">
+    Test Button 2
+  </Button>
+</Stack>;
+
+      </div>
   );
 };
 
