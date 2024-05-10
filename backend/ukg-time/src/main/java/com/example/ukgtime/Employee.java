@@ -1,23 +1,21 @@
 package com.example.ukgtime;
 
-import java.util.Arrays;
-
 public class Employee {
     private long employeeId;
     private String ssn;
     private String firstName, lastName;
-    private int companyId;
     private String dob;
-    private byte[] profileImage;
+    private String email;
+    private long managerId;
 
-    public Employee(long employeeId, String ssn, String firstName, String lastName, int companyId, String dob, byte[] profileImage) {
+    public Employee(long employeeId, String ssn, String firstName, String lastName, String dob, String email, long managerId) {
         this.employeeId = employeeId;
         this.ssn = ssn;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.companyId = companyId;
         this.dob = dob;
-        this.profileImage = profileImage;
+        this.email = email;
+        this.managerId = managerId;
     }
 
     public Employee(long employeeId, String firstName, String lastName) {
@@ -28,9 +26,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return String.format("Employee[id: %d, ssn: '%s', firstName: '%s', lastName: '%s'" +
-            "companyId: %d, dob: '%s', profileImage: '%s']", employeeId, ssn, firstName, lastName,
-                companyId, dob, profileImage);
+        return String.format("Employee[id: %d, ssn: '%s', firstName: '%s', lastName: '%s', " +
+            "dob: '%s', email: '%s', managerId: %d]", employeeId, ssn, firstName, lastName,
+                dob, email, managerId);
     }
 
     public long getEmployeeId() {
@@ -65,14 +63,6 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public int getcompanyId() {
-        return companyId;
-    }
-
-    public void setcompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
     public String getDob() {
         return dob;
     }
@@ -81,11 +71,19 @@ public class Employee {
         this.dob = dob;
     }
 
-    public byte[] getProfileImage() {
-        return profileImage;
+    public String getEmail() {
+        return email;
     }
 
-    public void setProfileImage(byte[] profileImage) {
-        this.profileImage = profileImage;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public long getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(long managerId) {
+        this.managerId = managerId;
     }
 }

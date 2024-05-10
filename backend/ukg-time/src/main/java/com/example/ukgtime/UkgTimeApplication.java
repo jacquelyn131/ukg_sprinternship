@@ -56,8 +56,8 @@ public class UkgTimeApplication implements CommandLineRunner {
 
 		jdbcTemplate.execute("DROP TABLE IF EXISTS employees");
 		jdbcTemplate.execute("CREATE TABLE employees(" +
-				"id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255), ssn CHAR(9), company_id INTEGER, " +
-				"dob DATE, profile_image MEDIUMBLOB)");
+				"employee_id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255), ssn CHAR(9), " +
+				"dob DATE, manager_id INTEGER, email VARCHAR(255))");
 		// split up the array of whole names into an array of first/last names
 		List<Object[]> splitUpNames = Arrays.asList("John Woo", "Jeff Dean", "Josh Bloch", "Josh Long").stream()
 				.map(name-> name.split(" "))
@@ -72,8 +72,8 @@ public class UkgTimeApplication implements CommandLineRunner {
 
 		log.info("Querying for employee records where first_name = 'Josh':");
 		jdbcTemplate.query(
-				"SELECT id, first_name, last_name FROM employees WHERE first_name = ?",
-				(rs, rowNum) -> new Employee(rs.getLong("id"),
+				"SELECT employee_id, first_name, last_name FROM employees WHERE first_name = ?",
+				(rs, rowNum) -> new Employee(rs.getLong("employee_id"),
 						rs.getString("first_name"), rs.getString("last_name")), "Josh")
 				.forEach(employee-> log.info(employee.toString()));
 
