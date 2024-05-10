@@ -1,0 +1,6 @@
+@import "../../../Variables.css";
+
+#root {
+    background: var(--backgroundGradient)
+}
+
