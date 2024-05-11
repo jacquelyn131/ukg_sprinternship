@@ -1,0 +1,55 @@
+:root {
+    --yellow: #FFC600;
+    --gray: #B7B7B7;
+    --dark-teal: #005151;
+}
+
+#navbarLogo {
+    height: 30px;
+    margin-left: 10px;
+}
+
+.navbarButton {
+    background-color: var(--yellow);
+    border-radius: 50px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    color: var(--dark-teal);
+    padding: 5px 20px;
+    max-width: 50%;
+    font-size: inherit;
+}
+
+.navbarButton:hover, .navbarButton:active {
+    background-color: var(--dark-teal);
+    color: white;
+    border: 1px solid var(--dark-teal);
+    cursor: pointer;
+}
+
+.navbarButton:active {
+    background: #002c2c !important;
+    color: rgb(255, 255, 255, .7);
+}
+
+
+/* .navLink:hover {
+    text-decoration: underline;
+} */
+
+.navlinksContainer {
+    column-gap: 20px;
+    align-items: center;
+    padding: 0 20px;
+    font-family: 'Source Sans Pro';
+
+}
+
+.navbar {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.255);
+}
+

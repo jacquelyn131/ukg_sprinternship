@@ -22,7 +22,7 @@ const App = () => {
   <Button as="a" variant="success">
     Test Button 2
   </Button>
-</Stack>;
+</Stack>
 
       </div>
   );
