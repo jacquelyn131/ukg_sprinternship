@@ -126,7 +126,19 @@ public class UkgTimeApplication implements CommandLineRunner {
 		jdbcTemplate.execute("DROP TABLE IF EXISTS company_location");
 		jdbcTemplate.execute("CREATE TABLE company_location (" +
 				"company_office_id INTEGER NOT NULL PRIMARY KEY, " +
-				"location POINT)");
+				"location POINT, " +
+				"radius FLOAT(3,3))");
+		// insert values into company_location
+		CompanyLocation ukgLoc = new CompanyLocation(3, new double[]{26.089835, -80.366919}, 0.005);
+		CompanyLocation santasWorkshopLoc = new CompanyLocation(4, new double[]{84.999983, -135.000971}, 0.005);
+		CompanyLocation kittenIncLoc = new CompanyLocation(5, new double[]{37.779585, -122.483034}, 0.005);
+		log.info("" + kittenIncLoc.getLocation()[0]);
+		jdbcTemplate.update("INSERT INTO company_location (company_office_id, location, radius) VALUES " +
+				"(?, POINT(?, ?), ?), (?, POINT(?, ?), ?), (?, POINT(?, ?), ?)", ukgLoc.getCompanyOfficeId(), ukgLoc.getLocation()[0], ukgLoc.getLocation()[1],
+				ukgLoc.getRadius(), santasWorkshopLoc.getCompanyOfficeId(), santasWorkshopLoc.getLocation()[0], santasWorkshopLoc.getLocation()[1],
+				santasWorkshopLoc.getRadius(), kittenIncLoc.getCompanyOfficeId(), kittenIncLoc.getLocation()[0], kittenIncLoc.getLocation()[1],
+				kittenIncLoc.getRadius());
+
 
 
 	}
