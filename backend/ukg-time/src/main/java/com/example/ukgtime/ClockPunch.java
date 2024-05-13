@@ -6,10 +6,10 @@ public class ClockPunch {
     private long employeeId;
     private long officeId;
     private String type;
-    private String valid; // either true or false or null
+    private Boolean valid; // either true or false or null
     private String comments;
 
-    public ClockPunch(String dateTime, long punchId, long employeeId, long officeId, String type, String valid, String comments) {
+    public ClockPunch(String dateTime, long punchId, long employeeId, long officeId, String type, Boolean valid, String comments) {
         this.dateTime = dateTime;
         this.punchId = punchId;
         this.employeeId = employeeId;
@@ -19,7 +19,7 @@ public class ClockPunch {
         this.comments = comments;
     }
 
-    public ClockPunch(String dateTime, long employeeId, long officeId, String type, String valid, String comments) {
+    public ClockPunch(String dateTime, long employeeId, long officeId, String type, Boolean valid, String comments) {
         this.dateTime = dateTime;
         this.employeeId = employeeId;
         this.officeId = officeId;
@@ -75,11 +75,11 @@ public class ClockPunch {
         this.type = type;
     }
 
-    public String getValid() {
+    public Boolean getValid() {
         return valid;
     }
 
-    public void setValid(String valid) {
+    public void setValid(Boolean valid) {
         this.valid = valid;
     }
 

@@ -154,6 +154,56 @@ public class UkgTimeApplication implements CommandLineRunner {
 				jeffProfImage.geteId(), jeffProfImage.getProfileImage(), joshBProfImage.geteId(),
 				joshBProfImage.getProfileImage());
 
+		// create employee_company
+		log.info("creating employee_company table...");
+		jdbcTemplate.execute("DROP TABLE IF EXISTS employee_company");
+		jdbcTemplate.execute("CREATE TABLE employee_company (" +
+				"e_id INTEGER NOT NULL, " +
+				"company_id INTEGER NOT NULL)");
+		EmployeeCompany johnCompany = new EmployeeCompany(1, 1);
+		EmployeeCompany jeffCompany = new EmployeeCompany(2, 2);
+		EmployeeCompany joshBCompany = new EmployeeCompany(3, 3);
+		jdbcTemplate.update("INSERT INTO employee_company (e_id, company_id) " +
+						"VALUES (?, ?), (?, ?), (?, ?)",
+				johnCompany.geteId(), johnCompany.getCompanyId(), jeffCompany.geteId(),
+				jeffCompany.getCompanyId(), joshBCompany.geteId(), joshBCompany.getCompanyId());
+
+		log.info("creating zip table...");
+		jdbcTemplate.execute("DROP TABLE IF EXISTS zip");
+		jdbcTemplate.execute("CREATE TABLE zip (" +
+				"city VARCHAR(255) NOT NULL, " +
+				"state CHAR(2) NOT NULL, " +
+				"zip CHAR(5) NOT NULL)");
+		// insert rows into zip
+		Zip ukgZip = new Zip("Weston", "FL", "33326");
+		Zip santasWorkshopZip = new Zip("North Pole", "AK", "12345");
+		Zip kittensZip = new Zip("San Francisco", "CA", "55555" );
+		jdbcTemplate.update("INSERT INTO zip (city, state, zip) " +
+				"VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?)", ukgZip.getCity(), ukgZip.getState(), ukgZip.getZip(),
+				santasWorkshopZip.getCity(), santasWorkshopZip.getState(), santasWorkshopZip.getZip(),
+				kittensZip.getCity(), kittensZip.getState(), kittensZip.getZip());
+
+		log.info("creating clock_punch table...");
+		jdbcTemplate.execute("DROP TABLE IF EXISTS clock_punch");
+		jdbcTemplate.execute("CREATE TABLE clock_punch (" +
+				"date_time DATETIME NOT NULL, " +
+				"punch_id SERIAL NOT NULL PRIMARY KEY, " +
+				"employee_id INTEGER NOT NULL, " +
+				"office_id INTEGER NOT NULL, " +
+				"type VARCHAR(9) NOT NULL, " +
+				"valid BOOLEAN, " +
+				"comments TEXT(280), " +
+				"CONSTRAINT CHK_type CHECK (type IN ('IN', 'OUT', 'BREAK-IN', 'BREAK-OUT')))");
+		// insert rows into clock_punch
+		ClockPunch johnPunch = new ClockPunch("2024-05-13 14:05:00", 1, 1, "IN", false, "nice weather today");
+		ClockPunch jeffPunch = new ClockPunch("2024-05-13 14:06:30", 2, 2, "OUT", false, "what a beautiful day");
+		ClockPunch joshBPunch = new ClockPunch("2024-05-13 14:06:38", 3, 3, "BREAK-IN", false, "clear blue skies");
+		jdbcTemplate.update("INSERT INTO clock_punch (date_time, employee_id, office_id, type, valid, comments) " +
+						"VALUES (?, ?, ?, ?, ?, ?), (?, ?, ?, ?, ?, ?), (?, ?, ?, ?, ?, ?)",
+				johnPunch.getDateTime(), johnPunch.getEmployeeId(), johnPunch.getOfficeId(), johnPunch.getType(), johnPunch.getValid(),
+				johnPunch.getComments(), jeffPunch.getDateTime(), jeffPunch.getEmployeeId(), jeffPunch.getOfficeId(), jeffPunch.getType(),
+				jeffPunch.getValid(), jeffPunch.getComments(), joshBPunch.getDateTime(), joshBPunch.getEmployeeId(), joshBPunch.getOfficeId(),
+				joshBPunch.getType(), joshBPunch.getValid(), joshBPunch.getComments());
 
 	}
 
