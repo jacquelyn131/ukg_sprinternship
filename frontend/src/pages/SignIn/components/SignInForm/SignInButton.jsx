@@ -18,7 +18,7 @@ const SignInButton = ({ children }) => {
           }
         `}
       </style>
-        <Button className="btn-flat">
+        <Button type="submit" className="btn-flat">
             {children}
         </Button>
     </>

@@ -15,17 +15,11 @@ import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Arrays;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-
 @SpringBootApplication
 public class UkgTimeApplication implements CommandLineRunner {
 
 	private static final Logger log = LoggerFactory.getLogger(UkgTimeApplication.class);
-	public static void main(String[] args) throws IOException, FirebaseAuthException {
+	public static void main(String[] args) {
 		SpringApplication.run(UkgTimeApplication.class, args);
 
 
