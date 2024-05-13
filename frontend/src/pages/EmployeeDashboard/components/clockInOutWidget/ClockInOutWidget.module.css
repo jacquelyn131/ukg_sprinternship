@@ -1,6 +1,36 @@
-.test {
+h1 {
+font-family: 'Volte Rounded';
+font-weight: 600;
+font-size: 2em;
+}
 
-color: red;}
+h2 {
+font-size: 1.5em;
+}
+
+.clock {
+font-family: 'Volte Rounded';
+font-weight: 500;
+font-kerning: 7%;
+color: black;}
 
 .button {
-background-color: pink;}
+font-family: 'Volte Rounded';
+font-weight: 500;
+font-size: 15px;
+color: white;
+background-color: #005151;
+border-width: 0;
+border-radius: 16px;
+width: 18em;
+height: 4em;}
+
+.button:hover {
+background-color:  #107E7E;
+}
+
+.personal {
+font-family: 'Volte Rounded';
+font-weight: regular;
+color: #005151;
+}
