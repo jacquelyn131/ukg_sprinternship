@@ -1,0 +1,18 @@
+
+.featureCard {
+max-width: 25vw;
+word-wrap: break-word;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+}
+
+.featureCard img {
+max-width: 80%;
+margin-bottom: 20px;
+}
+
+.featureCard p {
+font-size: .9rem;
+}
