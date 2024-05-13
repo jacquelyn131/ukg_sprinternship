@@ -76,6 +76,52 @@ public class UkgTimeApplication implements CommandLineRunner {
 				(rs, rowNum) -> new Employee(rs.getLong("employee_id"),
 						rs.getString("first_name"), rs.getString("last_name")), "Josh")
 				.forEach(employee-> log.info(employee.toString()));
+		log.info("setting up tables...");
+
+		jdbcTemplate.execute("DROP TABLE IF EXISTS company");
+		jdbcTemplate.execute("CREATE TABLE company(" +
+				"company_id SERIAL PRIMARY KEY NOT NULL, company_name VARCHAR(255), headquarters_id INTEGER)");
+		// insert example companies into table: UKG, Santa's Workshop, Kittens Inc.
+		//  using batch update with a list of objects
+		Company ukg = new Company(1, "UKG", 12);
+		Company santasWorkshop = new Company(2, "Santa's Workshop", 13);
+		Company kittensInc = new Company(3, "Kittens Inc.", 14);
+		List<Company> companies = Arrays.asList(ukg, santasWorkshop, kittensInc);
+		companies.forEach(company->
+				log.info(String.format("Inserting company record for %s", company.getCompanyName())));
+
+		// use jdbctemplate batchupdate to insert multiple
+		// insert statements to insert multiple
+		jdbcTemplate.update(
+				"INSERT INTO company (company_id, company_name, headquarters_id) " +
+						"VALUES (?, ?, ?), " +
+						"(?, ?, ?), " +
+						"(?, ?, ?)", ukg.getCompanyId(), ukg.getCompanyName(), ukg.getHeadquartersId(),
+				santasWorkshop.getCompanyId(), santasWorkshop.getCompanyName(), santasWorkshop.getHeadquartersId(),
+				kittensInc.getCompanyId(), kittensInc.getCompanyName(), kittensInc.getHeadquartersId());
+
+		log.info("creating company_address table...");
+		jdbcTemplate.execute("DROP TABLE IF EXISTS company_address");
+		jdbcTemplate.execute("CREATE TABLE company_address (" +
+				"company_id INTEGER, " +
+				"company_office_id INTEGER, " +
+				"street VARCHAR(255), " +
+				"zip CHAR(5), " +
+				"country CHAR(3))");
+		// insert values into company address
+		CompanyAddress ukgAddr = new CompanyAddress(1, 3, "2500 N Commerce Pkwy", "33326", "USA");
+		CompanyAddress santasWorkshopAddr = new CompanyAddress(2, 4, "1 N 1st Lane", "12345", "USA");
+		CompanyAddress kittensIncAddr = new CompanyAddress(3, 5, "123 Meow Blvd", "55555", "USA");
+
+		jdbcTemplate.update("INSERT INTO company_address (company_id, company_office_id, street, zip, country)" +
+				" VALUES (?, ?, ?, ?, ?), " +
+				"(?, ?, ?, ?, ?), " +
+				"(?, ?, ?, ?, ?)", ukgAddr.getCompanyId(), ukgAddr.getCompanyOfficeId(), ukgAddr.getStreet(), ukgAddr.getZip(), ukgAddr.getCountry(),
+				santasWorkshopAddr.getCompanyId(), santasWorkshopAddr.getCompanyOfficeId(), santasWorkshopAddr.getStreet(), santasWorkshopAddr.getZip(),
+					santasWorkshopAddr.getCountry(), kittensIncAddr.getCompanyId(), kittensIncAddr.getCompanyOfficeId(), kittensIncAddr.getStreet(),
+				kittensIncAddr.getZip(), kittensIncAddr.getCountry()
+				);
+
 
 	}
 
