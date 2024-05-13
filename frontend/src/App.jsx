@@ -4,10 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Stack } from "react-bootstrap";
 
 const App = () => {
-
   return (
-
-
       <div>Hello, world
 
 <Stack direction="horizontal" gap={2}>
