@@ -139,6 +139,20 @@ public class UkgTimeApplication implements CommandLineRunner {
 				santasWorkshopLoc.getRadius(), kittenIncLoc.getCompanyOfficeId(), kittenIncLoc.getLocation()[0], kittenIncLoc.getLocation()[1],
 				kittenIncLoc.getRadius());
 
+		log.info("creating profile_image table");
+
+		jdbcTemplate.execute("DROP TABLE IF EXISTS profile_image");
+		jdbcTemplate.execute("CREATE TABLE profile_image (" +
+				"e_id INTEGER NOT NULL," +
+				"profile_image MEDIUMBLOB)");
+		// insert rows into profile image
+		ProfileImage johnProfImage = new ProfileImage(1, null);
+		ProfileImage jeffProfImage = new ProfileImage(2, null);
+		ProfileImage joshBProfImage = new ProfileImage(3, null);
+		jdbcTemplate.update("INSERT INTO profile_image (e_id, profile_image) " +
+				"VALUES (?,?), (?,?), (?,?)", johnProfImage.geteId(), johnProfImage.getProfileImage(),
+				jeffProfImage.geteId(), jeffProfImage.getProfileImage(), joshBProfImage.geteId(),
+				joshBProfImage.getProfileImage());
 
 
 	}
