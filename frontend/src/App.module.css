@@ -14,7 +14,8 @@
     left: 0;
     height: 100%;
     width: 100%;
-background: linear-gradient(0deg, #ffffff, #ffffff, #ffffff, #ffffff, #e7f8f5, #cff2eb, #b6ebe1, #9ce4d8, #80ddce, #5fd5c4, #30cebb);    opacity: .4; /* Adjust the opacity as needed */
+    background: linear-gradient(0deg, #ffffff, #ffffff, #ffffff, #ffffff, #e7f8f5, #cff2eb, #b6ebe1, #9ce4d8, #80ddce, #5fd5c4, #30cebb);
+    opacity: .4;
     z-index: 1;
 
 }
