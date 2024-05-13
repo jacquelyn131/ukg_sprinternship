@@ -15,14 +15,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class JdbcCorporateEventDao implements CorporateEventDao{
     private JdbcTemplate jdbcTemplate;
-
+    private DataSource datasource;
     @Autowired
     public void setDataSource(DataSource datasource) {
         this.jdbcTemplate = new JdbcTemplate(datasource);
     }
 
+    public DataSource getDatasource() {
+        return this.datasource;
+    }
     public boolean add(Employee employee) {
         // TODO: finish
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         jdbcTemplate.update("INSERT INTO employees(first_name, last_name) " +
                 "VALUES (?,?)", employee.getFirstName(), employee.getLastName());
         System.out.println("inserted an employee successfully");

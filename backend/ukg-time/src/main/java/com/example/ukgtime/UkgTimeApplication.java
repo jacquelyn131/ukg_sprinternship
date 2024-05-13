@@ -23,7 +23,7 @@ public class UkgTimeApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(UkgTimeApplication.class, args);
 		JdbcCorporateEventDao jdbcCorporateEventDao = new JdbcCorporateEventDao();
-		jdbcCorporateEventDao.setDataSource(new DataSource()
+
 		log.info("found employee: " + jdbcCorporateEventDao.find(1));
 
 		// FirebaseOptions options = FirebaseOptions.builder()
