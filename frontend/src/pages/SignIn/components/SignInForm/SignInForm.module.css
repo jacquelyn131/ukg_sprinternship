@@ -1,11 +1,18 @@
 @import "../../../Variables.css";
 
-#root {
-    background: var(--backgroundGradient)
+#signInForm {
+display: flex;
+flex-direction: column;
+gap: 5px;
+
 }
 
-@media screen and (min-width: 500px) {
-    .container-sm {
-        background-color: black;
-    }
+#signInForm input:not([type="submit"]) { border: 1px solid var(--light-teal);
+padding: 10px;}
+
+#signInForm button:hover { background-color: var(--light-teal); }
+
+#signInForm button {
+align-self: center;
+border: 1px solid transparent;
 }

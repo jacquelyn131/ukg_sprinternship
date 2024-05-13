@@ -1,4 +1,4 @@
-import './SignInForm.module.css';
+import styles from './SignInForm.module.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -49,12 +49,11 @@ const SignInForm = () => {
     return (
         <>
             <Container fluid="sm">
-                <Form onSubmit={handleLogin}>
+                <Form onSubmit={handleLogin} id={styles.signInForm}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control 
+                        <Form.Control
                             type="email" 
-                            placeholder="Enter email" 
+                            placeholder="Email Address"
                             value = {email}
                             onChange={(e) => setEmail(e.target.value)}    
                         />
@@ -64,8 +63,7 @@ const SignInForm = () => {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control 
+                        <Form.Control
                             type="password" 
                             placeholder="Password" 
                             value = {password}
@@ -73,7 +71,7 @@ const SignInForm = () => {
                         />
                     </Form.Group>
                     <SignInButton>
-                        Sign In
+                        Log In
                     </SignInButton>
                 </Form>
             </Container>

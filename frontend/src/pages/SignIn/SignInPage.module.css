@@ -1,0 +1,51 @@
+.signInWrapper {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(0deg, #ffffff, #e7f8f5, #cff2eb, #b6ebe1, #9ce4d8, #80ddce, #5fd5c4, #30cebb);
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 1;
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.contentWrapper h1 {
+  font-family: 'Volte Rounded';
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--dark-teal);
+}
+
+@media screen and (max-width: 500px) {
+  .signInWrapper {
+    height: 100% !important;
+  }
+
+  .contentWrapper {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25vh;
+    box-shadow: none;
+  }
+
+  .contentWrapper h1 {
+    font-size: 1.6rem;
+  }
+}
