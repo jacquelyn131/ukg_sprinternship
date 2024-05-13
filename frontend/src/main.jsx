@@ -8,6 +8,7 @@ import App from './App.jsx';
 import Layout from './layout/Layout.jsx';
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
 
+import EmployeeDashboard from './pages/EmployeeDashboard/EmployeeDashboard.jsx'
 
 import SignInPage from './pages/SignIn/SignInPage.jsx';
 
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { index: true, element: <App /> },
       { path: '*', element: <ErrorPage />, error: true, message: 'Not Found'},
       { path: '/signin', element: <SignInPage />},
+      { path: '/dashboard', element: <EmployeeDashboard />}
     ],
   },
 ]);
