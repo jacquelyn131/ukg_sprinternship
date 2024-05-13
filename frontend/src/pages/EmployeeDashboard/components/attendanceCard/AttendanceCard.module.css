@@ -1,0 +1,22 @@
+.all {
+padding: 2rem 2rem;
+border-radius: 2rem;
+background-color: grey;
+}
+
+.punchContainer{
+inline-flex: left;
+}
+
+.clockIn{
+display: flex;
+justify-content: center;
+}
+
+.clockOut{
+display: flex;
+justify-content: right;
+align-items: center;
+
+}
+
