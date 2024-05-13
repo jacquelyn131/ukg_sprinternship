@@ -11,7 +11,7 @@ import classNames from 'classnames';
 const Layout = () => {
 
   const logoPath =  
-  './UKGtimelogo.svg'; 
+  './images/UKGtimelogo.svg';
 
   const [navbarHeight, setNavbarHeight] = useState(0);
 

@@ -1,3 +1,6 @@
 :root {
     --backgroundGradient: linear-gradient(to bottom, #30CEBB 0%, #FFF 22%);
+    --yellow: #FFC600;
+    --gray: #B7B7B7;
+    --dark-teal: #005151;
 }

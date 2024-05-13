@@ -1,0 +1,129 @@
+@import './fonts.css';
+
+.homepageWrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.homepageWrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+background: linear-gradient(0deg, #ffffff, #ffffff, #ffffff, #ffffff, #e7f8f5, #cff2eb, #b6ebe1, #9ce4d8, #80ddce, #5fd5c4, #30cebb);    opacity: .4; /* Adjust the opacity as needed */
+    z-index: 1;
+
+}
+
+.homepageWrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('/backgrounds/ukg-pattern.png');
+    background-size: cover;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.contentWrapper {
+    position: relative;
+    z-index: 2;
+    color: black;
+    word-wrap: break-word;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+padding-top: 10vh;
+
+}
+
+.header {
+font-family: 'Volte Rounded';
+color: var(--dark-teal);
+display: flex;
+align-items: center;
+justify-content: center;
+height: 30vh;
+gap: 20px;
+min-width: 60%;
+padding: 20px;
+margin: 20px;
+}
+
+.header img {
+max-height: 125%;
+width: auto;
+
+}
+
+.header p {
+font-weight: 400;
+color: black;
+}
+
+.header h1 {
+    font-size: 2rem;
+    padding: 0;
+
+}
+
+.features {
+padding: 10vh 0;
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+font-family: 'Volte Rounded';
+}
+
+.featuresContent {
+text-align: center;
+padding: 30px 20px;
+max-width: 50%;
+}
+
+@media (min-width: 768px) {
+    .featuresContent {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .featuresContent {
+        max-width: 90%;
+    }
+}
+
+.features {
+padding-top: 15vh;
+}
+
+.features h2 {
+font-weight: 600;
+font-size: 2rem;
+}
+
+.features h3 {
+font-size: 1.5rem;
+}
+
+.features p {
+font-size: 1rem;
+}
+
+
+
+.featureCardContainer {
+display: flex;
+flex-wrap: wrap;
+gap: 5vw;
+}

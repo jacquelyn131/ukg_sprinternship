@@ -33,14 +33,14 @@
     font-weight: normal;
     font-style: normal;
   }
-  
+
   @font-face {
     font-family: 'Source Sans Pro';
-    src: url('../fonts/SourceSans/SourceSansPro-SemiBold.ttf') format('truetype');
-    font-weight: 600;
+    src: url('../fonts/SourceSans/SourceSansPro-Light.ttf') format('truetype');
+    font-weight: 300;
     font-style: normal;
   }
-  
+
   @font-face {
     font-family: 'Source Sans Pro';
     src: url('../fonts/SourceSans/SourceSansPro-Bold.ttf') format('truetype');
