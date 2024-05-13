@@ -51,7 +51,7 @@ const Layout = () => {
                 <Nav.Link href="/" className={classNames(styles.navLink)}> 
                         Home
                     </Nav.Link> 
-                    <Nav.Link href="#features" className={classNames(styles.navLink)}> 
+                    <Nav.Link href="/#features" className={classNames(styles.navLink)}>
                         Features
                     </Nav.Link>
                       <Nav.Link href="/dashboard" className={classNames(styles.navLink)}>
