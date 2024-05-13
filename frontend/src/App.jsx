@@ -5,10 +5,7 @@ import './App.css';
 import { Button, Stack } from "react-bootstrap";
 
 const App = () => {
-
   return (
-
-
       <div>Hello, world
 
         <div className="test">
