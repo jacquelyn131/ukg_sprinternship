@@ -122,6 +122,12 @@ public class UkgTimeApplication implements CommandLineRunner {
 				kittensIncAddr.getZip(), kittensIncAddr.getCountry()
 				);
 
+		log.info("creating company_location table...");
+		jdbcTemplate.execute("DROP TABLE IF EXISTS company_location");
+		jdbcTemplate.execute("CREATE TABLE company_location (" +
+				"company_office_id INTEGER NOT NULL PRIMARY KEY, " +
+				"location POINT)");
+
 
 	}
 
