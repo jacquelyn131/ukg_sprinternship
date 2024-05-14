@@ -63,7 +63,7 @@ margin-right: auto;
 .locationIcon {
 height: 22px;
 width: 18px;
-opacity: 0.4;
+opacity: 0.6;
 border: none;
 align-items: center;
 justify-content: center;
@@ -72,8 +72,8 @@ margin-left: auto;
 
 .location {
 display: flex;
-height: 36px;
-width: ;
+height: 2.5em;
+width: 20em;
 gap: 8px;
 background-color: #E4FAD9;
 border-color: #C9ECB9;
@@ -82,7 +82,8 @@ align-items: center;
 justify-content: center;
 flex-direction: row;
 padding: auto;
-border-radius: 16px;
+border-radius: 30px;
+margin-bottom: 8px;
 }
 
 .clockLocation {
