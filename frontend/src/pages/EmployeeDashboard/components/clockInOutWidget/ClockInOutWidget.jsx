@@ -48,6 +48,7 @@ const ClockInOutWidget = () => {
 
     return (
         <>
+        <div className = {styles.clockinComponents}>
             <div className={styles.clock}>
                 <h2>Clock</h2>
                 <h1>{currentTime}</h1>
@@ -57,15 +58,24 @@ const ClockInOutWidget = () => {
                 <h5>Sunny day, bright vibes</h5>
             </div>
 
-            <form action="POST" onSubmit={(e) => {
-                e.preventDefault();
+<div className={styles.clockLocation}>
+     <form action="POST" onSubmit={(e) => {
+                    e.preventDefault();
 
-                geolocation(e); // Passing event to geolocation function
-            }}>
-                <div className={styles.buttonContainer}>
-                    <Button type="submit" className={styles.button} variant="primary" size="lg">Clock In</Button>{' '}
-                </div>
+                    geolocation(e); // Passing event to geolocation function
+                }}>
+            <div className={styles.buttonContainer}>
+                <Button className={styles.button}>Clock In</Button>{' '}
+            </div>
             </form>
+
+            <div className={styles.location}>
+                <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                <h6 >You are within office reach</h6>
+            </div>
+            </div>
+            </div>
+
         </>
     );
 

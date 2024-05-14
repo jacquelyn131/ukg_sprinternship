@@ -14,7 +14,7 @@ function CustomDateFormat() {
 
     return (
         <div className={styles.date}>
-            <h5>{newDate}</h5>
+            <h4>{newDate}</h4>
         </div>
     );
 }
