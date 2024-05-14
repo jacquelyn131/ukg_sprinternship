@@ -39,6 +39,8 @@ public class UkgTimeApplication implements CommandLineRunner {
 		SpringApplication.run(UkgTimeApplication.class, args);
 
 		log.info("found employee: " + dao.find(1));
+		log.info("all employees: " + dao.list());
+
 
 		// FirebaseOptions options = FirebaseOptions.builder()
 		// .setCredentials(GoogleCredentials.getApplicationDefault())
