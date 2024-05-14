@@ -15,7 +15,7 @@ const EmployeeDashboard = () =>
        {/*} <div>Test</div>
         <ClockInOutWidget />*/}
 
-        <div><h2>My Attendance</h2></div>
+        <div><h1>My Attendance</h1></div>
         <AttendanceCard test="Hello World" />
 
         <div>

@@ -1,9 +1,74 @@
 .all {
-padding: 2rem 2rem;
-border-radius: 2rem;
-background-color: grey;
+display: flex;
+flex-direction: column;
+
+padding: 24px;
+background-color: #FFFFFF;
+color: #005151;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+border-radius:30px;
+height: 140px;
+width: 500px;
+
+align-items: left;
 }
 
+h1{
+color: #005151;
+}
+
+h4{
+display: flex;
+font-size: .75em;
+}
+
+h3{
+
+}
+
+.date{
+color: #757575;
+font-family: "volte rounded";
+font-weight: 500;
+}
+
+.totalHours{
+font-size: 2em;
+font-family: "volte rounded";
+font-weight: 500;
+}
+
+.clockIn{
+font-size: 1.5em;
+color: #757575;
+font-family: "volte rounded";
+}
+
+.clockOut{
+font-size: 1.5em;
+color: #757575;
+font-family: "volte rounded";
+}
+
+.num8{
+color: black;
+font-family: "volte rounded";
+}
+
+.num6{
+color: black;
+font-family: "volte rounded";
+font-weight: 500;
+}
+
+.num2{
+font-family: "volte rounded";
+color: black;
+font-weight: 500;
+}
+
+
+/*
 .punchContainer{
 inline-flex: left;
 }
@@ -20,3 +85,10 @@ align-items: center;
 
 }
 
+*/
+
+.punchContainer {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
