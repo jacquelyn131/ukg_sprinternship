@@ -19,6 +19,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.sql.DataSource;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Arrays;
@@ -29,7 +30,9 @@ public class UkgTimeApplication implements CommandLineRunner {
 	private static final Logger log = LoggerFactory.getLogger(UkgTimeApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(UkgTimeApplication.class, args);
+		JdbcCorporateEventDao jdbcCorporateEventDao = new JdbcCorporateEventDao();
 
+		log.info("found employee: " + jdbcCorporateEventDao.find(1));
 
 		// FirebaseOptions options = FirebaseOptions.builder()
 		// .setCredentials(GoogleCredentials.getApplicationDefault())
@@ -208,5 +211,6 @@ public class UkgTimeApplication implements CommandLineRunner {
 				joshBPunch.getType(), joshBPunch.getValid(), joshBPunch.getComments());
 
 	}
+
 
 }
