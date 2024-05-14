@@ -10,20 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class JdbcCorporateEventDao implements CorporateEventDao{
+import com.example.ukgtime.Employee.Employee;
+
+@Component
+public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
     private JdbcTemplate jdbcTemplate;
-    private DataSource datasource;
+
     @Autowired
-    public void setDataSource(DataSource datasource) {
-        this.jdbcTemplate = new JdbcTemplate(datasource);
+    public JdbcCorporateEventDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
-    public DataSource getDatasource() {
-        return this.datasource;
-    }
+
     public boolean add(Employee employee) {
         // TODO: finish
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
