@@ -102,6 +102,11 @@ max-width: 50%;
     .featuresContent {
         max-width: 90%;
     }
+
+      .header {
+    display: flex;
+            flex-direction: column;
+            padding: 50px 25px;}
 }
 
 .features {
