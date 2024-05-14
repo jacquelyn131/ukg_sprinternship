@@ -8,6 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.example.ukgtime.Company.*;
+import com.example.ukgtime.Employee.*;
+
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.List;
