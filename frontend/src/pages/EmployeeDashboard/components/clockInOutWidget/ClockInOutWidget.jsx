@@ -25,20 +25,21 @@ const ClockInOutWidget = () => {
     const geolocation = (e) => {
         e.preventDefault();
     
-        const showPosition = (position) => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
+        const showPosition = async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
     
-            console.log(latitude, longitude); // Log coordinates to verify
+            console.log(lat, lon); // Log coordinates to verify
     
             // Create an object with latitude and longitude
             const userLoc = {
-                lat: latitude,
-                lon: longitude
+                latitude: lat,
+                longitude: lon
             };
     
             // Call your endpoint to send location data to the server
-            // endpoints.locationChecker(userLoc);
+            const locationResponse = await endpoints.locationChecker(userLoc);
+            console.log(locationResponse)
         };
     
         // Request the user's current position
