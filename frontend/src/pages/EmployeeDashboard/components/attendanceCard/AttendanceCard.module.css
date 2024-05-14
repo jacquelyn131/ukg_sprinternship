@@ -1,16 +1,15 @@
 .all {
 display: flex;
 flex-direction: column;
-
-padding: 24px;
+padding: 15px;
 background-color: #FFFFFF;
 color: #005151;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-border-radius:30px;
-height: 140px;
+border-radius:16px;
+height: 7.8em;
 width: 500px;
-
 align-items: left;
+justify-content: center;
 }
 
 h1{
@@ -23,7 +22,7 @@ font-size: .75em;
 }
 
 h3{
-
+font-size: .80em
 }
 
 .date{
