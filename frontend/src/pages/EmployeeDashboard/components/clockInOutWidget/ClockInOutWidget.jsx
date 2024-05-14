@@ -25,6 +25,7 @@ const ClockInOutWidget = () => {
 
     return (
         <>
+        <div className = {styles.clockinComponents}>
             <div className={styles.clock}>
                 <h2>Clock</h2>
                 <h1>{currentTime}</h1>
@@ -36,6 +37,7 @@ const ClockInOutWidget = () => {
 
             <div className={styles.buttonContainer}>
                 <Button className={styles.button} variant="primary" size="lg">Clock In</Button>{' '}
+            </div>
             </div>
         </>
     );
