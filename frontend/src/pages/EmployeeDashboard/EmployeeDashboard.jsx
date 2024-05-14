@@ -12,39 +12,36 @@ const EmployeeDashboard = () =>
 {
     return (
         <>
- EmployeeDashboard
+
         <div className={styles.dashboardWrapper}>
             <div className={styles.dashboardBackground}>
         <div className={styles.dashboardGreeting}>
-=======
+
 
        {/*} <div>Test</div>
         <ClockInOutWidget />*/}
 
-        
+
 
         <div>
- main
             <GreetingMessage />
             <CustomDate />
-            </div>
+        </div>
 
-                <div className={styles.contentWrapper}>
-        <ClockInOutWidget />
- EmployeeDashboard
+        <div className={styles.contentWrapper}>
+            <ClockInOutWidget />
         </div>
 
         <div>
-        <div><h1>My Attendance</h1></div>
-        <AttendanceCard test="Hello World" />
+            <div><h1>My Attendance</h1></div>
+            <AttendanceCard test="Hello World" />
         </div>
 
         </div>
         </div>
-=======
+        </div>
 
- main
-        </>)}
+        </>);}
 
         export default EmployeeDashboard;
 

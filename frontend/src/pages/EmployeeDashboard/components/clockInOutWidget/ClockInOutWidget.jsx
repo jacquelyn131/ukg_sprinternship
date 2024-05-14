@@ -56,11 +56,17 @@ const ClockInOutWidget = () => {
             <div className={styles.personal}>
                 <h5>Sunny day, bright vibes</h5>
             </div>
- EmployeeDashboard
+
 <div className={styles.clockLocation}>
+     <form action="POST" onSubmit={(e) => {
+                    e.preventDefault();
+
+                    geolocation(e); // Passing event to geolocation function
+                }}>
             <div className={styles.buttonContainer}>
                 <Button className={styles.button}>Clock In</Button>{' '}
             </div>
+            </form>
 
             <div className={styles.location}>
                 <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
@@ -68,8 +74,7 @@ const ClockInOutWidget = () => {
             </div>
             </div>
             </div>
-           
- main
+
         </>
     );
 
