@@ -1,7 +1,2 @@
 @import './fonts.css';
 @import './pages/Variables.css';
-
-.test {
-  font-family: 'Volte Rounded';
-  font-weight: 600;
-}
