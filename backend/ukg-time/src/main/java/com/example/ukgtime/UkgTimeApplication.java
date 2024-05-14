@@ -6,6 +6,9 @@ import com.example.ukgtime.Employee.EmployeeCompany;
 import com.example.ukgtime.Company.CompanyAddress;
 import com.example.ukgtime.Company.CompanyLocation;
 
+import com.example.ukgtime.*;
+import com.example.ukgtime.ProfileImage;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+//import org.apache.commons.dbcp2.BasicDataSource;
 import javax.sql.DataSource;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -23,12 +27,19 @@ import java.util.Arrays;
 @SpringBootApplication
 public class UkgTimeApplication implements CommandLineRunner {
 
+	private static CorporateEventDao<Employee> dao;
 	private static final Logger log = LoggerFactory.getLogger(UkgTimeApplication.class);
+
+	public UkgTimeApplication(CorporateEventDao<Employee> dao) {
+		this.dao = dao;
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(UkgTimeApplication.class, args);
-		JdbcCorporateEventDao jdbcCorporateEventDao = new JdbcCorporateEventDao();
 
-		log.info("found employee: " + jdbcCorporateEventDao.find(1));
+		log.info("found employee: " + dao.find(1));
+		log.info("all employees: " + dao.list());
+
 	}
 	@Autowired
 	JdbcTemplate jdbcTemplate;
