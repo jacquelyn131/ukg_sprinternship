@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(0deg, #ffffff, #e7f8f5, #cff2eb, #b6ebe1, #9ce4d8, #80ddce, #5fd5c4, #30cebb);
 }
 
 .contentWrapper {
