@@ -30,46 +30,23 @@ class Endpoints {
             console.error('There was some kind of issue!', error);
         }
     }
-    
-    
 
-    // should return whether its a clock-in/clock-out take-break come back from break
-
-    // timestamp = async (user) => {
+    // locationChecker = async (location) => {
     //     try {
-    //         const response = await fetch('http://localhost:8080/api/user/timestamp', {
-    //             method: 'POST',
+    //         const response = await fetch('http://localhost:8080/api/user/info', {
+    //             method: 'POST', // Change method to POST
     //             headers: {
     //                 'Accept': 'application/json',
     //                 'Content-Type': 'application/json'
     //             },
-    //             body: JSON.stringify(user)
+    //             body: JSON.stringify(location) // Fix typo: use JSON.stringify() instead of json.stringify()
     //         });
-    //         console.log("Success!");
     //         return response.json();
     //     } catch (error) {
     //         console.error('There was some kind of issue!', error);
     //     }
     // }
-
-    // returns list of current user shifts
-
-    // listOfShifts = async (user) => {
-    //     try {
-    //         const response = await fetch('http://localhost:8080/api/user/timestamp', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(user)
-    //         });
-    //         console.log("Success!");
-    //         return response.json();
-    //     } catch (error) {
-    //         console.error('There was some kind of issue!', error);
-    //     }
-    // }
+    
 }
 
 const endpoints = new Endpoints();
