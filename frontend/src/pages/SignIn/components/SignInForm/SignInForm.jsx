@@ -38,10 +38,11 @@ const SignInForm = () => {
         
         // HTTP post to server
         const response = await Endpoints.loginUser(user);
-        
-        if (response && response.uid) {
+        const userInfo = await Endpoints.userInfo()
+        if (response) {
             localStorage.setItem('login_token', response.uid);
-            console.log(sessionStorage.getItem('login_token'))
+            console.log(localStorage.getItem('login_token'))
+            console.log(userInfo)
         }
         //console.log(userToken.userEmail);
     };    
