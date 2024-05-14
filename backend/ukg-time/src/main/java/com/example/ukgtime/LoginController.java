@@ -22,5 +22,7 @@ public class LoginController {
         // Return response with status 200 and UID in the body
         return ResponseEntity.ok(responseBody);
     }
+
 }
 */
+

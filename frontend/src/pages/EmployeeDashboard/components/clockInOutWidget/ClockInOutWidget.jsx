@@ -1,10 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 import styles from './ClockInOutWidget.module.css'
+import endpoints from '../../../../endpoints/Endpoints';
 
 const ClockInOutWidget = () => {
     // Initialize current time state
     const [currentTime, setCurrentTime] = useState(getFormattedTime());
+    const [currentLocation, setCurrentLocation] = useState("");
 
     // Update current time every minute
     setInterval(() => {
@@ -20,11 +22,33 @@ const ClockInOutWidget = () => {
         return `${hour}:${minute} ${amOrPm}`; // Include AM/PM indicator
     }
 
-
-
+    const geolocation = (e) => {
+        e.preventDefault();
+    
+        const showPosition = async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+    
+            console.log(lat, lon); // Log coordinates to verify
+    
+            // Create an object with latitude and longitude
+            const userLoc = {
+                latitude: lat,
+                longitude: lon
+            };
+    
+            // Call your endpoint to send location data to the server
+            const locationResponse = await endpoints.locationChecker(userLoc);
+            console.log(locationResponse)
+        };
+    
+        // Request the user's current position
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }    
 
     return (
         <>
+        <div className = {styles.clockinComponents}>
             <div className={styles.clock}>
                 <h2>Clock</h2>
                 <h1>{currentTime}</h1>
@@ -34,12 +58,27 @@ const ClockInOutWidget = () => {
                 <h5>Sunny day, bright vibes</h5>
             </div>
 
+<div className={styles.clockLocation}>
+     <form action="POST" onSubmit={(e) => {
+                    e.preventDefault();
+
+                    geolocation(e); // Passing event to geolocation function
+                }}>
             <div className={styles.buttonContainer}>
-                <Button className={styles.button} variant="primary" size="lg">Clock In</Button>{' '}
+                <Button className={styles.button}>Clock In</Button>{' '}
             </div>
+            </form>
+
+            <div className={styles.location}>
+                <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                <h6 >You are within office reach</h6>
+            </div>
+            </div>
+            </div>
+
         </>
     );
 
-    }
+}
 
-    export default ClockInOutWidget;
+export default ClockInOutWidget;

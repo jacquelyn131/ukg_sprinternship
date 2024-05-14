@@ -1,1 +1,32 @@
-@import './fonts.css';
+
+html {
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+}
+
+html::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(0deg, #ffffff, #ffffff, #ffffff, #ffffff, #e7f8f5, #cff2eb, #b6ebe1, #9ce4d8, #80ddce, #5fd5c4, #30cebb);
+    opacity: .4;
+    z-index: -1;
+}
+
+html::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../backgrounds/ukg-pattern.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    z-index: -2;
+}
