@@ -12,6 +12,7 @@ const EmployeeDashboard = () =>
     return (
         <>
         <div className={styles.dashboardWrapper}>
+            <div className={styles.dashboardBackground}>
         <div className={styles.dashboardGreeting}>
             <GreetingMessage />
             <CustomDate />
@@ -19,6 +20,7 @@ const EmployeeDashboard = () =>
 
                 <div className={styles.contentWrapper}>
         <ClockInOutWidget />
+        </div>
         </div>
         </div>
         </>)}

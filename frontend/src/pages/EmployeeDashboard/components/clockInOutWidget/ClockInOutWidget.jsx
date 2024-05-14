@@ -35,8 +35,15 @@ const ClockInOutWidget = () => {
                 <h5>Sunny day, bright vibes</h5>
             </div>
 
+<div className={styles.clockLocation}>
             <div className={styles.buttonContainer}>
-                <Button className={styles.button} variant="primary" size="lg">Clock In</Button>{' '}
+                <Button className={styles.button}>Clock In</Button>{' '}
+            </div>
+
+            <div className={styles.location}>
+                <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                <h6 >You are within office reach</h6>
+            </div>
             </div>
             </div>
         </>
