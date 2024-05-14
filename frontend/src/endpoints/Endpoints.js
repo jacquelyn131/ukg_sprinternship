@@ -31,21 +31,21 @@ class Endpoints {
         }
     }
 
-    // locationChecker = async (location) => {
-    //     try {
-    //         const response = await fetch('http://localhost:8080/api/user/info', {
-    //             method: 'POST', // Change method to POST
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(location) // Fix typo: use JSON.stringify() instead of json.stringify()
-    //         });
-    //         return response.json();
-    //     } catch (error) {
-    //         console.error('There was some kind of issue!', error);
-    //     }
-    // }
+    locationChecker = async (userLoc) => {
+        try {
+            const response = await fetch('http://localhost:8080/api/user/location', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userLoc)
+            });
+            return response.json();
+        } catch (error) {
+            console.error('There was some kind of issue!', error);
+        }
+    }
     
 }
 

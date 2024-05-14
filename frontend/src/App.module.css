@@ -1,38 +1,5 @@
 @import './fonts.css';
 
-.homepageWrapper {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-
-.homepageWrapper::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(0deg, #ffffff, #ffffff, #ffffff, #ffffff, #e7f8f5, #cff2eb, #b6ebe1, #9ce4d8, #80ddce, #5fd5c4, #30cebb);
-    opacity: .4;
-    z-index: 1;
-
-}
-
-.homepageWrapper::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-image: url('/backgrounds/ukg-pattern.png');
-    background-size: cover;
-    opacity: 0.2;
-    z-index: 0;
-}
-
 .contentWrapper {
     position: relative;
     z-index: 2;

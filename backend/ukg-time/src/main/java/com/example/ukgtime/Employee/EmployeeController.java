@@ -1,5 +1,6 @@
 package com.example.ukgtime.Employee;
 
+import com.example.ukgtime.Coordinates;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,11 +21,11 @@ public class EmployeeController {
     }
 
 
-//    @PostMapping("/api/user/location")
-//    public ResponseEntity<Boolean> updateUserLocation(@RequestBody Boolean locationAvailable) {
-//
-//        System.out.println(locationAvailable);
-//
-//        return ResponseEntity.ok(true);
-//    }
+    @PostMapping("/api/user/location")
+    public ResponseEntity<Boolean> updateUserLocation(@RequestBody Coordinates userLoc) {
+
+        System.out.println(userLoc);
+
+        return ResponseEntity.ok(true);
+    }
 }

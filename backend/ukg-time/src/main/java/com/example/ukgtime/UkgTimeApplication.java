@@ -1,14 +1,10 @@
 package com.example.ukgtime;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import com.example.ukgtime.Employee.Employee;
 import com.example.ukgtime.Company.Company;
 import com.example.ukgtime.Employee.EmployeeCompany;
 import com.example.ukgtime.Company.CompanyAddress;
-import com.example.ukgtime.Employee.EmployeeController;
 import com.example.ukgtime.Company.CompanyLocation;
-import com.example.ukgtime.*;
 
 
 import org.slf4j.Logger;
@@ -33,23 +29,6 @@ public class UkgTimeApplication implements CommandLineRunner {
 		JdbcCorporateEventDao jdbcCorporateEventDao = new JdbcCorporateEventDao();
 
 		log.info("found employee: " + jdbcCorporateEventDao.find(1));
-
-		// FirebaseOptions options = FirebaseOptions.builder()
-		// .setCredentials(GoogleCredentials.getApplicationDefault())
-		// .setDatabaseUrl("https://<DATABASE_NAME>.firebaseio.com/")
-		// .build();
-
-		// FileInputStream serviceAccount = new FileInputStream("keys\\firebaseKeys.json");
-
-		// @SuppressWarnings("deprecation")
-		// FirebaseOptions options = new FirebaseOptions.Builder()
-		// .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-		// .build();
-
-		// FirebaseApp app = FirebaseApp.initializeApp(options);
-		// FirebaseAuth defaultAuth = FirebaseAuth.getInstance(app);
-
-
 	}
 	@Autowired
 	JdbcTemplate jdbcTemplate;
