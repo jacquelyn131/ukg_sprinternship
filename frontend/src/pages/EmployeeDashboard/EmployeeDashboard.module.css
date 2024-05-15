@@ -44,7 +44,7 @@ font-size: 1.4em;
 }
 
 @media screen and (max-width: 768px) {
-}
+
 
 .dashboardGreeting {
 width: 100%;
@@ -98,4 +98,5 @@ border-radius: 16px;
 align-items: left;
 gap: 10px;
 padding: 12px;
+}
 }

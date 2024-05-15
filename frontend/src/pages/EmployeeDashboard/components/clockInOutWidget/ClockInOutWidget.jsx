@@ -1,21 +1,28 @@
 import Button from 'react-bootstrap/Button';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from './ClockInOutWidget.module.css'
 import endpoints from '../../../../endpoints/Endpoints';
 
 const ClockInOutWidget = () => {
     // Initialize current time state
-    const [currentTime, setCurrentTime] = useState(getFormattedTime());
+    const [currentTime, setCurrentTime] = useState("");
     const [currentLocation, setCurrentLocation] = useState("");
     const [clockedIn, setClockedIn] = useState(false); // State variable to track whether the user is clocked in
     const [onBreak, setOnBreak] = useState(false); // State variable to track whether the user is on a break
+    const [clockInStartTime, setClockInStartTime] = useState(null); // State variable to track the start time of clocking in
+    const [breakStartTime, setBreakStartTime] = useState(null); // State variable to track the start time of break
+    const [clockInElapsedTime, setClockInElapsedTime] = useState(0); // State variable to track the elapsed time for clocking in
+    const [breakElapsedTime, setBreakElapsedTime] = useState(0); // State variable to track the elapsed time for break
 
     // Update current time every minute
-    setInterval(() => {
-        setCurrentTime(getFormattedTime());
-    }, 60000); // Update every 60 seconds (1 minute)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTime(getFormattedTime());
+        }, 1000); // Update every second
+        return () => clearInterval(interval);
+    }, []);
 
-    // Function to get formatted time (hour and minutes)
+    // Function to get formatted time (hour, minute, and AM/PM)
     function getFormattedTime() {
         const now = new Date();
         const hour = String(now.getHours() % 12 || 12).padStart(2, '0'); // Convert to 12-hour format
@@ -46,61 +53,95 @@ const ClockInOutWidget = () => {
         navigator.geolocation.getCurrentPosition(showPosition);
     }
 
-    const handleClockIn = (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+    const handleClockIn = () => {
         setClockedIn(true); // Set clockedIn state to true when the user clocks in
-    };
-
-    const handleBreak = () => {
-        // Handle break logic here
-        setOnBreak(true); // Set onBreak state to true when the user takes a break
-    };
-
-    const handleEndBreak = () => {
-        // Handle end break logic here
-        setOnBreak(false); // Set onBreak state to false when the user ends the break
+        setClockInStartTime(new Date()); // Record the start time
+        setCurrentTime(""); // Remove current time when clocked in
     };
 
     const handleClockOut = () => {
-        // Handle clock out logic here
         setClockedIn(false); // Set clockedIn state back to false when the user clocks out
+        setClockInElapsedTime(0); // Reset elapsed time for clocking in
+        setOnBreak(false); // Reset break state
+        setCurrentTime(getFormattedTime()); // Show current time when clocked out
     };
+
+    const handleBreak = () => {
+        setOnBreak(true); // Set onBreak state to true when the user takes a break
+        setBreakStartTime(new Date()); // Record the start time of break
+        setClockInElapsedTime((prevElapsedTime) => {
+            // Store the current elapsed time when the break starts
+            setBreakElapsedTime(prevElapsedTime);
+            return prevElapsedTime;
+        });
+    };
+
+    const handleEndBreak = () => {
+        setOnBreak(false); // Set onBreak state to false when the user ends the break
+        setBreakElapsedTime(0); // Reset break elapsed time
+        setClockInStartTime((prevStartTime) => {
+            // Adjust clock in start time by subtracting break duration
+            const breakDuration = new Date() - breakStartTime;
+            return new Date(prevStartTime.getTime() + breakDuration);
+        });
+    };
+
+
+    // Calculate elapsed time when clocked in
+    useEffect(() => {
+        let clockInInterval;
+        let breakInterval;
+
+        if (clockedIn && !onBreak) {
+            clockInInterval = setInterval(() => {
+                const currentTime = new Date();
+                const elapsedMilliseconds = currentTime - clockInStartTime;
+                setClockInElapsedTime(elapsedMilliseconds);
+            }, 1000); // Update every second
+        } else {
+            clearInterval(clockInInterval);
+        }
+
+        if (onBreak) {
+            breakInterval = setInterval(() => {
+                const currentTime = new Date();
+                const elapsedMilliseconds = currentTime - breakStartTime;
+                setBreakElapsedTime(elapsedMilliseconds);
+            }, 1000); // Update every second
+        } else {
+            clearInterval(breakInterval);
+        }
+
+        return () => {
+            clearInterval(clockInInterval);
+            clearInterval(breakInterval);
+        };
+    }, [clockedIn, onBreak, clockInStartTime, breakStartTime]);
+
+    // Format elapsed time to display hours, minutes, and seconds
+    function formatElapsedTime(milliseconds) {
+        const hours = Math.floor(milliseconds / 3600000);
+        const minutes = Math.floor((milliseconds % 3600000) / 60000);
+        const seconds = Math.floor((milliseconds % 60000) / 1000);
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
 
     return (
         <>
             <div className={styles.clockinComponents}>
-                <div className={styles.clock}>
-                    <h2>Clock</h2>
-                    <h1>{currentTime}</h1>
-                </div>
-
-                <div className={styles.personal}>
-                    <h5>Sunny day, bright vibes</h5>
-                </div>
-
-                {clockedIn ? ( // Render buttons only if the user is clocked in
-                    <div className={styles.clockLocation}>
-                        <div className={styles.buttonContainer}>
-                            {onBreak ?
-                                (
-                                <Button className={styles.endbreakButton} onClick={handleEndBreak}>
-                                    End Break
-                                </Button>
-                            ) : (
-                                <Button className={styles.breakButton} onClick={handleBreak}>
-                                    Break
-                                </Button>
-                            )}
-                            <Button className={styles.clockoutButton} onClick={handleClockOut}>
-                                Clock Out
-                            </Button>
-                        </div>
-                        <div className={styles.location}>
-                            <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
-                            <h6 >You are within office reach</h6>
-                        </div>
+                {!clockedIn && (
+                    <div className={styles.clock}>
+                        <h2>Clock</h2>
+                        {currentTime && <h1>{currentTime}</h1>}
                     </div>
-                ) : ( // Render "Clock In" button if the user is not clocked in
+                )}
+                {!clockedIn && (
+                    <div className={styles.personal}>
+                        <h5>Sunny day, bright vibes</h5>
+                    </div>
+                )}
+
+                {!clockedIn && (
                     <div className={styles.clockLocation}>
                         <div className={styles.buttonContainer}>
                             <Button className={styles.button} type="button" onClick={handleClockIn}>
@@ -109,7 +150,42 @@ const ClockInOutWidget = () => {
                         </div>
                         <div className={styles.location}>
                             <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
-                            <h6 >You are within office reach</h6>
+                            <h6 className={styles.officeReach}>You are within office reach</h6>
+                        </div>
+                    </div>
+                )}
+
+                {(onBreak || clockedIn) && (
+                    <div className={styles.timerBreak}>
+                        <h6>On Break:</h6>
+                        <h4 className={styles.breakTimer}>{onBreak ? formatElapsedTime(breakElapsedTime) : "00:00:00"}</h4>
+                    </div>
+                )}
+
+                {clockedIn && (
+                    <div className={styles.clockLocation}>
+                        <div className={styles.timer}>
+                            <h6>Clocked In:</h6>
+                            <h1>{formatElapsedTime(clockInElapsedTime)}</h1>
+                        </div>
+                        <div className={styles.buttonContainer}>
+                            {onBreak ?
+                                (
+                                    <Button className={styles.endbreakButton} onClick={handleEndBreak}>
+                                        End Break
+                                    </Button>
+                                ) : (
+                                    <Button className={styles.breakButton} onClick={handleBreak}>
+                                        Break
+                                    </Button>
+                                )}
+                            <Button className={styles.clockoutButton} onClick={handleClockOut}>
+                                Clock Out
+                            </Button>
+                        </div>
+                        <div className={styles.location}>
+                            <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                            <h6 className ={styles.officeReach}>You are within office reach</h6>
                         </div>
                     </div>
                 )}
