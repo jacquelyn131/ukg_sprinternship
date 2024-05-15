@@ -28,6 +28,10 @@ public class ClockPunch {
         this.comments = comments;
     }
 
+    public ClockPunch() {
+
+    }
+
     @Override
     public String toString() {
         return String.format("ClockPunch[dateTime: '%s', employeeId: %d, officeId: %d, " +

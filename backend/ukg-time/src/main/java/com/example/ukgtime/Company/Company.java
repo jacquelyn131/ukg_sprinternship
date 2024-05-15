@@ -11,6 +11,9 @@ public class Company {
                 "headquartersId: %d]", companyId, companyName, headquartersId);
     }
 
+    public Company() {
+    }
+
     public Company(long companyId, String companyName, long headquartersId) {
         this.companyId = companyId;
         this.companyName = companyName;
