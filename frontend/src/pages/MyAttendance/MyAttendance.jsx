@@ -1,7 +1,7 @@
 import styles from './MyAttendance.module.css';
 import AttendanceCard from '../EmployeeDashboard/components/attendanceCard/AttendanceCard';
-import {VerticalTimeline, VerticalTimelineElement} from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
+// import {VerticalTimeline, VerticalTimelineElement} from "react-vertical-timeline-component";
+// import "react-vertical-timeline-component/style.min.css";
 
 const MyAttendance = () => {
     const dotStyles = {background: "#005151"}
@@ -16,20 +16,11 @@ const MyAttendance = () => {
             <div>
 
                             <div className={styles.attendanceCard1}>
-                                 <AttendanceCard />
-                            </div>
-                            <div className={styles.attendanceCard1}>
-                                                             <AttendanceCard />
-                                                        </div>
-                                                        <div className={styles.attendanceCard1}>
-                                                                                         <AttendanceCard />
-                                                                                    </div>
-                                                                                    <div className={styles.attendanceCard1}>
-                                                                                                                     <AttendanceCard />
-                                                                                                                </div>
+                                 <AttendanceCard className={styles.test} />
 
-
-
+                            <AttendanceCard className={styles.test} />
+                            <AttendanceCard className={styles.test} />
+</div>
             </div>
 
             <div>

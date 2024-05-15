@@ -1,11 +1,11 @@
 .attendanceCard1 {
     padding: 20px;
     display: flex;
-    justify-content: left;
+    flex-direction: column;
+    gap: 20px;
+    width: 60%;
     align-items: center;
-    border-radius:  7px;
-    padding-left: 250px;
-    width: 3000px;
+    background-color: yellow;
 
 }
 
