@@ -16,10 +16,31 @@ h2 {
 font-size: 1.7em;
 }
 
+.breakTimer {
+font-family: 'Volte Rounded';
+font-weight: 500;
+font-size: 1.5em;
+color: #576460;
+}
+
+.timerBreak {
+display:flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+text-align: center;
+gap: 4px;
+}
+
 .clock {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
 font-family: 'Volte Rounded';
 font-weight: 500;
 font-kerning: 13%;
+text-align: center;
 color: black;}
 
 .button {
@@ -57,7 +78,7 @@ text-align: center;
 justify-content: center;
 margin-top: auto;
 margin-bottom: auto;
-margin-right: auto;
+
 }
 
 .locationIcon {
@@ -168,4 +189,8 @@ background-color:  #107E7E;
 
 .clockoutButton:active {
 background-color: #002c2c !important;
+}
+
+.officeReach {
+margin-right: auto;
 }

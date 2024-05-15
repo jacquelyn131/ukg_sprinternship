@@ -28,28 +28,39 @@ import java.util.Arrays;
 public class UkgTimeApplication implements CommandLineRunner {
 
 	private static CorporateEventDao<Employee> dao;
+	private static CorporateEventDao<Company> companyDao;
 	private static final Logger log = LoggerFactory.getLogger(UkgTimeApplication.class);
 
-	public UkgTimeApplication(CorporateEventDao<Employee> dao) {
+	public UkgTimeApplication(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao) {
 		this.dao = dao;
+		this.companyDao = companyDao;
 	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(UkgTimeApplication.class, args);
 
-		log.info("found employee: " + dao.find(1));
-		log.info("all employees: " + dao.list());
-		Employee employee = new Employee(7, "123456789", "Jenny", "McLaren", "01-01-1991", "jenny@email.com",
-				1);
-		log.info("add employee: " + dao.add(employee));
-		log.info("get employeee with id 1: " + dao.get(1));
-		Employee employee2 = new Employee(1, null, "John", "Woo", null, "john@email.com", 2);
-		dao.update(employee2, 1);
-		log.info("update employee with id=1: " + dao.get(1));
-		dao.delete(2);
-		log.info("delete employee with id=2: " + dao.get(2) );
-
-
+//		log.info("found employee: " + dao.find(1));
+//		log.info("all employees: " + dao.list());
+//		Employee employee = new Employee(7, "123456789", "Jenny", "McLaren", "01-01-1991", "jenny@email.com",
+//				1);
+//		log.info("add employee: " + dao.add(employee));
+//		log.info("get employeee with id 1: " + dao.get(1));
+//		Employee employee2 = new Employee(1, null, "John", "Woo", null, "john@email.com", 2);
+//		dao.update(employee2, 1);
+//		log.info("update employee with id=1: " + dao.get(1));
+//		dao.delete(2);
+//		log.info("delete employee with id=2: " + dao.get(2) );
+//		log.info("add company: " + companyDao.add(new
+//				Company(4, "Amazing fun company", 7)));
+		//log.info("find company with id 4: " + companyDao.find(4));
+		//log.info("list all companies: " + companyDao.list());
+		//log.info("get company with id 3" + companyDao.get(3));
+//		Company kittensUpdated = companyDao.get(3).get();
+//		kittensUpdated.setCompanyName("Kittens Incorporated");
+//		companyDao.update(kittensUpdated, 3);
+//		log.info("update company with id  3");
+//		companyDao.delete(4);
+//		log.info("delete company with id 4");
 
 	}
 	@Autowired
