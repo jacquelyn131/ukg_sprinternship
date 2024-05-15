@@ -9,6 +9,9 @@ const ClockInOutWidget = () => {
     const [currentLocation, setCurrentLocation] = useState("");
     const [clockedIn, setClockedIn] = useState(false); // State variable to track whether the user is clocked in
     const [onBreak, setOnBreak] = useState(false); // State variable to track whether the user is on a break
+
+    const [withinReach, setWithinReach] = useState('true');
+
     const [clockInStartTime, setClockInStartTime] = useState(null); // State variable to track the start time of clocking in
     const [breakStartTime, setBreakStartTime] = useState(null); // State variable to track the start time of break
     const [clockInElapsedTime, setClockInElapsedTime] = useState(0); // State variable to track the elapsed time for clocking in
@@ -47,13 +50,18 @@ const ClockInOutWidget = () => {
 
             const locationResponse = await endpoints.locationChecker(userLoc);
             console.log(locationResponse)
+
+            setWithinReach(locationResponse);
         };
 
         // Request the user's current position
         navigator.geolocation.getCurrentPosition(showPosition);
     }
 
-    const handleClockIn = () => {
+    const handleClockIn = (e) => {
+        geolocation(e);
+        e.preventDefault(); // Prevent default form submission behavior
+
         setClockedIn(true); // Set clockedIn state to true when the user clocks in
         setClockInStartTime(new Date()); // Record the start time
         setCurrentTime(""); // Remove current time when clocked in
@@ -183,6 +191,19 @@ const ClockInOutWidget = () => {
                                 Clock Out
                             </Button>
                         </div>
+
+                        {withinReach ? (
+                            <div className={styles.location}>
+                                <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                                <h6>You are within office reach</h6>
+                            </div>
+                        ) : (
+                            <div className={styles.location}>
+                                <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                                <h6>You are not within office reach</h6>
+                            </div>
+                        )}
+
                         <div className={styles.location}>
                             <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
                             <h6 className ={styles.officeReach}>You are within office reach</h6>

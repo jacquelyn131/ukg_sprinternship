@@ -28,14 +28,14 @@ const SignInForm = () => {
             return;
         }
 
-        const user = {
+        const emp = {
             email: email,
-            password: password // TODO: hash the password, do not send in plaintext
+            employeeId: password // TODO: hash the password, do not send in plaintext
         };
 
         try {
             // HTTP post to server
-            const response = await Endpoints.loginUser(user);
+            const response = await Endpoints.userInfo(emp);
             if (response) {
                 localStorage.setItem('login_token', response.uid);
                 setLoginToken(response.uid);
