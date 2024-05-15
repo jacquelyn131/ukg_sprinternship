@@ -53,8 +53,10 @@ color: #005151;
    }
 
 .contentWrapper {
-  position: relative;
-    max-width: 26em;
+  position: absolute;
+    max-width: 24em;
+    width: 24em;
+    height: 18em;
     max-height: 19em;
     margin-top: 20px;
     margin: 1 auto; /* Center the content horizontally */
@@ -75,6 +77,7 @@ gap: 18%;
 }
 
 .attendanceWrapper {
+position: relative;
 display: flex;
 flex-direction: column;
 background-color: white;
