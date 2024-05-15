@@ -75,13 +75,25 @@ public class CompanyDao implements CorporateEventDao {
         return Optional.ofNullable(company);
     }
 
-    @Override
     public void update(Object o, long id) {
+
+    }
+
+    public void update(Company company, long id) {
+        String sql = "UPDATE company SET company_id = ?, company_name = ?, headquarters_id = ? " +
+                "WHERE company_id = ?";
+        int update = jdbcTemplate.update(sql, company.getCompanyId(), company.getCompanyName(),
+                company.getHeadquartersId(), id);
+        if (update == 1) {
+            logger.info("Company information updated");
+        }
 
     }
 
     @Override
     public void delete(long id) {
+        String sql = "DELETE FROM company WHERE company_id = " + id;
+        jdbcTemplate.execute(sql);
 
     }
 }
