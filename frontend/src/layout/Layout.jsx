@@ -65,7 +65,9 @@ const Layout = () => {
                  
          { loginToken ? (
                        <>
-
+<Nav.Link href="/dashboard" className={classNames(styles.navLink)}>
+                                                                    Dashboard
+                                                                </Nav.Link>
                                                                     <Button onClick={handleLogout} className={classNames(styles.navbarButton)}>
                                                                         Logout
                                                                     </Button>
