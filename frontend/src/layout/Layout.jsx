@@ -33,9 +33,9 @@ const Layout = () => {
    <>
 
 
-<Navbar id="navbar" expand="lg" 
+<Navbar id="navbar" expand="lg"
  fixed="top"
-                className={classNames("container-fluid", styles.navbar)}> 
+                className={classNames(styles.navbar)}>
             <Navbar.Brand href="/"> 
                 <img src={logoPath}
                      alt="Logo" 
@@ -47,7 +47,7 @@ const Layout = () => {
                 aria-controls="basic-navbar-nav" /> 
             <Navbar.Collapse  
                 id="basic-navbar-nav"> 
-                <Nav className={classNames("ms-auto", styles.navlinksContainer)}> 
+                <Nav className={classNames("ms-auto", styles.navlinksContainer)}>
                 <Nav.Link href="/" className={classNames(styles.navLink)}> 
                         Home
                     </Nav.Link> 

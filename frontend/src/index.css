@@ -1,32 +1,30 @@
-
 html {
-    position: relative;
-    min-height: 100%;
-    width: 100%;
-}
-
-html::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(0deg, #ffffff, #ffffff, #ffffff, #ffffff, #e7f8f5, #cff2eb, #b6ebe1, #9ce4d8, #80ddce, #5fd5c4, #30cebb);
-    opacity: .4;
-    z-index: -1;
+    height: 100%;
 }
 
 html::before {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-image: url('../backgrounds/ukg-pattern.png');
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
     opacity: 0.2;
+    z-index: -1;
+}
+
+html::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #ffffff), color-stop(16.67%, #ffffff), color-stop(33.33%, #ffffff), color-stop(50%, #ffffff), color-stop(58.33%, #e7f8f5), color-stop(66.67%, #cff2eb), color-stop(75%, #b6ebe1), color-stop(83.33%, #9ce4d8), color-stop(91.67%, #80ddce), color-stop(100%, #5fd5c4), to(#30cebb)) fixed;
+    opacity: 0.8;
     z-index: -2;
 }

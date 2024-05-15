@@ -1,85 +1,71 @@
-.attendanceTitle {
-font-family: 'Volte Rounded';
-font-weight: 500;
-font-size: 1em;
-color: #005151;
-}
-
-.dashboardBackground {
-  height: 100%;
-  width: 100%;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  padding-left: 70px;
-  display: flex;
-  align-items: left;
-  justify-content: left;
-  flex-direction: column;
-  gap: 30px;
-  overflow: hidden;
-  position: relative;
-}
-
-
 .dashboardWrapper {
-    position: absolute;
-    height: 100%;
-        width: 100%;
-}
-
-.dashboardWrapper::after {
-    content: "";
-    position: relative;
-    top: 0;
-    left: 0;
-    opacity: 0.2;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    background: linear-gradient(0deg, #ffffff, #ffffff, #ffffff, #ffffff, #e7f8f5, #cff2eb, #b6ebe1, #9ce4d8, #80ddce, #5fd5c4, #30cebb);
-}
-
-.dashboardWrapper::before {
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-image: url('/backgrounds/ukg-pattern.png');
-    background-size: cover;
-    opacity: 0.3;
-    z-index: 0;
-   }
-
-.contentWrapper {
-  position: relative;
-    max-width: 26em;
-    max-height: 19em;
-    margin-top: 20px;
-    margin: 1 auto; /* Center the content horizontally */
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 16px;
-    box-sizing: border-box;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.dashboardWidgets {
-display: flex;
-flex-direction: row;
-gap: 18%;
-}
-
-.attendanceWrapper {
 display: flex;
 flex-direction: column;
-background-color: white;
+justify-content: center;
+max-height: 100%;
+max-width: 100%;
+padding: 4%;
+}
+
+.dashboardContent {
+display: flex;
+flex-direction: row;
+column-gap: 2%;
+justify-content: space-around;
+}
+
+.dashboardGreeting {
+width: 50%;
+text-align: center;
+
+}
+.clockInOutWidget, .attendanceSection {
+width: 50%;
+padding: 2%;
+display: flex;
+flex-direction: column;
+background-color: #FFF;
+height: 100%;
+border: 1px solid #D9D9D9;
 border-radius: 16px;
-align-items: left;
-gap: 10px;
-padding: 12px;
+}
+
+.attendanceSection {
+display: flex;
+flex-direction: column;
+height: 100%;
+gap: 1em;
+}
+
+.attendanceSection h2 {
+font-family: 'Volte Rounded';
+font-weight: 500;
+color: var(--dark-teal);
+}
+
+@media screen and (max-width: 768px) {
+
+
+.dashboardGreeting {
+width: 100%;
+text-align: left;
+}
+
+.dashboardContent {
+flex-direction: column;
+}
+
+.clockInOutWidget, .attendanceSection {
+width: 100%;
+}
+
+.attendanceSection {
+background-color: transparent;
+border: none;
+}
+
+.attendanceSection h2 {
+font-size: 1.5em;
+}
+
 }
