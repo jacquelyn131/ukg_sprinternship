@@ -8,7 +8,11 @@ import Container from 'react-bootstrap/Container';
 import { useState, useEffect } from 'react';
 import Endpoints from '../../../../endpoints/Endpoints';
 import { useNavigate } from 'react-router-dom';
+
+import { useUser } from '../../../../UserContext';
+
 const SignInForm = () => {
+    const { setLoginToken, setUserInfo, loginToken } = useUser();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -16,36 +20,36 @@ const SignInForm = () => {
     const [missingInfoMessage, setMissingInfoMessage] = useState("");
 	const [badCredentialsMessage, setBadCredentialsMessage] = useState("");
 
-    useEffect(() => {
-		if (sessionStorage.getItem("login_token")) {
-            // Navigate to the correct URL
-			// navigate("/dashboard");
-		}
-	});
-
     const handleLogin = async (e) => {
         e.preventDefault();
-        
+
         if (!email || !password) {
             setMissingInfoMessage('Please fill out all the fields!');
             return;
         }
-        
+
         const user = {
             email: email,
             password: password // TODO: hash the password, do not send in plaintext
         };
-        
-        // HTTP post to server
-        const response = await Endpoints.loginUser(user);
-        const userInfo = await Endpoints.userInfo()
-        if (response) {
-            localStorage.setItem('login_token', response.uid);
-            console.log(localStorage.getItem('login_token'))
-            console.log(userInfo)
+
+        try {
+            // HTTP post to server
+            const response = await Endpoints.loginUser(user);
+            if (response) {
+                localStorage.setItem('login_token', response.uid);
+                setLoginToken(response.uid);
+                const userInfo = await Endpoints.userInfo();
+                setUserInfo(userInfo);
+                console.log(userInfo);
+                console.log(loginToken)
+                navigate("/dashboard");
+            }
+        } catch (error) {
+            console.error('Login failed', error);
+            setBadCredentialsMessage('Invalid credentials. Please try again.');
         }
-        //console.log(userToken.userEmail);
-    };    
+    };
 
     return (
         <>
