@@ -3,11 +3,7 @@ import { useState } from "react";
 
 const GreetingMessage = () => {
 
-    return (
-            <div className={styles.greeting}>
-                <h1>Goodmorning, Jesse!</h1>
-            </div>
-        );
+    return <h1 className={styles.greeting}>Good morning, Jesse!</h1>
     }
 
 export default GreetingMessage;

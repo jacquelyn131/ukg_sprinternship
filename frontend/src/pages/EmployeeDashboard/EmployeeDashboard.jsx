@@ -14,38 +14,23 @@ const EmployeeDashboard = () =>
         <>
 
         <div className={styles.dashboardWrapper}>
-            <div className={styles.dashboardBackground}>
-                <div className={styles.dashboardGreeting}>
-
-
-       {/*} <div>Test</div>
-        <ClockInOutWidget />*/}
-
-<div className={styles.dashboardWidgets}>
-        <div>
-        <div>
-            <GreetingMessage />
-            <CustomDate />
-        </div>
-
-
-        <div className={styles.contentWrapper}>
-            <ClockInOutWidget />
-        </div>
-        </div>
-
-        <div className={styles.attendanceWrapper}>
-            <div className={styles.attendanceTitle}><h2>My Attendance</h2></div>
-            <AttendanceCard test="Hello World" />
-            <AttendanceCard test="Hello World" />
-            <AttendanceCard test="Hello World" />
-
-        </div>
-</div>
-
-        </div>
-            </div>
+            <div className={styles.dashboardGreeting}>
+                <GreetingMessage />
+                <CustomDate />
                 </div>
+                <div className={styles.dashboardContent}>
+                    <div className={styles.clockInOutWidget}>
+                        <ClockInOutWidget />
+                        </div>
+                        <div className={styles.attendanceSection}>
+                            <h2>My Attendance</h2>
+                                        <AttendanceCard test="Hello World" />
+                                        <AttendanceCard test="Hello World" />
+                                        <AttendanceCard test="Hello World" />
+                            </div>
+                    </div>
+
+            </div>
 
         </>);}
 
