@@ -19,8 +19,9 @@ const EmployeeDashboard = () =>
 
         <div className={styles.dashboardWrapper}>
             <div className={styles.dashboardGreeting}>
-                <GreetingMessage firstName={userInfo.firstName} />
-                <CustomDate />
+                {userInfo && <GreetingMessage firstName={userInfo.firstName} />}
+
+<CustomDate />
                 </div>
                 <div className={styles.dashboardContent}>
                     <div className={styles.clockInOutWidget}>
