@@ -9,6 +9,7 @@ import Layout from './layout/Layout.jsx';
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
 
 import EmployeeDashboard from './pages/EmployeeDashboard/EmployeeDashboard.jsx'
+import MyAttendance from './pages/MyAttendance/MyAttendance.jsx'
 
 import SignInPage from './pages/SignIn/SignInPage.jsx';
 import { UserProvider } from './UserContext.jsx';
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { index: true, element: <App /> },
       { path: '*', element: <ErrorPage />, error: true, message: 'Not Found'},
       { path: '/signin', element: <SignInPage />},
+      { path: '/attendance', element: <MyAttendance />},
       { path: '/dashboard', element: <PrivateRoutes>
         <EmployeeDashboard />
           </PrivateRoutes>}
