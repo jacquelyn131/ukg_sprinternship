@@ -45,9 +45,12 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
 
 
     public boolean add(Employee employee) {
-        String sql = "INSERT INTO employees(first_name, last_name) VALUES (?,?)";
+        String sql = "INSERT INTO employees(employee_id, first_name, last_name, ssn, dob, " +
+                "manager_id, email) " +
+                "VALUES (?,?,?,?,?,?,?)";
         //ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName());
+        jdbcTemplate.update(sql, employee.getEmployeeId(), employee.getFirstName(), employee.getLastName(),
+                employee.getSsn(), employee.getDob(), employee.getManagerId(), employee.getEmail());
         System.out.println("inserted an employee successfully");
         return true;
     }
@@ -93,6 +96,5 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
     public void delete(long id) {
         String sql = "DELETE FROM employees WHERE employee_id =" + id;
         jdbcTemplate.execute(sql);
-
     }
 }
