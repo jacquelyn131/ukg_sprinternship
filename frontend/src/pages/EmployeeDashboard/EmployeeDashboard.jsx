@@ -6,16 +6,20 @@ import styles from "./EmployeeDashboard.module.css";
 
 import { useState } from 'react';
 
+import { useUser } from '../../UserContext';
+
 
 const EmployeeDashboard = () =>
 
 {
+    const { userInfo } = useUser();
+
     return (
         <>
 
         <div className={styles.dashboardWrapper}>
             <div className={styles.dashboardGreeting}>
-                <GreetingMessage />
+                <GreetingMessage firstName={userInfo.firstName} />
                 <CustomDate />
                 </div>
                 <div className={styles.dashboardContent}>
