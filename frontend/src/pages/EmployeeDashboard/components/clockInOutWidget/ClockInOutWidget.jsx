@@ -9,7 +9,7 @@ const ClockInOutWidget = () => {
     const [currentLocation, setCurrentLocation] = useState("");
     const [clockedIn, setClockedIn] = useState(false); // State variable to track whether the user is clocked in
     const [onBreak, setOnBreak] = useState(false); // State variable to track whether the user is on a break
-
+    const [withinReach, setWithinReach] = useState('true');
     // Update current time every minute
     setInterval(() => {
         setCurrentTime(getFormattedTime());
@@ -40,6 +40,8 @@ const ClockInOutWidget = () => {
 
             const locationResponse = await endpoints.locationChecker(userLoc);
             console.log(locationResponse)
+
+            setWithinReach(locationResponse);
         };
 
         // Request the user's current position
@@ -47,6 +49,7 @@ const ClockInOutWidget = () => {
     }
 
     const handleClockIn = (e) => {
+        geolocation(e);
         e.preventDefault(); // Prevent default form submission behavior
         setClockedIn(true); // Set clockedIn state to true when the user clocks in
     };
@@ -107,10 +110,20 @@ const ClockInOutWidget = () => {
                                 Clock In
                             </Button>
                         </div>
-                        <div className={styles.location}>
-                            <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
-                            <h6 >You are within office reach</h6>
-                        </div>
+
+                        {withinReach ? (
+                            <div className={styles.location}>
+                                <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                                <h6>You are within office reach</h6>
+                            </div>
+                        ) : (
+                            <div className={styles.location}>
+                                <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                                <h6>You are not within office reach</h6>
+                            </div>
+                        )}
+
+
                     </div>
                 )}
             </div>
