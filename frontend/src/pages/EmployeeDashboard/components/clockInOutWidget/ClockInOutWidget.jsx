@@ -7,6 +7,8 @@ const ClockInOutWidget = () => {
     // Initialize current time state
     const [currentTime, setCurrentTime] = useState(getFormattedTime());
     const [currentLocation, setCurrentLocation] = useState("");
+    const [clockedIn, setClockedIn] = useState(false); // State variable to track whether the user is clocked in
+    const [onBreak, setOnBreak] = useState(false); // State variable to track whether the user is on a break
 
     // Update current time every minute
     setInterval(() => {
@@ -22,63 +24,98 @@ const ClockInOutWidget = () => {
         return `${hour}:${minute} ${amOrPm}`; // Include AM/PM indicator
     }
 
-    const geolocation = (e) => {
+    const geolocation = async (e) => {
         e.preventDefault();
-    
+
         const showPosition = async (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-    
-            console.log(lat, lon); // Log coordinates to verify
-    
-            // Create an object with latitude and longitude
+
+            console.log(lat, lon);
+
             const userLoc = {
                 latitude: lat,
                 longitude: lon
             };
-    
-            // Call your endpoint to send location data to the server
+
             const locationResponse = await endpoints.locationChecker(userLoc);
             console.log(locationResponse)
         };
-    
+
         // Request the user's current position
         navigator.geolocation.getCurrentPosition(showPosition);
-    }    
+    }
+
+    const handleClockIn = (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+        setClockedIn(true); // Set clockedIn state to true when the user clocks in
+    };
+
+    const handleBreak = () => {
+        // Handle break logic here
+        setOnBreak(true); // Set onBreak state to true when the user takes a break
+    };
+
+    const handleEndBreak = () => {
+        // Handle end break logic here
+        setOnBreak(false); // Set onBreak state to false when the user ends the break
+    };
+
+    const handleClockOut = () => {
+        // Handle clock out logic here
+        setClockedIn(false); // Set clockedIn state back to false when the user clocks out
+    };
 
     return (
         <>
-        <div className = {styles.clockinComponents}>
-            <div className={styles.clock}>
-                <h2>Clock</h2>
-                <h1>{currentTime}</h1>
-            </div>
+            <div className={styles.clockinComponents}>
+                <div className={styles.clock}>
+                    <h2>Clock</h2>
+                    <h1>{currentTime}</h1>
+                </div>
 
-            <div className={styles.personal}>
-                <h5>Sunny day, bright vibes</h5>
-            </div>
+                <div className={styles.personal}>
+                    <h5>Sunny day, bright vibes</h5>
+                </div>
 
-<div className={styles.clockLocation}>
-     <form action="POST" onSubmit={(e) => {
-                    e.preventDefault();
-
-                    geolocation(e); // Passing event to geolocation function
-                }}>
-            <div className={styles.buttonContainer}>
-                <Button className={styles.button}>Clock In</Button>{' '}
+                {clockedIn ? ( // Render buttons only if the user is clocked in
+                    <div className={styles.clockLocation}>
+                        <div className={styles.buttonContainer}>
+                            {onBreak ?
+                                (
+                                <Button className={styles.endbreakButton} onClick={handleEndBreak}>
+                                    End Break
+                                </Button>
+                            ) : (
+                                <Button className={styles.breakButton} onClick={handleBreak}>
+                                    Break
+                                </Button>
+                            )}
+                            <Button className={styles.clockoutButton} onClick={handleClockOut}>
+                                Clock Out
+                            </Button>
+                        </div>
+                        <div className={styles.location}>
+                            <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                            <h6 >You are within office reach</h6>
+                        </div>
+                    </div>
+                ) : ( // Render "Clock In" button if the user is not clocked in
+                    <div className={styles.clockLocation}>
+                        <div className={styles.buttonContainer}>
+                            <Button className={styles.button} type="button" onClick={handleClockIn}>
+                                Clock In
+                            </Button>
+                        </div>
+                        <div className={styles.location}>
+                            <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
+                            <h6 >You are within office reach</h6>
+                        </div>
+                    </div>
+                )}
             </div>
-            </form>
-
-            <div className={styles.location}>
-                <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
-                <h6 >You are within office reach</h6>
-            </div>
-            </div>
-            </div>
-
         </>
     );
-
 }
 
 export default ClockInOutWidget;

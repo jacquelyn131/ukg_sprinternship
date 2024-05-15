@@ -1,4 +1,4 @@
-.clockinComponents{
+.clockinComponents {
 display: flex;
 align-items: center;
 justify-content: center;
@@ -87,7 +87,85 @@ margin-bottom: 8px;
 }
 
 .clockLocation {
+position: relative;
 display: flex;
 flex-direction: column;
-gap: 13px;
+gap: 1em;
+justify-content: center;
+align-items: center;
+}
+
+.buttonContainer {
+display:flex;
+flex-direction: row;
+justify-content: center;
+gap: 12px;
+}
+
+.endbreakButton {
+position: relative;
+font-family: 'Volte Rounded';
+font-weight: 500;
+font-size: 20px;
+color: white;
+background-color: #038299;
+border-radius: 16px;
+max-width: 9em;
+width: 9em;
+height: 2.8em;
+padding: 12px 30px;
+border: none;
+}
+
+.endbreakButton:hover {
+background-color:  #107E7E;
+}
+
+.endbreakButton:active {
+background-color: #002c2c !important;
+}
+
+.breakButton {
+position: relative;
+font-family: 'Volte Rounded';
+font-weight: 500;
+font-size: 20px;
+color: white;
+background-color: #0BBFDF;
+border-radius: 16px;
+width:9em;
+max-width: 8em;
+height: 2.8em;
+padding: 12px 30px;
+border: none;
+}
+
+.breakButton:hover {
+background-color:  #107E7E;
+}
+
+.breakButton:active {
+background-color: #002c2c !important;
+}
+
+.clockoutButton {
+font-family: 'Volte Rounded';
+font-weight: 500;
+font-size: 20px;
+color: white;
+background-color: #576460;
+border-radius: 16px;
+width: 8em;
+max-width: 8em;
+height: 2.8em;
+padding: 12px 30px;
+border: none;
+}
+
+.clockoutButton:hover {
+background-color:  #107E7E;
+}
+
+.clockoutButton:active {
+background-color: #002c2c !important;
 }
