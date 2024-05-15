@@ -9,11 +9,10 @@ html::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('../backgrounds/ukg-pattern.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.2;
+    background-image: url('../backgrounds/patternbackgroundgray.png');
+background-size: 500px;
+filter: sepia(0%) brightness(108%);
+opacity: .15;
     z-index: -1;
 }
 
@@ -24,7 +23,7 @@ html::after {
     left: 0;
     right: 0;
     bottom: 0;
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #ffffff), color-stop(16.67%, #ffffff), color-stop(33.33%, #ffffff), color-stop(50%, #ffffff), color-stop(58.33%, #e7f8f5), color-stop(66.67%, #cff2eb), color-stop(75%, #b6ebe1), color-stop(83.33%, #9ce4d8), color-stop(91.67%, #80ddce), color-stop(100%, #5fd5c4), to(#30cebb)) fixed;
-    opacity: 0.8;
-    z-index: -2;
+ background: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #ffffff), color-stop(16.67%, #ffffff), color-stop(33.33%, #ffffff), color-stop(50%, #ffffff), color-stop(58.33%, #e7f8f5), color-stop(66.67%, #cff2eb), color-stop(75%, #b6ebe1), color-stop(83.33%, #9ce4d8), color-stop(91.67%, #80ddce), color-stop(100%, #5fd5c4), to(#30cebb));
+  background-color: #e7f8f5;
+    z-index: -3;
 }
