@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+/*
 @RestController
 public class LoginController {
 
@@ -22,4 +22,7 @@ public class LoginController {
         // Return response with status 200 and UID in the body
         return ResponseEntity.ok(responseBody);
     }
+
 }
+*/
+

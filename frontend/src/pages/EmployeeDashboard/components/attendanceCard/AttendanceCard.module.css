@@ -1,93 +1,60 @@
-.all {
+.attendanceCardContainer {
 display: flex;
+overflow: hidden;
 flex-direction: column;
-padding: 15px;
-background-color: #FFFFFF;
+padding: 1.5% 4%;
+background-color: white;
 color: #005151;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-border-radius:16px;
-height: 7.8em;
-width: 500px;
-align-items: left;
+border-radius: 16px;
+max-width: 100%;
 justify-content: center;
-}
 
-h1{
-color: #005151;
-}
-
-h4{
-display: flex;
-font-size: .75em;
-}
-
-h3{
-font-size: .80em
 }
 
 .date{
 color: #757575;
-font-family: "volte rounded";
+font-family: "Volte Rounded";
 font-weight: 500;
+font-size: .9em;
 }
 
 .totalHours{
-font-size: 2em;
-font-family: "volte rounded";
+font-size: 1.8em;
+font-family: "Volte Rounded";
 font-weight: 500;
 }
 
-.clockIn{
-font-size: 1.5em;
-color: #757575;
-font-family: "volte rounded";
+.totalHoursLabel {
+font-size: .9em;
 }
 
-.clockOut{
-font-size: 1.5em;
-color: #757575;
-font-family: "volte rounded";
-}
-
-.num8{
-color: black;
-font-family: "volte rounded";
-}
-
-.num6{
-color: black;
-font-family: "volte rounded";
-font-weight: 500;
-}
-
-.num2{
-font-family: "volte rounded";
-color: black;
-font-weight: 500;
-}
-
-
-/*
-.punchContainer{
-inline-flex: left;
-}
-
-.clockIn{
+.punch {
 display: flex;
-justify-content: center;
-}
-
-.clockOut{
-display: flex;
-justify-content: right;
+flex-direction: column;
 align-items: center;
-
 }
 
-*/
+.punch .punchTime {
+font-size: 1.2em;
+color: #757575;
+font-family: "Volte Rounded";
+}
+
+.punch .punchType {
+font-size: .9rem;
+}
+
 
 .punchContainer {
 display: flex;
 align-items: center;
 justify-content: space-between;
+}
+
+
+.totalHoursContainer {
+display: flex;
+align-items: center;
+flex-direction: column;
 }

@@ -23,6 +23,9 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+    public Employee() {
+
+    }
 
     @Override
     public String toString() {
