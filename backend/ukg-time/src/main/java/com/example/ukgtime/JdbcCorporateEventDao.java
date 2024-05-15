@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -44,7 +45,7 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
 
     public boolean add(Employee employee) {
         String sql = "INSERT INTO employees(first_name, last_name) VALUES (?,?)";
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        //ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName());
         System.out.println("inserted an employee successfully");
         return true;
@@ -65,16 +66,32 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
 
     @Override
     public Optional<Employee> get(long id) {
-        return Optional.empty();
+        String sql = "SELECT employee_id, first_name, last_name, ssn, dob, manager_id, email " +
+                "FROM employees WHERE employee_id = ?";
+        Employee employee = null;
+        try {
+            employee = jdbcTemplate.queryForObject(sql, Employee.class, id);
+        } catch(DataAccessException e) {
+            logger.info("Employee not found: " + id);
+        }
+        return Optional.ofNullable(employee);
     }
 
     @Override
     public void update(Employee employee, long id) {
-
+        String sql = "UPDATE employees SET first_name = ?, last_name = ?, ssn = ?, dob = ?, " +
+                "manager_id = ?, email = ? WHERE employee_id = ?";
+        int update = jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(), employee.getSsn(),
+                employee.getDob(), employee.getManagerId(), employee.getEmail(), id);
+        if (update == 1) {
+            logger.info("Employee record updated: " + id);
+        }
     }
 
     @Override
     public void delete(long id) {
+        String sql = "DELETE FROM employees WHERE employee_id = id";
+        jdbcTemplate.execute(sql);
 
     }
 }

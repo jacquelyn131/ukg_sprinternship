@@ -39,6 +39,10 @@ public class UkgTimeApplication implements CommandLineRunner {
 
 		log.info("found employee: " + dao.find(1));
 		log.info("all employees: " + dao.list());
+		Employee employee = new Employee(7, "123456789", "Jenny", "McLaren", "01-01-1991", "jenny@email.com",
+				1);
+		log.info("add employee: " + dao.add(employee));
+
 
 	}
 	@Autowired
