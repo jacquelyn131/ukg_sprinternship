@@ -2,25 +2,31 @@
 display: flex;
 overflow: hidden;
 flex-direction: column;
-padding: 15px;
-background-color: #FFFFFF;
+padding: 1.5% 4%;
+background-color: white;
 color: #005151;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-border-radius:16px;
+border-radius: 16px;
 max-width: 100%;
 justify-content: center;
+
 }
 
 .date{
 color: #757575;
-font-family: "volte rounded";
+font-family: "Volte Rounded";
 font-weight: 500;
+font-size: .9em;
 }
 
 .totalHours{
-font-size: 2em;
-font-family: "volte rounded";
+font-size: 1.8em;
+font-family: "Volte Rounded";
 font-weight: 500;
+}
+
+.totalHoursLabel {
+font-size: .9em;
 }
 
 .punch {
@@ -30,12 +36,13 @@ align-items: center;
 }
 
 .punch .punchTime {
-font-size: 1.5em;
+font-size: 1.2em;
 color: #757575;
 font-family: "Volte Rounded";
 }
 
 .punch .punchType {
+font-size: .9rem;
 }
 
 
