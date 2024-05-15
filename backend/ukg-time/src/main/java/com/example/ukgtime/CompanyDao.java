@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class CompanyDao implements CorporateEventDao {
+public class CompanyDao implements CorporateEventDao<Company> {
     private static Logger logger = LoggerFactory.getLogger(CompanyDao.class);
     private JdbcTemplate jdbcTemplate;
 
@@ -33,9 +33,6 @@ public class CompanyDao implements CorporateEventDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public boolean add(Object o){
-        return true;
-    }
     public boolean add(Company company) {
         String sql = "INSERT INTO company (company_id, company_name, headquarters_id) " +
                 "VALUES (?, ?, ?)";
@@ -75,9 +72,7 @@ public class CompanyDao implements CorporateEventDao {
         return Optional.ofNullable(company);
     }
 
-    public void update(Object o, long id) {
 
-    }
 
     public void update(Company company, long id) {
         String sql = "UPDATE company SET company_id = ?, company_name = ?, headquarters_id = ? " +
