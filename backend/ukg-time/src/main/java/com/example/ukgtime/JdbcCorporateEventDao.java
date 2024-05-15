@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -66,14 +67,15 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
 
     @Override
     public Optional<Employee> get(long id) {
-        String sql = "SELECT employee_id, first_name, last_name, ssn, dob, manager_id, email " +
-                "FROM employees WHERE employee_id = ?";
+        String sql = "SELECT employee_id, ssn, first_name, last_name, dob, email, manager_id " +
+                "FROM employees WHERE employee_id =?";
         Employee employee = null;
         try {
-            employee = jdbcTemplate.queryForObject(sql, Employee.class, id);
+            employee = jdbcTemplate.queryForObject(sql, new Object[]{id}, rowMapper);
         } catch(DataAccessException e) {
             logger.info("Employee not found: " + id);
         }
+        logger.info("employee: " + employee);
         return Optional.ofNullable(employee);
     }
 
@@ -90,7 +92,7 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
 
     @Override
     public void delete(long id) {
-        String sql = "DELETE FROM employees WHERE employee_id = id";
+        String sql = "DELETE FROM employees WHERE employee_id =" + id;
         jdbcTemplate.execute(sql);
 
     }
