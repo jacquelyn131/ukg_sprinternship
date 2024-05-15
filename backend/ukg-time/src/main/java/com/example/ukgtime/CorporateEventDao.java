@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CorporateEventDao<T> {
-    boolean add(Employee employee);
-    boolean find(long eId);
+    boolean add(T t);
+    boolean find(long id);
     List<T> list();
     Optional<T> get(long id);
     void update(T t, long id);

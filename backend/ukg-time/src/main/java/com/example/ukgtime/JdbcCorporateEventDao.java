@@ -60,8 +60,7 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
     @Override
     public List<Employee> list() {
         String sql = "SELECT employee_id, first_name, last_name, ssn, dob, manager_id, email " +
-                "FROM employees " +
-                "";
+                "FROM employees";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
