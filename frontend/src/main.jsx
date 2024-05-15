@@ -11,6 +11,8 @@ import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
 import EmployeeDashboard from './pages/EmployeeDashboard/EmployeeDashboard.jsx'
 
 import SignInPage from './pages/SignIn/SignInPage.jsx';
+import { UserProvider } from './UserContext.jsx';
+import PrivateRoutes from './PrivateRoutes.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,14 +23,19 @@ const router = createBrowserRouter([
       { index: true, element: <App /> },
       { path: '*', element: <ErrorPage />, error: true, message: 'Not Found'},
       { path: '/signin', element: <SignInPage />},
-      { path: '/dashboard', element: <EmployeeDashboard />}
+      { path: '/dashboard', element: <PrivateRoutes>
+        <EmployeeDashboard />
+          </PrivateRoutes>}
     ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
   <React.StrictMode>
+      <UserProvider>
     <RouterProvider router={router} />
+ </UserProvider>
   </React.StrictMode>
 );
