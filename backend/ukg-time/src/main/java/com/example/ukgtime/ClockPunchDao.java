@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ClockPunchDao implements CorporateEventDao{
+public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
     private static Logger logger = LoggerFactory.getLogger(ClockPunchDao.class);
     private JdbcTemplate jdbcTemplate;
     private RowMapper<ClockPunch> rowMapper = (rs, rowNum) -> {
@@ -33,10 +33,6 @@ public class ClockPunchDao implements CorporateEventDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
-    public boolean add(Object o) {
-        return false;
-    }
     public boolean add(ClockPunch clockPunch) {
         String sql = "INSERT INTO clock_punch (date_time, punch_id, employee_id, office_id, " +
                 "type, valid, comments) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -73,10 +69,6 @@ public class ClockPunchDao implements CorporateEventDao{
         return Optional.ofNullable(clockPunch);
     }
 
-    @Override
-    public void update(Object o, long id) {
-
-    }
     public void update(ClockPunch clockPunch, long id) {
         String sql = "UPDATE clock_punch SET date_time = ?, punch_id = ?, employee_id = ?, " +
                 "office_id = ?, type = ?, valid = ?, comments = ? WHERE punch_id = ?";
