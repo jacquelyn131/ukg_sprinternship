@@ -8,13 +8,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
     private static Logger logger = LoggerFactory.getLogger(ClockPunchDao.class);
+    private static SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
     private JdbcTemplate jdbcTemplate;
     private RowMapper<ClockPunch> rowMapper = (rs, rowNum) -> {
         ClockPunch clockPunch = new ClockPunch();
@@ -85,4 +89,84 @@ public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
         String sql = "DELETE FROM clock_punch WHERE punch_id = " + id;
         jdbcTemplate.execute(sql);
     }
+    // insert a 'IN' punch for the given employee
+    public boolean employeeClockIn(long id) {
+        // check if a clock in is allowed
+        // can only insert clock in when most recent is clock out
+        if (true) {
+            return false;
+        }
+        return true;
+    }
+    // return recent punch type given employee id
+    public Optional getRecentPunchType(long id) {
+        String punchType = null;
+        ClockPunch result = null;
+        String sql = "SELECT type FROM clock_punch " +
+                    "WHERE employee_id = ? " +
+                    "ORDER BY date_time DESC " +
+                    "LIMIT 1";
+        try {
+            punchType = jdbcTemplate.queryForObject(sql, String.class, id);
+
+        } catch (DataAccessException e) {
+            logger.info("No recent punches for employee: " + id);
+        }
+        return Optional.ofNullable(punchType);
+    }
+    // return recent punch time given employee id
+    public Optional getRecentPunchTime(long id) {
+        String dateTime = null;
+        ClockPunch result = null;
+        String sql = "SELECT date_time FROM clock_punch " +
+                "WHERE employee_id = ? " +
+                "ORDER BY date_time DESC " +
+                "LIMIT 1";
+        try {
+            dateTime = jdbcTemplate.queryForObject(sql, String.class, id);
+
+        } catch (DataAccessException e) {
+            logger.info("No recent punches for employee: " + id);
+        }
+        return Optional.ofNullable(dateTime);
+    }
+
+    // return recent punch time given employee id and punch type
+    public Optional getRecentPunchTime(long id, String punchType) {
+        String dateTime = null;
+        ClockPunch result = null;
+        String sql = "SELECT date_time FROM clock_punch " +
+                "WHERE employee_id = ? AND type = ?" +
+                "ORDER BY date_time DESC " +
+                "LIMIT 1";
+        try {
+            dateTime = jdbcTemplate.queryForObject(sql, String.class, id, punchType);
+
+        } catch (DataAccessException e) {
+            logger.info("No recent punches for employee: " + id);
+        }
+        return Optional.ofNullable(dateTime);
+    }
+    // return shift length given two punch id's
+    public float getShiftLength(long startId, long endId) throws ParseException {
+        float shiftLength = (float)0.0;
+        String sql = "SELECT date_time FROM clock_punch WHERE punch_id = ?";
+        String d1 = null;
+        String d2 = null;
+        try {
+            d1 = jdbcTemplate.queryForObject(sql, String.class, startId);
+            d2 = jdbcTemplate.queryForObject(sql, String.class, endId);
+        } catch (DataAccessException e) {
+            logger.info("no punch for given id: " + startId + " " + endId);
+        }
+        Date date1 = sdf.parse(d1);
+        Date date2 = sdf.parse(d2);
+        shiftLength = date2.getTime() - date1.getTime();
+        return shiftLength;
+    }
+    // return break length given two punch id's
+    public float getBreakLength(long startId, long endId) {
+        return (float) 0.0;
+    }
+
 }
