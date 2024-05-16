@@ -75,7 +75,7 @@ const ClockInOutWidget = () => {
 
     const handleClockIn = (e) => {
         const timeStampInfo = {
-            employeeId: localStorage.getItem("login_token"),
+            employeeId: userInfo.employeeId,
             type: "IN",
             time: getDateTime(),
         };
@@ -91,7 +91,7 @@ const ClockInOutWidget = () => {
 
     const handleClockOut = () => {
         const timeStampInfo = {
-            employeeId: localStorage.getItem("login_token"),
+            employeeId: userInfo.employeeId,
             type: "OUT",
             time: getDateTime(),
         };
@@ -104,7 +104,7 @@ const ClockInOutWidget = () => {
 
     const handleBreak = () => {
         const timeStampInfo = {
-            employeeId: localStorage.getItem("login_token"),
+            employeeId: userInfo.employeeId,
             type: "BREAK-IN",
             time: getDateTime(),
         };
@@ -120,7 +120,7 @@ const ClockInOutWidget = () => {
 
     const handleEndBreak = () => {
         const timeStampInfo = {
-            employeeId: localStorage.getItem("login_token"),
+            employeeId: userInfo.employeeId,
             type: "BREAK-OUT",
             time: getDateTime(),
         };
