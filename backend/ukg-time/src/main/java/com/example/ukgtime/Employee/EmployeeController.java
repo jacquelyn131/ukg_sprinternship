@@ -1,14 +1,15 @@
 package com.example.ukgtime.Employee;
 
+import com.example.ukgtime.ClockPunch;
+import com.example.ukgtime.ClockPunchDao;
 import com.example.ukgtime.Company.Company;
 import com.example.ukgtime.Coordinates;
 import com.example.ukgtime.CorporateEventDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.Clock;
 import java.util.Optional;
 
 @RestController
@@ -26,9 +27,12 @@ public class EmployeeController {
 
     private static CorporateEventDao<Employee> dao;
     private static CorporateEventDao<Company> companyDao;
-    public EmployeeController(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao) {
+    private static ClockPunchDao clockPunchDao;
+    public EmployeeController(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao,
+    ClockPunchDao clockPunchDao) {
         this.dao = dao;
         this.companyDao = companyDao;
+        this.clockPunchDao = clockPunchDao;
     }
 
         @PostMapping("/api/user/info")
@@ -62,5 +66,14 @@ public class EmployeeController {
 
 
         return ResponseEntity.ok(true);
+    }
+
+    @GetMapping("/api/user/viewRecentPunch")
+    public ResponseEntity<Optional<ClockPunch>> employeeClockIn(@RequestParam long id ) {
+        System.out.println(id);
+        ClockPunch recentPunch = (ClockPunch) clockPunchDao.getRecentPunch(id).get();
+        System.out.println(recentPunch);
+        // return response with status 200 ok and the most recent ClockPunch
+        return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(recentPunch));
     }
 }
