@@ -12,23 +12,21 @@ const App = () => {
                <section className={styles.header}>
                   <div className={styles.headerContent}>
                        <h1>Welcome to UKG Time</h1>
-                                         <p>UKG Time is a time tracking application that allows you to easily clock in and out of work.</p>
-
-                      </div>
-                      <img src="./images/header-img.png" />
-
-                   </section>
-<section className={styles.features}>
-<h2 id="features">Features</h2>
-    <p className={styles.featuresContent}>We could put some general text about the app here. Like an overview of what it does/why it’s cool. Some feature ideas: location clock in, hour/pay viewing & time stats. If we have time: shift trading, shout outs. </p>
-
-<div className={styles.featureCardContainer}>
-    <FeatureCard featureName="Feature 1" featureDescription="Lorem ipsum dolor sit amet" />
-    <FeatureCard featureName="Feature 2" featureDescription="Lorem ipsum dolor sit amet" />
-    <FeatureCard featureName="Feature 3" featureDescription="Lorem ipsum dolor sit amet" />
-
-    </div>
-    </section>
+                       <p>UKG Time is a time tracking application that allows you to easily clock in and out of work.</p>
+                  </div>
+                  <img src="./images/header-img.png" />
+               </section>
+               <section className={styles.features}>
+                  <h2 id="features">Features</h2>
+                  <p className={styles.featuresContent}>
+                     UKG Time is your go-to for seamless time management and attendance tracking. Utilizing advanced location technology, employers can effortlessly monitor employee arrivals and departures, while features like location clock-in, hour/pay viewing, and time stats streamline the process for everyone.
+                  </p>
+                  <div className={styles.featureCardContainer}>
+                     <FeatureCard featureName="Location Checker" featureDescription="Ensures employees are checking in from the office." imageUrl="./images/office location.png" />
+                     <FeatureCard featureName="Clock In/Out Reporting" featureDescription="Displays Clock In time and saves timestamp history with Clock Out feature." imageUrl="./images/clock in out.png" />
+                     <FeatureCard featureName="Manual Break Time" featureDescription="Allows employees the amount of time they've been on break according to their start." imageUrl="./images/break time recorded.png" />
+                  </div>
+               </section>
             </div>
         </div>
     );
