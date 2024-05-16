@@ -69,7 +69,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/api/user/viewRecentPunch")
-    public ResponseEntity<Optional<ClockPunch>> employeeClockIn(@RequestParam long id ) {
+    public ResponseEntity<Optional<ClockPunch>> viewRecentPunch(@RequestParam long id ) {
         System.out.println(id);
         ClockPunch recentPunch = (ClockPunch) clockPunchDao.getRecentPunch(id).get();
         System.out.println(recentPunch);
