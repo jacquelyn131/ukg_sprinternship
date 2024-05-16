@@ -37,11 +37,12 @@ const SignInForm = () => {
             // HTTP post to server
             const response = await Endpoints.userInfo(emp);
             if (response) {
-                localStorage.setItem('login_token', response.employeeId);
+                sessionStorage.setItem('login_token', response.employeeId);
                 setLoginToken(response.employeeId);
-                const userInfo = await Endpoints.userInfo();
-                setUserInfo(userInfo);
+//                 const userInfo = await Endpoints.userInfo();
+                setUserInfo(response);
                 navigate("/dashboard");
+
             }
         } catch (error) {
             console.error('Login failed', error);
