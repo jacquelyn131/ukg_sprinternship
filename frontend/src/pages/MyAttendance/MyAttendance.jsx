@@ -4,30 +4,26 @@ import AttendanceCard from '../EmployeeDashboard/components/attendanceCard/Atten
 // import "react-vertical-timeline-component/style.min.css";
 
 const MyAttendance = () => {
-    const dotStyles = {background: "#005151"}
     return (
         <>
+            <button className={styles.backButton} type="button">
+                <img src="./././public/images/BackArrow.svg" className={styles.backArrow} />
+            </button>
+            <h1>My Attendance </h1>
+            <div className={styles.allAttendance}>
 
- <div className={styles.backButton}>
-      <button type="button">Back </button>
-      <img src="./././public/images/BackArrow.svg" className={styles.backArrow} />
-    </div>
-<h1>My Attendance</h1>
-            <div>
+                <div className={styles.attendanceCard1}>
+                    <AttendanceCard className={styles.test} />
 
-                            <div className={styles.attendanceCard1}>
-                                 <AttendanceCard className={styles.test} />
-
-                            <AttendanceCard className={styles.test} />
-                            <AttendanceCard className={styles.test} />
-</div>
+                    <AttendanceCard className={styles.test} />
+                    <AttendanceCard className={styles.test} />
+                </div>
             </div>
 
-            <div>
-                  <button type="button">View all</button>
-                </div>
-
-       </>
+            <div className={styles.container}>
+                <button className={styles.viewAll}> View All </button>
+            </div>
+        </>
     )
 }
 

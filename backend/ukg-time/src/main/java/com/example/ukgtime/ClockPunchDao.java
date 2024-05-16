@@ -23,7 +23,7 @@ public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
     private RowMapper<ClockPunch> rowMapper = (rs, rowNum) -> {
         ClockPunch clockPunch = new ClockPunch();
         clockPunch.setPunchId(rs.getLong("punch_id"));
-        clockPunch.setDateTime("" + rs.getDate("date_time"));
+        clockPunch.setDateTime("" + rs.getTimestamp("date_time"));
         clockPunch.setEmployeeId(rs.getLong("employee_id"));
         clockPunch.setOfficeId(rs.getLong("office_id"));
         clockPunch.setType(rs.getString("type"));
@@ -124,6 +124,21 @@ public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
         }
         return Optional.ofNullable(punchType);
     }
+    // return the most recent ClockPunch of a given employee
+    public Optional getRecentPunch(long id) {
+        ClockPunch result = null;
+        String sql = "SELECT date_time, punch_id, employee_id, office_id, type, valid, comments " +
+                "FROM clock_punch WHERE employee_id = ? " +
+                "ORDER BY date_time DESC " +
+                "LIMIT 1";
+        try {
+            result = jdbcTemplate.queryForObject(sql, new Object[]{id}, rowMapper);
+        } catch (DataAccessException e) {
+            logger.info("no recent punches for employee: " + id);
+        }
+        return Optional.ofNullable(result);
+
+    }
     // return recent punch time given employee id
     public Optional getRecentPunchTime(long id) {
         String dateTime = null;
@@ -156,6 +171,13 @@ public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
             logger.info("No recent punches for employee: " + id);
         }
         return Optional.ofNullable(dateTime);
+    }
+    public List<ClockPunch> employeePunchList(long id) {
+        String sql = "SELECT date_time, punch_id, employee_id, office_id, type, valid, comments " +
+                "FROM clock_punch " +
+                "WHERE employee_id = ? " +
+                "ORDER BY date_time DESC";
+        return jdbcTemplate.query(sql, new Object[] {id}, rowMapper);
     }
     // return shift length given two punch id's
     public float getShiftLength(long startId, long endId) throws ParseException {
