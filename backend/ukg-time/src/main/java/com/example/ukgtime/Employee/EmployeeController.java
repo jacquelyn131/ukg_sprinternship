@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Clock;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -85,5 +86,14 @@ public class EmployeeController {
         System.out.println(recentPunch);
         // return response with status 200 ok and the most recent ClockPunch
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(recentPunch));
+    }
+
+    @GetMapping("/api/user/viewRecentPunchList")
+    public ResponseEntity<Optional<List<ClockPunch>>> viewRecentPunchList(@RequestParam long id ) {
+        System.out.println(id);
+        List<ClockPunch> punchList = clockPunchDao.employeePunchList(id);
+        System.out.println(punchList);
+        // return response with status 200 ok and the most recent ClockPunch
+        return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(punchList));
     }
 }
