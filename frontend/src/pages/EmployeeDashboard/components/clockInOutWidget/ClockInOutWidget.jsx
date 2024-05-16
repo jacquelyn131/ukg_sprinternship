@@ -74,15 +74,28 @@ const ClockInOutWidget = () => {
     }
 
     const handleClockIn = (e) => {
+        const timeStampInfo = {
+            employeeId: userInfo.employeeId,
+            type: "IN",
+            time: getDateTime(),
+        };
+        console.log(timeStampInfo);
+        endpoints.addTimestamp(timeStampInfo);
         geolocation(e);
         e.preventDefault(); // Prevent default form submission behavior
-
+        // endpoints.addTimestamp(timeStamp)
         setClockedIn(true); // Set clockedIn state to true when the user clocks in
         setClockInStartTime(new Date()); // Record the start time
         setCurrentTime(""); // Remove current time when clocked in
     };
 
     const handleClockOut = () => {
+        const timeStampInfo = {
+            employeeId: userInfo.employeeId,
+            type: "OUT",
+            time: getDateTime(),
+        };
+        endpoints.addTimestamp(timeStampInfo);
         setClockedIn(false); // Set clockedIn state back to false when the user clocks out
         setClockInElapsedTime(0); // Reset elapsed time for clocking in
         setOnBreak(false); // Reset break state
@@ -90,6 +103,12 @@ const ClockInOutWidget = () => {
     };
 
     const handleBreak = () => {
+        const timeStampInfo = {
+            employeeId: userInfo.employeeId,
+            type: "BREAK-IN",
+            time: getDateTime(),
+        };
+        endpoints.addTimestamp(timeStampInfo);
         setOnBreak(true); // Set onBreak state to true when the user takes a break
         setBreakStartTime(new Date()); // Record the start time of break
         setClockInElapsedTime((prevElapsedTime) => {
@@ -100,6 +119,12 @@ const ClockInOutWidget = () => {
     };
 
     const handleEndBreak = () => {
+        const timeStampInfo = {
+            employeeId: userInfo.employeeId,
+            type: "BREAK-OUT",
+            time: getDateTime(),
+        };
+        endpoints.addTimestamp(timeStampInfo);
         setOnBreak(false); // Set onBreak state to false when the user ends the break
         setBreakElapsedTime(0); // Reset break elapsed time
         setClockInStartTime((prevStartTime) => {

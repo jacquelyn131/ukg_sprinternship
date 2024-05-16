@@ -28,12 +28,14 @@ public class EmployeeController {
     private static CorporateEventDao<Employee> dao;
     private static CorporateEventDao<Company> companyDao;
     private static ClockPunchDao clockPunchDao;
-    public EmployeeController(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao,
-    ClockPunchDao clockPunchDao) {
+
+    public EmployeeController(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao, ClockPunchDao clockPunchDao) {
         this.dao = dao;
         this.companyDao = companyDao;
+
         this.clockPunchDao = clockPunchDao;
     }
+
 
         @PostMapping("/api/user/info")
         public ResponseEntity<Optional<Employee>> createUserInfo(@RequestBody Employee employee) {
@@ -46,7 +48,6 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.OK).body(getEmp);
         }
 
-
 //    @PostMapping("/api/user/info")
 //    public ResponseEntity<Employee> createUserInfo(@RequestBody Employee employee) {
 //        // Here, you have access to the entire Employee object sent in the request body
@@ -58,6 +59,15 @@ public class EmployeeController {
 //        // Return response with status 201 (Created) and the received employee object in the body
 //        return ResponseEntity.status(HttpStatus.OK).body(employee);
 //    }
+
+    @PostMapping("/api/add/timestamp")
+    public ResponseEntity<Boolean> addTimeStamp(@RequestBody ClockPunch timeStamp) {
+        timeStamp.setOfficeId(3);
+//        timeStamp.setType("IN");
+        System.out.println(timeStamp);
+//        System.out.println(clockPunchDao.add(timeStamp));
+        return ResponseEntity.ok(true);
+    }
 
     @PostMapping("/api/user/location")
     public ResponseEntity<Boolean> updateUserLocation(@RequestBody Coordinates userLoc) {
