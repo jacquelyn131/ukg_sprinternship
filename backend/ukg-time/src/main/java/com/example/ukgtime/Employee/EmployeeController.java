@@ -5,10 +5,11 @@ import com.example.ukgtime.Coordinates;
 import com.example.ukgtime.CorporateEventDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 public class EmployeeController {
@@ -31,14 +32,14 @@ public class EmployeeController {
     }
 
         @PostMapping("/api/user/info")
-        public ResponseEntity<Employee> createUserInfo(@RequestBody Employee employee) {
-            // Here, you have access to the request body sent from the frontend, which is an Employee object
-            // You can perform any necessary operations with the received Employee object
-            // For example, you might save it to a database
+        public ResponseEntity<Optional<Employee>> createUserInfo(@RequestBody Employee employee) {
             System.out.println(employee);
             System.out.println(dao.get(employee.getEmployeeId()));
+
+            Optional<Employee> getEmp = dao.get(employee.getEmployeeId());
+
             // Return response with status 200 (OK) and the created employee object in the body
-            return ResponseEntity.status(HttpStatus.OK).body(employee);
+            return ResponseEntity.status(HttpStatus.OK).body(getEmp);
         }
 
 
@@ -58,6 +59,7 @@ public class EmployeeController {
     public ResponseEntity<Boolean> updateUserLocation(@RequestBody Coordinates userLoc) {
 
         System.out.println(userLoc);
+
 
         return ResponseEntity.ok(true);
     }

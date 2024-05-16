@@ -31,7 +31,10 @@ class Endpoints {
                 },
                 body: JSON.stringify(bodyData)
             });
-            return response.json();
+            const jsonResponse = await response.json()
+            console.log(jsonResponse)
+            return jsonResponse;
+            
         } catch (error) {
             console.error('There was some kind of issue!', error);
         }
