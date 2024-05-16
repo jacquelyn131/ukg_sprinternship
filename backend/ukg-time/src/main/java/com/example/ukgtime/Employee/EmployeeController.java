@@ -11,20 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
 public class EmployeeController {
-
-//    @PostMapping("/api/user/info")
-//    public ResponseEntity<Employee> getUserInfo() {
-//        // Simulate finding the user with ID
-//        Employee newEmp = new Employee(123456, "1010101010", "Rafael", "Ojeda", "12/34/56", "rafael.e.ojeda@gmail.com", 654321);
-//
-//        System.out.println("Test");
-//        // Return response with status 200 and user info in the body
-//        return ResponseEntity.ok(newEmp);
-//    }
 
     private static CorporateEventDao<Employee> dao;
     private static CorporateEventDao<Company> companyDao;
@@ -38,6 +29,29 @@ public class EmployeeController {
         this.clockPunchDao = clockPunchDao;
     }
 
+        @PostMapping("/api/auth/login")
+        public ResponseEntity<Boolean> loginUser(@RequestBody Employee employee) {
+
+            String empEmail = employee.getEmail();
+            long empId = employee.getEmployeeId();
+
+            if (!dao.find(empId)) {
+                System.out.println("Failed to log in!");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+            } else {
+                Optional<Employee> empInfo = dao.get(empId);
+
+                if (!empInfo.get().getEmail().equals(empEmail)) {
+                    System.out.println("Failed to log in!");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+                } else {
+                    System.out.println("Successfully logged in!");
+                    return ResponseEntity.status(HttpStatus.OK).body(true);
+
+                }
+            }
+
+        }
 
         @PostMapping("/api/user/info")
         public ResponseEntity<Optional<Employee>> createUserInfo(@RequestBody Employee employee) {
@@ -49,18 +63,6 @@ public class EmployeeController {
             // Return response with status 200 (OK) and the created employee object in the body
             return ResponseEntity.status(HttpStatus.OK).body(getEmp);
         }
-
-//    @PostMapping("/api/user/info")
-//    public ResponseEntity<Employee> createUserInfo(@RequestBody Employee employee) {
-//        // Here, you have access to the entire Employee object sent in the request body
-//        System.out.println("Received employee: " + employee);
-//
-//        // You can perform any necessary operations with the received Employee object
-//        // For example, you might save it to a database
-//
-//        // Return response with status 201 (Created) and the received employee object in the body
-//        return ResponseEntity.status(HttpStatus.OK).body(employee);
-//    }
 
     @PostMapping("/api/add/timestamp")
     public ResponseEntity<Boolean> addTimeStamp(@RequestBody ClockPunch timeStamp) {
