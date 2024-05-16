@@ -10,6 +10,7 @@ import com.example.ukgtime.*;
 import com.example.ukgtime.ProfileImage;
 
 
+import org.checkerframework.checker.units.qual.C;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 //import org.apache.commons.dbcp2.BasicDataSource;
 import javax.sql.DataSource;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Arrays;
@@ -29,11 +31,14 @@ public class UkgTimeApplication implements CommandLineRunner {
 
 	private static CorporateEventDao<Employee> dao;
 	private static CorporateEventDao<Company> companyDao;
+	private static ClockPunchDao clockPunchDao;
 	private static final Logger log = LoggerFactory.getLogger(UkgTimeApplication.class);
 
-	public UkgTimeApplication(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao) {
+	public UkgTimeApplication(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao,
+							  ClockPunchDao clockPunchDao) {
 		this.dao = dao;
 		this.companyDao = companyDao;
+		this.clockPunchDao = clockPunchDao;
 	}
 
 	public static void main(String[] args) {
@@ -61,7 +66,10 @@ public class UkgTimeApplication implements CommandLineRunner {
 //		log.info("update company with id  3");
 //		companyDao.delete(4);
 //		log.info("delete company with id 4");
+		log.info("test get: " + clockPunchDao.get(1));
 
+		log.info("recent punch type: " + (clockPunchDao.getRecentPunchType(1)).get());
+		log.info("recent punch time: " + (clockPunchDao.getRecentPunchTime(1, "IN")).get());
 	}
 	@Autowired
 	JdbcTemplate jdbcTemplate;
