@@ -124,6 +124,21 @@ public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
         }
         return Optional.ofNullable(punchType);
     }
+    // return the most recent ClockPunch of a given employee
+    public Optional getRecentPunch(long id) {
+        ClockPunch result = null;
+        String sql = "SELECT date_time, punch_id, employee_id, office_id, type, valid, comments " +
+                "FROM clock_punch WHERE employee_id = ? " +
+                "ORDER BY date_time DESC " +
+                "LIMIT 1";
+        try {
+            result = jdbcTemplate.queryForObject(sql, new Object[]{id}, rowMapper);
+        } catch (DataAccessException e) {
+            logger.info("no recent punches for employee: " + id);
+        }
+        return Optional.ofNullable(result);
+
+    }
     // return recent punch time given employee id
     public Optional getRecentPunchTime(long id) {
         String dateTime = null;
