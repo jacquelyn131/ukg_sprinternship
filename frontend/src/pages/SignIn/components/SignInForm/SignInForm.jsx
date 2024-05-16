@@ -41,8 +41,6 @@ const SignInForm = () => {
                 setLoginToken(response.employeeId);
                 const userInfo = await Endpoints.userInfo();
                 setUserInfo(userInfo);
-                console.log(userInfo);
-                console.log(loginToken)
                 navigate("/dashboard");
             }
         } catch (error) {
