@@ -64,7 +64,7 @@ class Endpoints {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(userLoc)
+                body: JSON.stringify(timeStamp)
             });
             return response.json();
         } catch (error) {
@@ -72,6 +72,30 @@ class Endpoints {
         }
     }
     
+    addTimestamp = async (recordTime) => {
+        try {
+            const bodyData = {
+                employeeId: recordTime.employeeId,
+                dateTime: recordTime.time,
+                type: recordTime.timeStampType // TYPES: (IN/OUT/BREAK-IN/BREAKOUT)
+            };
+    
+            const response = await fetch('http://localhost:8080/api/add/timestamp', {
+                method: 'POST', 
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyData)
+            });
+            const jsonResponse = await response.json()
+            console.log(jsonResponse)
+            return jsonResponse;
+            
+        } catch (error) {
+            console.error('There was some kind of issue!', error);
+        }
+    }    
 }
 
 const endpoints = new Endpoints();

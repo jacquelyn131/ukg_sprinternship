@@ -35,8 +35,8 @@ public class ClockPunch {
     @Override
     public String toString() {
         return String.format("ClockPunch[dateTime: '%s', employeeId: %d, officeId: %d, " +
-                "type: %s, valid: %s, comments: %s]", dateTime, employeeId, officeId,
-                type, valid, comments);
+                "type: %s, valid: %s, comments: %s, punchId: %s]", dateTime, employeeId, officeId,
+                type, valid, comments, punchId);
     }
 
     public String getDateTime() {
