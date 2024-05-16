@@ -37,8 +37,8 @@ const SignInForm = () => {
             // HTTP post to server
             const response = await Endpoints.userInfo(emp);
             if (response) {
-                localStorage.setItem('login_token', response.uid);
-                setLoginToken(response.uid);
+                localStorage.setItem('login_token', response.employeeId);
+                setLoginToken(response.employeeId);
                 const userInfo = await Endpoints.userInfo();
                 setUserInfo(userInfo);
                 console.log(userInfo);

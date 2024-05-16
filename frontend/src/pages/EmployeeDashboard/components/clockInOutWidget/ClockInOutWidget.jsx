@@ -2,8 +2,11 @@ import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react";
 import styles from './ClockInOutWidget.module.css'
 import endpoints from '../../../../endpoints/Endpoints';
-
+import { useUser } from '../../../../UserContext.jsx'
 const ClockInOutWidget = () => {
+    const { userInfo } = useUser();
+
+
     // Initialize current time state
     const [currentTime, setCurrentTime] = useState("");
     const [currentLocation, setCurrentLocation] = useState("");
@@ -11,11 +14,23 @@ const ClockInOutWidget = () => {
     const [onBreak, setOnBreak] = useState(false); // State variable to track whether the user is on a break
 
     const [withinReach, setWithinReach] = useState('true');
-
     const [clockInStartTime, setClockInStartTime] = useState(null); // State variable to track the start time of clocking in
     const [breakStartTime, setBreakStartTime] = useState(null); // State variable to track the start time of break
     const [clockInElapsedTime, setClockInElapsedTime] = useState(0); // State variable to track the elapsed time for clocking in
     const [breakElapsedTime, setBreakElapsedTime] = useState(0); // State variable to track the elapsed time for break
+
+    const [dateTime, setDateTime] = useState("")
+
+    const getDateTime = () => {
+        return new Date().toISOString().slice(0, 19).replace('T', ' ');
+    } 
+
+    // const userTimeStamp = {
+    //     employeeId: userInfo.employeeId,
+    //     timeStampType: 
+    //     timeStamp:
+
+    // }
 
     // Update current time every minute
     useEffect(() => {
@@ -36,7 +51,7 @@ const ClockInOutWidget = () => {
 
     const geolocation = async (e) => {
         e.preventDefault();
-
+        console.log(getDateTime())
         const showPosition = async (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
