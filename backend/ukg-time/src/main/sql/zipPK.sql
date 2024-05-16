@@ -1,0 +1,2 @@
+ALTER TABLE zip
+ADD CONSTRAINT pk_zip PRIMARY KEY (zip);
