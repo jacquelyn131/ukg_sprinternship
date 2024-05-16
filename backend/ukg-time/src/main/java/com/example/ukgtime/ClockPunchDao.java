@@ -92,7 +92,17 @@ public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
     // insert a 'IN' punch for the given employee
     public boolean employeeClockIn(long id) {
         // check if a clock in is allowed
-        // can only insert clock in when most recent is clock out
+        // can only insert clock in when most recent is clock out or employee has
+        //  no punches in system
+        String recentPunch = null;
+        ClockPunch punch = null;
+        String sql = "SELECT count(*) FROM clock_punch WHERE employee_id = ?";
+
+        try {
+            punch = (ClockPunch) getRecentPunchType(id).get();
+        } catch (DataAccessException e) {
+            logger.info("no punches for given employee: " + id);
+        }
         if (true) {
             return false;
         }
