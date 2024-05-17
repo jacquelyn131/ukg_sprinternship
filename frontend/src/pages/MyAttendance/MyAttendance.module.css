@@ -1,5 +1,17 @@
+.myAttendanceWrapper {
+display: flex;
+flex-direction: column;
+align-items: center;
+
+}
+
+.myAttendanceHeader {
+display: flex;
+align-items: center;
+}
+
 .attendanceCard1 {
-    padding: 20px;
+    padding: 1em 2em;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -9,7 +21,11 @@
 
 .allAttendance {
     display: flex;
-    justify-content: center;
+    width: 80vw;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    align-items: center;
 }
 
 .backButton{
@@ -21,14 +37,20 @@
     background: none;
     cursor: pointer;
     position: relative;
+    align-self: flex-start;
     height: 50px;
     width: 70px;
     font-size: 1.5em;
 }
 
-h1{
-    margin-left: 6rem;
+.myAttendance h1{
     color: #005151;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-family: "Volte Rounded";
+
 }
 
 .backArrow {
