@@ -125,7 +125,39 @@ class Endpoints {
         } catch (error) {
             console.error('There was some kind of issue!', error);
         }
-    }    
+    }   
+    
+    viewRecentPunch = async (employeeId) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/user/viewRecentPunch?id=${employeeId}`);
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const jsonResponse = await response.json();
+    
+            console.log(jsonResponse);
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    }
+    
+    viewRecentPunchList = async (employeeId) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/user/viewRecentPunchList?id=${employeeId}`);
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const jsonResponse = await response.json();
+    
+            console.log(jsonResponse);
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    }
 }
 
 const endpoints = new Endpoints();
