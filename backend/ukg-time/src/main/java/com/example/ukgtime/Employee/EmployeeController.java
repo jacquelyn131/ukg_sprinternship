@@ -1,14 +1,16 @@
 package com.example.ukgtime.Employee;
 
-import com.example.ukgtime.ClockPunch;
-import com.example.ukgtime.ClockPunchDao;
+import com.example.ukgtime.*;
 import com.example.ukgtime.Company.Company;
-import com.example.ukgtime.Coordinates;
-import com.example.ukgtime.CorporateEventDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 import java.util.Objects;
 import java.time.Clock;
 import java.util.List;
@@ -26,6 +28,30 @@ public class EmployeeController {
         this.companyDao = companyDao;
 
         this.clockPunchDao = clockPunchDao;
+    }
+    // helper method to calculate length of a shift
+    public static float calculateShiftDuration(String startTime, String endTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat();
+//        Date startDate = sdf.parse(startTime, new ParsePosition(0));
+//        Date endDate = sdf.parse(endTime, new ParsePosition(0));
+        String parseDate1 = startTime.replaceAll(" ", "T");
+        String parseDate2 = endTime.replaceAll(" ", "T");
+        System.out.println("parseDate1: " + parseDate1);
+        parseDate1 = parseDate1 + ".00Z";
+        parseDate2 = parseDate2 + ".00Z";
+        Instant i1 = Instant.parse(parseDate1);
+        Instant i2 = Instant.parse(parseDate2);
+        System.out.println("i1: " + i1 + " i2: " + i2);
+        long millis1 = i1.toEpochMilli();
+        long millis2 = i2.toEpochMilli();
+        System.out.println("millis1: " + millis1 + " millis2: " + millis2);
+        Timestamp ts1;
+        Timestamp ts2;
+        float durationMilis = (float)(millis2 - millis1);
+        System.out.println("durationmillis " + durationMilis);
+        float hours = (durationMilis) / (float) 3600000;
+        System.out.println("hours " + hours);
+        return hours;
     }
 
         @PostMapping("/api/auth/login")
@@ -86,6 +112,7 @@ public class EmployeeController {
         System.out.println(id);
         ClockPunch recentPunch = (ClockPunch) clockPunchDao.getRecentPunch(id).get();
         System.out.println(recentPunch);
+        float duration = calculateShiftDuration("2024-05-17 08:00:00", "2024-05-17 14:55:55");
         // return response with status 200 ok and the most recent ClockPunch
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(recentPunch));
     }
@@ -97,5 +124,26 @@ public class EmployeeController {
         System.out.println(punchList);
         // return response with status 200 ok and the most recent ClockPunch
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(punchList));
+    }
+    @GetMapping("/api/user/viewRecentShift")
+    public ResponseEntity<Optional<ShiftData>> viewRecentShift(@RequestBody Employee employee ) {
+        long id = employee.getEmployeeId();
+        System.out.println(id);
+        String recentInPunch = (String) clockPunchDao.getRecentPunchTime(id, "IN").get();
+        String recentOutPunch = (String) clockPunchDao.getRecentPunchTime(id, "OUT").get();
+        System.out.println(recentInPunch);
+        float duration = (float)calculateShiftDuration(recentInPunch, recentOutPunch);
+        duration = (float)Math.floor((duration * 100.0f)/ 1.0f) / 100.0f;
+        ShiftData shiftData = new ShiftData();
+        shiftData.setShiftDuration(duration);
+        shiftData.setEmployeeId(id);
+        shiftData.setStartTime(recentInPunch.substring(11, 16));
+        shiftData.setEndTime(recentOutPunch.substring(11, 16));
+        System.out.println(recentInPunch.substring(0, 10));
+        shiftData.setDate(recentInPunch.substring(0, 10));
+        System.out.println(recentInPunch);
+        System.out.println(shiftData.toString());
+        // return response with status 200 ok and the most recent shift data
+        return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(shiftData));
     }
 }
