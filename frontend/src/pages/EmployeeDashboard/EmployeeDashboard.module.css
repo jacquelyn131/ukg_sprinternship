@@ -15,8 +15,12 @@ justify-content: space-around;
 
 .dashboardGreeting {
 width: 50%;
+}
+
+.dashboardGreeting h1 {
+margin: 0;
 text-align: center;
-padding: 1%;
+
 }
 
 .clockInOutWidget, .attendanceSection {
@@ -48,8 +52,8 @@ font-size: 1.4em;
 
 .dashboardGreeting {
 width: 100%;
-text-align: left;
 }
+
 
 .dashboardContent {
 flex-direction: column;

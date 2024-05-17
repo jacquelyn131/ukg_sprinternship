@@ -6,14 +6,18 @@ flex-direction: column;
 gap: 6px;
 }
 
-h1 {
+.clock h1 {
 font-family: 'Volte Rounded';
 font-weight: 600;
 font-size: 2.5em;
 }
 
-h2 {
+.clock h2 {
 font-size: 1.7em;
+}
+
+.clock h1 {
+margin: 0;
 }
 
 .breakTimer {

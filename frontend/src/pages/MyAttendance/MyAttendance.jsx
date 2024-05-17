@@ -6,23 +6,30 @@ import AttendanceCard from '../EmployeeDashboard/components/attendanceCard/Atten
 const MyAttendance = () => {
     return (
         <>
-            <button className={styles.backButton} type="button">
-                <img src="./././public/images/BackArrow.svg" className={styles.backArrow} />
-            </button>
-            <h1>My Attendance </h1>
-            <div className={styles.allAttendance}>
+           <div className={styles.myAttendanceWrapper}>
 
-                <div className={styles.attendanceCard1}>
-                    <AttendanceCard className={styles.test} />
+                <button className={styles.backButton} type="button">
+                               <img src="./././public/images/BackArrow.svg" className={styles.backArrow} />
+                           </button>
+                           <div className={styles.myAttendance}>
+                                           <h1 className={styles.myAttendanceHeader}>My Attendance </h1>
 
-                    <AttendanceCard className={styles.test} />
-                    <AttendanceCard className={styles.test} />
-                </div>
-            </div>
+               </div>
+                           <div className={styles.allAttendance}>
 
-            <div className={styles.container}>
-                <button className={styles.viewAll}> View All </button>
-            </div>
+
+                               <div className={styles.attendanceCard1}>
+                                   <AttendanceCard className={styles.test} />
+
+                                   <AttendanceCard className={styles.test} />
+                                   <AttendanceCard className={styles.test} />
+                               </div>
+                           </div>
+
+                           <div className={styles.container}>
+                               <button className={styles.viewAll}> View All </button>
+                           </div>
+               </div>
         </>
     )
 }

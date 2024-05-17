@@ -10,24 +10,23 @@ const GreetingMessage = (props) => {
 
 useEffect(() => {
 
-      const currentTime = new Date().toLocaleTimeString();
- console.log(currentTime)
- if (currentTime > "12:00:00 AM" && currentTime < "11:59:59 AM") {
-            setGreeting("Good Morning");
-        } else if (currentTime > "12:00:00 PM" && currentTime < "5:59:59 PM") {
-            setGreeting("Good Afternoon");
-        } else if (currentTime > "6:00:00 PM" && currentTime < "11:59:59 PM") {
-            setGreeting("Good Evening");
-        }  else {
-            setGreeting("Hello");
-        }
+      const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
+      const hour = parseInt(currentTime.split(":")[0]);
+
+      console.log(hour);
+
+   if (hour >= 0 && hour < 12) {
+             setGreeting('Good Morning');
+         } else if (hour >= 12 && hour < 18) {
+             setGreeting('Good Afternoon');
+         } else if (hour >= 18 && hour < 24) {
+             setGreeting('Good Evening');
+         }
     }, []);
 
 
 return (
-    <div className={styles.greetingMessage}>
         <h1 className={styles.greeting}>{greeting}, {props.firstName}!</h1>
-    </div>
 );
 }
 
