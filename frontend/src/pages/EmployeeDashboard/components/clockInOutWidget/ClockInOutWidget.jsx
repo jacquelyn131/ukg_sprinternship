@@ -1,8 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react";
-import styles from './ClockInOutWidget.module.css'
+import styles from './ClockInOutWidget.module.css';
 import endpoints from '../../../../endpoints/Endpoints';
-import { useUser } from '../../../../UserContext.jsx'
+import { useUser } from '../../../../UserContext.jsx';
+import Utils from '../../../../Utils.js';
 const ClockInOutWidget = () => {
     const { userInfo } = useUser();
 
@@ -74,7 +75,6 @@ const ClockInOutWidget = () => {
     }
 
     const handleClockIn = (e) => {
-        console.log(endpoints.viewRecentPunchList(userInfo.employeeId))
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             type: "IN",
