@@ -11,6 +11,8 @@ import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
 import EmployeeDashboard from './pages/EmployeeDashboard/EmployeeDashboard.jsx'
 import MyAttendance from './pages/MyAttendance/MyAttendance.jsx'
 
+import ManagerDashboard from './pages/ManagerDashboard/ManagerDashboard.jsx'
+
 import SignInPage from './pages/SignIn/SignInPage.jsx';
 import { UserProvider } from './UserContext.jsx';
 import PrivateRoutes from './PrivateRoutes.jsx';
@@ -28,7 +30,7 @@ const router = createBrowserRouter([
        </PrivateRoutes>},
       { path: '/dashboard', element: <PrivateRoutes>
         <EmployeeDashboard />
-          </PrivateRoutes>}
+          </PrivateRoutes>}, { path: '/managerdashboard', element: <ManagerDashboard/>}
     ],
   },
 ]);

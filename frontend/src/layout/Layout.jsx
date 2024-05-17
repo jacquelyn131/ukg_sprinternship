@@ -59,6 +59,9 @@ const Layout = () => {
                 <Nav.Link href="/" className={classNames(styles.navLink)}> 
                         Home
                     </Nav.Link>
+                    <Nav.Link href="/managerdashboard" className={classNames(styles.navLink)}>
+                                            ManagerDashboard
+                                        </Nav.Link>
 
 
 
