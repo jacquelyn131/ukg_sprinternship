@@ -107,7 +107,8 @@ class Endpoints {
             const bodyData = {
                 employeeId: recordTime.employeeId,
                 dateTime: recordTime.time,
-                type: recordTime.timeStampType // TYPES: (IN/OUT/BREAK-IN/BREAKOUT)
+                type: recordTime.timeStampType, // TYPES: (IN/OUT/BREAK-IN/BREAKOUT)
+                comments: recordTime.comments
             };
     
             const response = await fetch('http://localhost:8080/api/add/timestamp', {
