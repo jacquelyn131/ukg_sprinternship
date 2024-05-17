@@ -7,6 +7,31 @@ max-width: 100%;
 padding: 1%;
 }
 
+.attendanceHeader {
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 100%;
+}
+
+.forwardButtonContainer {
+border: none;
+outline: none;
+background: none;
+}
+.forwardButton {
+    padding: 1rem 0;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    height: 2.2em;
+    font-size: 1.5em;
+    border: none;
+
+}
+
 .dashboardContent {
 display: flex;
 flex-direction: row;

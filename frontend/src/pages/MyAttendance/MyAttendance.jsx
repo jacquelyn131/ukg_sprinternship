@@ -1,14 +1,23 @@
 import styles from './MyAttendance.module.css';
 import AttendanceCard from '../EmployeeDashboard/components/attendanceCard/AttendanceCard';
-// import {VerticalTimeline, VerticalTimelineElement} from "react-vertical-timeline-component";
-// import "react-vertical-timeline-component/style.min.css";
+import { useNavigate } from 'react-router-dom';
+
 
 const MyAttendance = () => {
+
+    const navigate = useNavigate();
+    const handleBackButton = (e) => {
+        e.preventDefault();
+        console.log('back button clicked')
+        navigate('/dashboard');
+    }
+
+
     return (
         <>
            <div className={styles.myAttendanceWrapper}>
 
-                <button className={styles.backButton} type="button">
+                <button className={styles.backButton} type="button" onClick={handleBackButton}>
                                <img src="./././public/images/BackArrow.svg" className={styles.backArrow} />
                            </button>
                            <div className={styles.myAttendance}>
