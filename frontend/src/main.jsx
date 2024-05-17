@@ -24,7 +24,8 @@ const router = createBrowserRouter([
       { index: true, element: <App /> },
       { path: '*', element: <ErrorPage />, error: true, message: 'Not Found'},
       { path: '/signin', element: <SignInPage />},
-      { path: '/attendance', element: <MyAttendance />},
+      { path: '/attendance', element: <PrivateRoutes><MyAttendance />
+       </PrivateRoutes>},
       { path: '/dashboard', element: <PrivateRoutes>
         <EmployeeDashboard />
           </PrivateRoutes>}
