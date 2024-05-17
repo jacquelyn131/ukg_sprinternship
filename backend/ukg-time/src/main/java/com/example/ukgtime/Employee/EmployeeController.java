@@ -1,10 +1,7 @@
 package com.example.ukgtime.Employee;
 
-import com.example.ukgtime.ClockPunch;
-import com.example.ukgtime.ClockPunchDao;
+import com.example.ukgtime.*;
 import com.example.ukgtime.Company.Company;
-import com.example.ukgtime.Coordinates;
-import com.example.ukgtime.CorporateEventDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -95,9 +92,9 @@ public class EmployeeController {
     @PostMapping("/api/add/timestamp")
     public ResponseEntity<Boolean> addTimeStamp(@RequestBody ClockPunch timeStamp) {
         timeStamp.setOfficeId(3);
-//        timeStamp.setType("IN");
+        timeStamp.setType("IN");
         System.out.println(timeStamp);
-//        System.out.println(clockPunchDao.add(timeStamp));
+        System.out.println(clockPunchDao.add(timeStamp));
         return ResponseEntity.ok(true);
     }
 
@@ -127,5 +124,26 @@ public class EmployeeController {
         System.out.println(punchList);
         // return response with status 200 ok and the most recent ClockPunch
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(punchList));
+    }
+    @GetMapping("/api/user/viewRecentShift")
+    public ResponseEntity<Optional<ShiftData>> viewRecentShift(@RequestBody Employee employee ) {
+        long id = employee.getEmployeeId();
+        System.out.println(id);
+        String recentInPunch = (String) clockPunchDao.getRecentPunchTime(id, "IN").get();
+        String recentOutPunch = (String) clockPunchDao.getRecentPunchTime(id, "OUT").get();
+        System.out.println(recentInPunch);
+        float duration = (float)calculateShiftDuration(recentInPunch, recentOutPunch);
+        duration = (float)Math.floor((duration * 100.0f)/ 1.0f) / 100.0f;
+        ShiftData shiftData = new ShiftData();
+        shiftData.setShiftDuration(duration);
+        shiftData.setEmployeeId(id);
+        shiftData.setStartTime(recentInPunch.substring(11, 16));
+        shiftData.setEndTime(recentOutPunch.substring(11, 16));
+        System.out.println(recentInPunch.substring(0, 10));
+        shiftData.setDate(recentInPunch.substring(0, 10));
+        System.out.println(recentInPunch);
+        System.out.println(shiftData.toString());
+        // return response with status 200 ok and the most recent shift data
+        return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(shiftData));
     }
 }
