@@ -1,11 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react";
-import styles from './ClockInOutWidget.module.css'
+import styles from './ClockInOutWidget.module.css';
 import endpoints from '../../../../endpoints/Endpoints';
+
 import { useUser } from '../../../../UserContext.jsx'
 
 import { Offcanvas } from 'react-bootstrap';
 import offcanvasStyles from './ClockOutOffcanvasStyles.module.css'
+
+
+import { useUser } from '../../../../UserContext.jsx';
+import Utils from '../../../../Utils.js';
 
 const ClockInOutWidget = () => {
     const { userInfo } = useUser();
