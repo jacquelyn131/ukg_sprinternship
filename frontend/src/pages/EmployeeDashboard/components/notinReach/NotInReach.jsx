@@ -7,7 +7,7 @@ const NotInReach = () => {
 
 <div className={styles.location}>
     <img src="././././public/images/location-sign.svg" className={styles.locationIcon} alt="" />
-              <h6 className ={styles.officeReach}>You are within office reach</h6>
+              <h6 className ={styles.officeReach}>You are out of office reach</h6>
 </div>
 
     );
