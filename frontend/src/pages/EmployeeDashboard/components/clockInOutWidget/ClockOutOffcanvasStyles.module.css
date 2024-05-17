@@ -1,0 +1,128 @@
+
+.clockOutOffcanvas {
+height: 78vh !important;
+}
+
+.confirmClockOutOffcanvasHeader {
+border-bottom: 1px solid #DFDDDD;
+}
+
+.offcanvasTitle {
+font-family: 'Volte Rounded';
+color: var(--dark-teal);
+}
+
+.offcanvasBody {
+display: flex;
+flex-direction: column;
+gap: 1.5em;
+}
+
+.totalHoursContainer, .clockIn, .clockOut {
+display: flex;
+flex-direction: column;
+}
+
+.punchesContainer {
+font-family: 'Volte Rounded';
+display: flex;
+gap: 2.5em;
+}
+
+.totalHoursContainer {
+font-family: 'Volte Rounded';
+line-height: 1;
+margin-bottom: 1em;
+}
+
+.totalHoursContainer h2 {
+color: var(--dark-teal);
+font-size: 1em;
+}
+
+.totalHoursValue {
+font-family: 'Volte Rounded';
+font-weight: 600;
+font-size: 2.7em;
+}
+
+.punchesContainer h3 {
+color: #757575;
+font-size: 1em;
+
+}
+
+
+
+.clockIn .punchValue, .clockOut .punchValue {
+font-weight: 500;
+line-height: 1;
+
+}
+
+.clockIn .punchValue::after, .clockOut .punchValue::after {
+color: var(--dark-teal);
+font-size: 1.2em;
+
+}
+
+.clockIn .punchValue::after {
+content: "«";
+}
+
+.clockOut .punchValue::after {
+content: "»";
+}
+
+.commentsContainer {
+display: flex;
+flex-direction: column;
+}
+
+
+
+.commentsLabel {
+color: var(--dark-teal);
+font-family: 'Volte Rounded';
+font-size: 1em;
+font-weight: 500;
+}
+
+.commentsInput {
+border: 1px solid #DFDDDD;
+padding: 1em;
+border-radius: 10px;
+}
+
+
+.commentsInput:focus {
+outline: none;
+border-color: var(--dark-teal);
+
+padding: 1em;
+border-radius: 10px;
+}
+
+.buttonContainer {
+display: flex;
+gap: 1em;
+}
+
+.cancelButton, .clockOutButton {
+color: white;
+border: none;
+border-radius: 10px;
+font-family: 'Volte Rounded';
+font-size: 1.1em;
+padding: .5em 1em;
+width: 50%;
+font-weight: 500;
+}
+
+.cancelButton {
+background-color: #888888;
+}
+
+.clockOutButton {
+background-color: var(--dark-teal);
+}
