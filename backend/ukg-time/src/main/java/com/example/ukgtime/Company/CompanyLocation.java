@@ -19,6 +19,10 @@ public class CompanyLocation {
         this.radius = radius;
     }
 
+    public CompanyLocation() {
+
+    }
+
     @Override
     public String toString() {
         return String.format("CompanyLocation[companyOfficeId: %d, location: '%s', radius: %f]",

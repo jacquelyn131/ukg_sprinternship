@@ -4,6 +4,10 @@ public class ProfileImage {
     private long eId;
     private byte[] profileImage;
 
+    public ProfileImage() {
+
+    }
+
     @Override
     public String toString() {
         return String.format("ProfileImage[eId: %d, profileImage: '%s']",
