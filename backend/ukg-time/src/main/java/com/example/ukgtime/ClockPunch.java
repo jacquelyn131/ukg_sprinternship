@@ -1,12 +1,27 @@
 package com.example.ukgtime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ClockPunch {
+    @JsonProperty("dateTime")
     private String dateTime; // "YYYY-MM-DD hh:mm:ss"
+
+    @JsonProperty("punchId")
     private long punchId;
+
+    @JsonProperty("employeeId")
     private long employeeId;
+
+    @JsonProperty("officeId")
     private long officeId;
+
+    @JsonProperty("type")
     private String type;
+
+    @JsonProperty("valid")
     private Boolean valid; // either true or false or null
+
+    @JsonProperty("comments")
     private String comments;
 
     public ClockPunch(String dateTime, long punchId, long employeeId, long officeId, String type, Boolean valid, String comments) {

@@ -55,8 +55,8 @@ const ClockInOutWidget = () => {
     const handleClockIn = (e) => {
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
-            type: "IN",
-            time: getDateTime(),
+            type: 'IN',
+            dateTime: getDateTime(),
         };
         endpoints.addTimestamp(timeStampInfo);
         geolocation(e);
@@ -72,8 +72,8 @@ const ClockInOutWidget = () => {
         }
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
-            type: "OUT",
-            time: getDateTime(),
+            type: 'OUT',
+            dateTime: getDateTime(),
             comments: comments,
         };
         endpoints.addTimestamp(timeStampInfo);
@@ -86,8 +86,8 @@ const ClockInOutWidget = () => {
     const handleBreak = () => {
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
-            type: "BREAK-IN",
-            time: getDateTime(),
+            dateTime: getDateTime(),
+            type: 'BREAK-IN',
         };
         endpoints.addTimestamp(timeStampInfo);
         setOnBreak(true);
@@ -100,8 +100,8 @@ const ClockInOutWidget = () => {
     const handleEndBreak = () => {
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
-            type: "BREAK-OUT",
-            time: getDateTime(),
+            type: 'BREAK-OUT',
+            dateTime: getDateTime(),
         };
         endpoints.addTimestamp(timeStampInfo);
         setOnBreak(false);

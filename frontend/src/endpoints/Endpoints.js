@@ -86,38 +86,40 @@ class Endpoints {
         }
     }
 
-    userTimeStamp = async (timeStamp) => {
-        try {
-            const response = await fetch('http://localhost:8080/api/user/location', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(timeStamp)
-            });
-            return response.json();
-        } catch (error) {
-            console.log('There was some kind of issue!', error);
-        }
-    }
+    // userTimeStamp = async (timeStamp) => {
+        
+    //     try {
+    //         const response = await fetch('http://localhost:8080/api/user/location', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(timeStamp)
+    //         });
+    //         return response.json();
+    //     } catch (error) {
+    //         console.log('There was some kind of issue!', error);
+    //     }
+    // }
     
     addTimestamp = async (recordTime) => {
+        console.log(recordTime)
         try {
-            const bodyData = {
-                employeeId: recordTime.employeeId,
-                dateTime: recordTime.time,
-                type: recordTime.timeStampType, // TYPES: (IN/OUT/BREAK-IN/BREAKOUT)
-                comments: recordTime.comments
-            };
-    
+            // const bodyData = {
+            //     employeeId: recordTime.employeeId,
+            //     dateTime: recordTime.time,
+            //     type: recordTime.timeStampType, // TYPES: (IN/OUT/BREAK-IN/BREAKOUT)
+            //     comments: recordTime.comments
+            // };
+            console.log(recordTime)
             const response = await fetch('http://localhost:8080/api/add/timestamp', {
                 method: 'POST', 
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(bodyData)
+                body: JSON.stringify(recordTime)
             });
             const jsonResponse = await response.json()
             console.log(jsonResponse)
@@ -126,7 +128,7 @@ class Endpoints {
         } catch (error) {
             console.error('There was some kind of issue!', error);
         }
-    }   
+    }  
     
     viewRecentPunch = async (employeeId) => {
         try {
