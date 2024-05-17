@@ -91,9 +91,8 @@ public class EmployeeController {
 
     @PostMapping("/api/add/timestamp")
     public ResponseEntity<Boolean> addTimeStamp(@RequestBody ClockPunch timeStamp) {
-        timeStamp.setOfficeId(3);
-        timeStamp.setType("IN");
         System.out.println(timeStamp);
+        timeStamp.setOfficeId(3);
         System.out.println(clockPunchDao.add(timeStamp));
         return ResponseEntity.ok(true);
     }
