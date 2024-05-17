@@ -74,6 +74,7 @@ const ClockInOutWidget = () => {
     }
 
     const handleClockIn = (e) => {
+        console.log(endpoints.viewRecentPunchList(userInfo.employeeId))
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             type: "IN",
