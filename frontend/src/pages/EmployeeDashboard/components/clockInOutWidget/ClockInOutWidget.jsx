@@ -70,7 +70,6 @@ const ClockInOutWidget = () => {
         if (comments === "") {
             comments = null;
         }
-        console.log(comments);
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             type: "OUT",
@@ -82,6 +81,7 @@ const ClockInOutWidget = () => {
         setClockInElapsedTime(0);
         setOnBreak(false);
         setCurrentTime(getFormattedTime());
+        setShowOffcanvas(false);
     };
     const handleBreak = () => {
         const timeStampInfo = {
