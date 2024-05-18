@@ -30,7 +30,7 @@ public class EmployeeCompanyDao implements CorporateEventDao<EmployeeCompany>{
 
     @Override
     public boolean add(EmployeeCompany employeeCompany) {
-        String sql = "INSERT INTO employee_company (e_id, ) VALUES ()";
+        String sql = "INSERT INTO employee_company (e_id, company_id ) VALUES (?, ?)";
         jdbcTemplate.update(sql, employeeCompany.geteId(), employeeCompany.getCompanyId());
         return true;
     }
@@ -62,11 +62,16 @@ public class EmployeeCompanyDao implements CorporateEventDao<EmployeeCompany>{
 
     @Override
     public void update(EmployeeCompany employeeCompany, long id) {
-
+        String sql = "UPDATE employee_company SET e_id = ?, company_id = ? WHERE e_id = ?";
+        int update = jdbcTemplate.update(sql, employeeCompany.geteId(), employeeCompany.getCompanyId(), id);
+        if (update == 1) {
+            logger.info("EmployeeCompany updated: " + id);
+        }
     }
 
     @Override
     public void delete(long id) {
-
+        String sql = "DELETE FROM employee_company WHERE e_id = " + id;
+        jdbcTemplate.execute(sql);
     }
 }

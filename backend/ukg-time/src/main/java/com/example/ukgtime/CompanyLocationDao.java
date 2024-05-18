@@ -9,6 +9,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.awt.*;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,13 @@ public class CompanyLocationDao implements CorporateEventDao<CompanyLocation> {
     private JdbcTemplate jdbcTemplate;
     private RowMapper<CompanyLocation> rowMapper = (rs, rowNum) -> {
         CompanyLocation companyLocation = new CompanyLocation();
+        companyLocation.setCompanyOfficeId(rs.getLong("company_office_id"));
+        Point point = rs.getObject("location", Point.class);
+        double[] location = new double[2];
+        location[0] = point.getX();
+        location[1] = point.getY();
+        companyLocation.setLocation(location);
+        companyLocation.setRadius(rs.getDouble("radius"));
         return companyLocation;
     };
 
