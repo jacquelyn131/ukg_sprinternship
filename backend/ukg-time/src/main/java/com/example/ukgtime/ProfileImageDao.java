@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,10 @@ public class ProfileImageDao implements CorporateEventDao<ProfileImage>{
     private JdbcTemplate jdbcTemplate;
     private RowMapper<ProfileImage> rowMapper = (rs, rowNum) -> {
         ProfileImage profileImage = new ProfileImage();
+        profileImage.seteId(rs.getLong("eId"));
+        Blob blob = rs.getBlob("profile_image");
+        handleBlob(blob)
+        profileImage.setProfileImage(handleBlob(blob));
         return profileImage;
     };
 
@@ -25,16 +30,21 @@ public class ProfileImageDao implements CorporateEventDao<ProfileImage>{
 
     @Override
     public boolean add(ProfileImage profileImage) {
+        String sql = "INSERT INTO profile_image (e_id, profile_image) VALUES (?, ?)";
+        jdbcTemplate.update(sql, profileImage.geteId(), profileImage.getProfileImage());
         return false;
     }
 
     @Override
     public boolean find(long id) {
-        return false;
+        String sql = "SELECT COUNT(*) FROM profile_image WHERE e_id = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, id);
+        return (count > 0);
     }
 
     @Override
     public List<ProfileImage> list() {
+
         return List.of();
     }
 
@@ -50,6 +60,9 @@ public class ProfileImageDao implements CorporateEventDao<ProfileImage>{
 
     @Override
     public void delete(long id) {
+
+    }
+    public byte[] handleBlob(Blob blob) {
 
     }
 }
