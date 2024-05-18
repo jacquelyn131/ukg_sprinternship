@@ -2,9 +2,11 @@ package com.example.ukgtime;
 
 import com.example.ukgtime.Company.CompanyAddress;
 import com.example.ukgtime.Employee.EmployeeCompany;
+import com.example.ukgtime.Employee.EmployeeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -16,6 +18,8 @@ public class EmployeeCompanyDao implements CorporateEventDao<EmployeeCompany>{
     private JdbcTemplate jdbcTemplate;
     private RowMapper<EmployeeCompany> rowMapper = (rs, rowNum) -> {
         EmployeeCompany employeeCompany = new EmployeeCompany();
+        employeeCompany.seteId(rs.getLong("e_id"));
+        employeeCompany.setCompanyId(rs.getLong("company_id"));
         return employeeCompany;
     };
 
@@ -26,22 +30,34 @@ public class EmployeeCompanyDao implements CorporateEventDao<EmployeeCompany>{
 
     @Override
     public boolean add(EmployeeCompany employeeCompany) {
-        return false;
+        String sql = "INSERT INTO employee_company (e_id, ) VALUES ()";
+        jdbcTemplate.update(sql, employeeCompany.geteId(), employeeCompany.getCompanyId());
+        return true;
     }
 
     @Override
     public boolean find(long id) {
-        return false;
+        String sql = "SELECT COUNT(*) FROM employee_company WHERE e_id = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, id);
+        return (count >0);
     }
 
     @Override
     public List<EmployeeCompany> list() {
-        return List.of();
+        String sql = "SELECT e_id, company_id FROM employee_company";
+        return jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
     public Optional<EmployeeCompany> get(long id) {
-        return Optional.empty();
+        String sql = "SELECT e_id, company_id FROM employee_company WHERE e_id = ?";
+        EmployeeCompany employeeCompany = null;
+        try {
+            employeeCompany = jdbcTemplate.queryForObject(sql, new Object[] {id}, rowMapper);
+        } catch (DataAccessException e) {
+            logger.info("EmployeeCompany not found: " + id);
+        }
+        return Optional.ofNullable(employeeCompany);
     }
 
     @Override
