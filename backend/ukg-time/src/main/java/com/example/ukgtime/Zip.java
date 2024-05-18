@@ -11,6 +11,10 @@ public class Zip {
         this.zip = zip;
     }
 
+    public Zip() {
+
+    }
+
     @Override
     public String toString() {
         return String.format("Zip[city: '%s', state: '%s', zip: '%s']");

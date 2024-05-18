@@ -9,6 +9,10 @@ public class EmployeeCompany {
         this.companyId = companyId;
     }
 
+    public EmployeeCompany() {
+
+    }
+
     @Override
     public String toString() {
         return String.format("EmployeeCompany[eId: %d, companyId: %d]", eId, companyId);

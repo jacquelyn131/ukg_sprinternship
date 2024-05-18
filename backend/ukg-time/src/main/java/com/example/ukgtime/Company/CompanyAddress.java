@@ -22,6 +22,10 @@ public class CompanyAddress {
         this.country = country;
     }
 
+    public CompanyAddress() {
+
+    }
+
     @Override
     public String toString() {
         return String.format("CompanyAddress[companyId: $d, companyOfficeId: %d, " +
