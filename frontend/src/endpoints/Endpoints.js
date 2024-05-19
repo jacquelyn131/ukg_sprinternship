@@ -1,29 +1,5 @@
 class Endpoints {
 
-    // userInfo = async (userId) => {
-    //     try {
-    //         const bodyData = {
-    //             email: userId.email,
-    //             employeeId: userId.employeeId
-    //         };
-    
-    //         const response = await fetch('http://localhost:8080/api/user/info', {
-    //             method: 'POST', 
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(bodyData)
-    //         });
-    //         const jsonResponse = await response.json()
-    //         console.log(jsonResponse)
-    //         return jsonResponse;
-            
-    //     } catch (error) {
-    //         console.error('There was some kind of issue!', error);
-    //     }
-    // }
-
     loginUser = async (user) => {
         try {
             const bodyData = {
@@ -43,7 +19,6 @@ class Endpoints {
         } catch (error) {
             console.error('There was some kind of issue!', error);
         }
-        console.log(response.json())
     }
 
     userInfo = async (userId) => {
@@ -62,13 +37,35 @@ class Endpoints {
                 body: JSON.stringify(bodyData)
             });
             const jsonResponse = await response.json()
-            console.log(jsonResponse)
             return jsonResponse;
             
         } catch (error) {
             console.error('There was some kind of issue!', error);
         }
     }    
+
+    viewRecentShift = async (userId) => {
+        try {
+            const bodyData = {
+                email: userId.email,
+                employeeId: userId.employeeId
+            };
+    
+            const response = await fetch('http://localhost:8080/api/user/viewRecentShift', {
+                method: 'POST', 
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyData)
+            });
+            const jsonResponse = await response.json()
+            return jsonResponse;
+            
+        } catch (error) {
+            console.error('There was some kind of issue!', error);
+        }
+    }
 
     locationChecker = async (userLoc) => {
         try {
@@ -85,26 +82,8 @@ class Endpoints {
             console.error('There was some kind of issue!', error);
         }
     }
-
-    // userTimeStamp = async (timeStamp) => {
-        
-    //     try {
-    //         const response = await fetch('http://localhost:8080/api/user/location', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(timeStamp)
-    //         });
-    //         return response.json();
-    //     } catch (error) {
-    //         console.log('There was some kind of issue!', error);
-    //     }
-    // }
     
     addTimestamp = async (recordTime) => {
-        console.log(recordTime)
         try {
             // const bodyData = {
             //     employeeId: recordTime.employeeId,
@@ -112,7 +91,6 @@ class Endpoints {
             //     type: recordTime.timeStampType, // TYPES: (IN/OUT/BREAK-IN/BREAKOUT)
             //     comments: recordTime.comments
             // };
-            console.log(recordTime)
             const response = await fetch('http://localhost:8080/api/add/timestamp', {
                 method: 'POST', 
                 headers: {
@@ -122,7 +100,6 @@ class Endpoints {
                 body: JSON.stringify(recordTime)
             });
             const jsonResponse = await response.json()
-            console.log(jsonResponse)
             return jsonResponse;
             
         } catch (error) {
@@ -140,7 +117,6 @@ class Endpoints {
     
             const jsonResponse = await response.json();
     
-            console.log(jsonResponse);
         } catch (error) {
             console.error('There was an error!', error);
         }
@@ -156,11 +132,13 @@ class Endpoints {
     
             const jsonResponse = await response.json();
     
-            console.log(jsonResponse);
+            return jsonResponse;
         } catch (error) {
             console.error('There was an error!', error);
         }
     }
+
+
 }
 
 const endpoints = new Endpoints();

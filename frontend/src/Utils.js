@@ -1,5 +1,5 @@
 class Utils {
-    getPunchByDay = async (employeeId) => {
+    getPunchList = async (employeeId) => {
         try {
             // Ensure the URL includes the protocol (http://)
             const response = await fetch(`http://localhost:8080/api/user/viewRecentPunchList?id=${employeeId}`);

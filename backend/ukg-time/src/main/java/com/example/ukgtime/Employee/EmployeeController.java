@@ -118,13 +118,14 @@ public class EmployeeController {
 
     @GetMapping("/api/user/viewRecentPunchList")
     public ResponseEntity<Optional<List<ClockPunch>>> viewRecentPunchList(@RequestParam long id ) {
-        System.out.println(id);
         List<ClockPunch> punchList = clockPunchDao.employeePunchList(id);
+
+        System.out.println("Retrieving EmployeeID: " +  id + " Recent Punch List Info.");
         System.out.println(punchList);
         // return response with status 200 ok and the most recent ClockPunch
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(punchList));
     }
-    @GetMapping("/api/user/viewRecentShift")
+    @PostMapping("/api/user/viewRecentShift")
     public ResponseEntity<Optional<ShiftData>> viewRecentShift(@RequestBody Employee employee ) {
         long id = employee.getEmployeeId();
         System.out.println(id);
@@ -145,4 +146,32 @@ public class EmployeeController {
         // return response with status 200 ok and the most recent shift data
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(shiftData));
     }
+//###############################################################################
+    // NEED TO BE TESTED
+//###############################################################################
+    @PostMapping("/api/user/add")
+    public ResponseEntity<Boolean> addEmployee(@RequestBody Employee employee) {
+        boolean result = dao.add(employee);
+
+        if (!result) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(true);
+        }
+    }
+
+    @PostMapping("/api/user/delete")
+    public ResponseEntity<Boolean> deleteEmployee(@RequestBody Employee employee) {
+        boolean result = dao.delete(employee.getEmployeeId());
+
+        if (!result) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(true);
+        }
+    }
+
+    //###############################################################################
+    // NEED TO BE TESTED
+//###############################################################################
 }

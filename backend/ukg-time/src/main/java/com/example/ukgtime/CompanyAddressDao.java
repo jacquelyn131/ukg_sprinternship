@@ -80,8 +80,9 @@ public class CompanyAddressDao implements CorporateEventDao<CompanyAddress>{
     }
 
     @Override
-    public void delete(long id) {
+    public boolean delete(long id) {
         String sql = "DELETE FROM company_address WHERE company_office_id = " + id;
         jdbcTemplate.execute(sql);
+        return false;
     }
 }
