@@ -2,39 +2,47 @@ package com.example.ukgtime.Employee;
 
 import com.example.ukgtime.*;
 import com.example.ukgtime.Company.Company;
+import com.example.ukgtime.Company.CompanyLocation;
+import com.google.api.Http;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.Date;
-import java.util.Objects;
-import java.time.Clock;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class EmployeeController {
-
     private static CorporateEventDao<Employee> dao;
     private static CorporateEventDao<Company> companyDao;
     private static ClockPunchDao clockPunchDao;
+//    private static EmployeeCompanyDao employeeCompanyDao;
+//    private static CompanyLocationDao companyLocationDao;
 
-    public EmployeeController(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao, ClockPunchDao clockPunchDao) {
+
+    public EmployeeController(CorporateEventDao<Employee> dao,
+                              CorporateEventDao<Company> companyDao,
+                              ClockPunchDao clockPunchDao
+//                              EmployeeCompanyDao employeeCompanyDao,
+//                              CompanyLocationDao companyLocationDao
+    ) {
         this.dao = dao;
         this.companyDao = companyDao;
-
         this.clockPunchDao = clockPunchDao;
+//        this.employeeCompanyDao = employeeCompanyDao;
+//        this.companyLocationDao = companyLocationDao;
     }
 
-    public static boolean isWithinRange(double userLocation, double businessLocation, double range) {
-        // Calculate the absolute difference
-        double difference = Math.abs(userLocation - businessLocation);
-        // Check if the difference is within the specified range
-        return difference <= range;
+    public static boolean isWithinRange(double[] empCoords, double[] compCoords, double range) {
+        double longitudeDifference = empCoords[0] - compCoords[0];
+        double latitudeDifference = empCoords[1] - compCoords[1];
+
+        double distance = Math.sqrt(Math.pow(longitudeDifference, 2) + Math.pow(latitudeDifference, 2));
+
+        return distance <= range;
     }
 
     // helper method to calculate length of a shift
@@ -106,16 +114,27 @@ public class EmployeeController {
     }
 
     /* NEEDS TO GET BUSINESS LOCATION */
-    @PostMapping("/api/user/checkLocation")
-    public ResponseEntity<Boolean> updateUserLocation(@RequestBody Coordinates userLoc) {
-        boolean latCheck = isWithinRange(userLoc.getLatitude(), /* business lat */, 0.0002899);
-        boolean longCheck = isWithinRange(userLoc.getLongitude(), /* business lat */, 0.0002899);
-        boolean nearLocation = latCheck&&longCheck;
-        System.out.println("Is the user witin the range? " + nearLocation);
-
-
-        return ResponseEntity.ok(nearLocation);
-    }
+//    @PostMapping("/api/user/checkLocation")
+//    public ResponseEntity<Boolean>checkUserLocation(@RequestBody EmployeeCheckLocation empCheckLocation) {
+//        Optional<EmployeeCompany> empComp = employeeCompanyDao.get(empCheckLocation.getEmployeeId());
+//        long empId = empComp.get().getCompanyId();
+//
+//        Optional<CompanyLocation> compLoc = companyLocationDao.get(empId);
+//
+//        double[] compCoords = compLoc.get().getLocation();
+//        double[] empCoords = new double[]{empCheckLocation.getLongitude(), empCheckLocation.getLatitude()};
+//
+//        boolean withinRange = isWithinRange(empCoords, compCoords, 0.0002899);
+//
+//        if (withinRange) {
+//            System.out.println("The points are within the specified range.");
+//            return ResponseEntity.status(HttpStatus.OK).body(true);
+//        } else {
+//            System.out.println("The points are not within the specified range.");
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+//        }
+//
+//    }
 
     @GetMapping("/api/user/viewRecentPunch")
     public ResponseEntity<Optional<ClockPunch>> viewRecentPunch(@RequestParam long id ) {
