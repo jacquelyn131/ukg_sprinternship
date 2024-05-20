@@ -2,6 +2,7 @@ package com.example.ukgtime.Employee;
 
 import com.example.ukgtime.*;
 import com.example.ukgtime.Company.Company;
+import com.example.ukgtime.Company.CompanyAddress;
 import com.example.ukgtime.Company.CompanyLocation;
 import com.google.api.Http;
 import org.springframework.http.HttpStatus;
@@ -19,22 +20,24 @@ public class EmployeeController {
     private static JdbcCorporateEventDao dao;
     private static CorporateEventDao<Company> companyDao;
     private static ClockPunchDao clockPunchDao;
-//    private static EmployeeCompanyDao employeeCompanyDao;
-//    private static CompanyLocationDao companyLocationDao;
-
+    private static EmployeeCompanyDao employeeCompanyDao;
+    private static CompanyLocationDao companyLocationDao;
+    private static CompanyAddressDao companyAddressDao;
 
 
     public EmployeeController(JdbcCorporateEventDao dao,
                               CorporateEventDao<Company> companyDao,
-                              ClockPunchDao clockPunchDao
-//                              EmployeeCompanyDao employeeCompanyDao,
-//                              CompanyLocationDao companyLocationDao
+                              ClockPunchDao clockPunchDao,
+                              EmployeeCompanyDao employeeCompanyDao,
+                              CompanyLocationDao companyLocationDao,
+                              CompanyAddressDao companyAddressDao
     ) {
         this.dao = dao;
         this.companyDao = companyDao;
         this.clockPunchDao = clockPunchDao;
-//        this.employeeCompanyDao = employeeCompanyDao;
-//        this.companyLocationDao = companyLocationDao;
+        this.employeeCompanyDao = employeeCompanyDao;
+        this.companyLocationDao = companyLocationDao;
+        this.companyAddressDao = companyAddressDao;
     }
 
     public static boolean isWithinRange(double[] empCoords, double[] compCoords, double range) {
@@ -117,11 +120,23 @@ public class EmployeeController {
     /* NEEDS TO GET BUSINESS LOCATION */
 //    @PostMapping("/api/user/checkLocation")
 //    public ResponseEntity<Boolean>checkUserLocation(@RequestBody EmployeeCheckLocation empCheckLocation) {
+//        // Gets the company ID based on the employees company ID
 //        Optional<EmployeeCompany> empComp = employeeCompanyDao.get(empCheckLocation.getEmployeeId());
-//        long empId = empComp.get().getCompanyId();
+//        long compId = empComp.get().getCompanyId();
 //
-//        Optional<CompanyLocation> compLoc = companyLocationDao.get(empId);
+//        // List to iterate through every company
+//        List<CompanyAddress> compList = companyAddressDao.list();
 //
+//        long comp_office_id = 1;
+//        for (CompanyAddress address : compList) {
+//            // If the current companyID matches the employees company ID match is found.
+//            if (address.getCompanyId() == compId)
+//                comp_office_id = address.getCompanyOfficeId();
+//        }
+//        System.out.println("comp_office_id: " + comp_office_id);
+//
+//        Optional<CompanyLocation> compLoc = companyLocationDao.get(comp_office_id);
+//        System.out.println(compLoc.get().toString());
 //        double[] compCoords = compLoc.get().getLocation();
 //        double[] empCoords = new double[]{empCheckLocation.getLongitude(), empCheckLocation.getLatitude()};
 //

@@ -23,6 +23,8 @@ public class CompanyLocationDao implements CorporateEventDao<CompanyLocation> {
         Point point = rs.getObject("location", Point.class);
         double[] location = new double[2];
         location[0] = point.getX();
+        System.out.println("pont.getx(): "+ point.getX());
+        System.out.println("pont.gety(): "+ point.getY());
         location[1] = point.getY();
         companyLocation.setLocation(location);
         companyLocation.setRadius(rs.getDouble("radius"));
