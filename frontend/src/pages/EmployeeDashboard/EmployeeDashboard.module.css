@@ -42,6 +42,14 @@ justify-content: space-around;
 width: 50%;
 }
 
+.alert {
+position: fixed;
+bottom: 0;
+margin: auto;
+z-index: 1000;
+width: 100%;
+}
+
 .dashboardGreeting h1 {
 margin: 0;
 text-align: center;

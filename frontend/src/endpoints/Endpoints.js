@@ -113,7 +113,7 @@ class Endpoints {
 
     locationChecker = async (userLoc) => {
         try {
-            const response = await fetch('http://localhost:8080/api/user/location', {
+            const response = await fetch('http://localhost:8080/api/user/checkLocation', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

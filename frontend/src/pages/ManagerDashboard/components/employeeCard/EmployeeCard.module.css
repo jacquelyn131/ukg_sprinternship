@@ -1,0 +1,28 @@
+.employeeCard {
+    width: 22em;
+    height: 7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid #D9D9D9;
+}
+
+.employeeName {
+    font-family: 'Volte Rounded';
+    font-weight: 600;
+    color: var(--dark-teal);
+    font-size: 1.9em;
+    margin-right: 53px;
+}
+
+.employeeCard img {
+    width: 5em;
+    height: 5em;
+    object-fit: cover;
+    border-radius: 50%;
+}
