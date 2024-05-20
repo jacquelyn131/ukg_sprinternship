@@ -1,24 +1,15 @@
 package com.example.ukgtime;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-
-import javax.annotation.Resource;
-import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import com.example.ukgtime.Employee.Employee;
 
@@ -93,9 +84,10 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
     }
 
     @Override
-    public void delete(long id) {
+    public boolean delete(long id) {
         String sql = "DELETE FROM employees WHERE employee_id =" + id;
         jdbcTemplate.execute(sql);
+        return false;
     }
     public boolean checkIsManager(long id) {
         // select the number of employees

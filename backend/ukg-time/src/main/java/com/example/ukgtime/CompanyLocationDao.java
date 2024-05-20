@@ -1,6 +1,5 @@
 package com.example.ukgtime;
 
-import com.example.ukgtime.Company.CompanyAddress;
 import com.example.ukgtime.Company.CompanyLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.awt.*;
-import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,8 +82,9 @@ public class CompanyLocationDao implements CorporateEventDao<CompanyLocation> {
     }
 
     @Override
-    public void delete(long id) {
+    public boolean delete(long id) {
         String sql = "DELETE FROM company_location WHERE company_office_id = id";
         jdbcTemplate.execute(sql);
+        return false;
     }
 }

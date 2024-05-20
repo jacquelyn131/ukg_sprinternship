@@ -2,33 +2,49 @@ package com.example.ukgtime.Employee;
 
 import com.example.ukgtime.*;
 import com.example.ukgtime.Company.Company;
+import com.example.ukgtime.Company.CompanyLocation;
+import com.google.api.Http;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.Date;
-import java.util.Objects;
-import java.time.Clock;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class EmployeeController {
-
     private static CorporateEventDao<Employee> dao;
     private static CorporateEventDao<Company> companyDao;
     private static ClockPunchDao clockPunchDao;
+//    private static EmployeeCompanyDao employeeCompanyDao;
+//    private static CompanyLocationDao companyLocationDao;
 
-    public EmployeeController(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao, ClockPunchDao clockPunchDao) {
+
+    public EmployeeController(CorporateEventDao<Employee> dao,
+                              CorporateEventDao<Company> companyDao,
+                              ClockPunchDao clockPunchDao
+//                              EmployeeCompanyDao employeeCompanyDao,
+//                              CompanyLocationDao companyLocationDao
+    ) {
         this.dao = dao;
         this.companyDao = companyDao;
-
         this.clockPunchDao = clockPunchDao;
+//        this.employeeCompanyDao = employeeCompanyDao;
+//        this.companyLocationDao = companyLocationDao;
     }
+
+    public static boolean isWithinRange(double[] empCoords, double[] compCoords, double range) {
+        double longitudeDifference = empCoords[0] - compCoords[0];
+        double latitudeDifference = empCoords[1] - compCoords[1];
+
+        double distance = Math.sqrt(Math.pow(longitudeDifference, 2) + Math.pow(latitudeDifference, 2));
+
+        return distance <= range;
+    }
+
     // helper method to calculate length of a shift
     public static float calculateShiftDuration(String startTime, String endTime) {
         SimpleDateFormat sdf = new SimpleDateFormat();
@@ -97,14 +113,28 @@ public class EmployeeController {
         return ResponseEntity.ok(true);
     }
 
-    @PostMapping("/api/user/location")
-    public ResponseEntity<Boolean> updateUserLocation(@RequestBody Coordinates userLoc) {
-
-        System.out.println(userLoc);
-
-
-        return ResponseEntity.ok(true);
-    }
+    /* NEEDS TO GET BUSINESS LOCATION */
+//    @PostMapping("/api/user/checkLocation")
+//    public ResponseEntity<Boolean>checkUserLocation(@RequestBody EmployeeCheckLocation empCheckLocation) {
+//        Optional<EmployeeCompany> empComp = employeeCompanyDao.get(empCheckLocation.getEmployeeId());
+//        long empId = empComp.get().getCompanyId();
+//
+//        Optional<CompanyLocation> compLoc = companyLocationDao.get(empId);
+//
+//        double[] compCoords = compLoc.get().getLocation();
+//        double[] empCoords = new double[]{empCheckLocation.getLongitude(), empCheckLocation.getLatitude()};
+//
+//        boolean withinRange = isWithinRange(empCoords, compCoords, 0.0002899);
+//
+//        if (withinRange) {
+//            System.out.println("The points are within the specified range.");
+//            return ResponseEntity.status(HttpStatus.OK).body(true);
+//        } else {
+//            System.out.println("The points are not within the specified range.");
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+//        }
+//
+//    }
 
     @GetMapping("/api/user/viewRecentPunch")
     public ResponseEntity<Optional<ClockPunch>> viewRecentPunch(@RequestParam long id ) {
@@ -118,13 +148,14 @@ public class EmployeeController {
 
     @GetMapping("/api/user/viewRecentPunchList")
     public ResponseEntity<Optional<List<ClockPunch>>> viewRecentPunchList(@RequestParam long id ) {
-        System.out.println(id);
         List<ClockPunch> punchList = clockPunchDao.employeePunchList(id);
+
+        System.out.println("Retrieving EmployeeID: " +  id + " Recent Punch List Info.");
         System.out.println(punchList);
         // return response with status 200 ok and the most recent ClockPunch
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(punchList));
     }
-    @GetMapping("/api/user/viewRecentShift")
+    @PostMapping("/api/user/viewRecentShift")
     public ResponseEntity<Optional<ShiftData>> viewRecentShift(@RequestBody Employee employee ) {
         long id = employee.getEmployeeId();
         System.out.println(id);
@@ -145,4 +176,35 @@ public class EmployeeController {
         // return response with status 200 ok and the most recent shift data
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(shiftData));
     }
+//###############################################################################
+    // NEED TO BE TESTED
+//###############################################################################
+
+    @PostMapping("/api/user/add")
+    public ResponseEntity<Boolean> addEmployee(@RequestBody Employee employee) {
+        boolean result = dao.add(employee);
+
+        if (!result) {
+            System.out.println("Could not add: " + employee);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+        }
+        System.out.println("Successfully added user: " + employee);
+        return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/api/user/delete")
+    public ResponseEntity<Boolean> deleteEmployee(@RequestBody Employee employee) {
+        boolean result = dao.delete(employee.getEmployeeId());
+
+        if (!result) {
+            System.out.println("Could not delete: " + employee);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+        }
+        System.out.println("Successfully deleted user: " + employee);
+        return ResponseEntity.ok(true);
+    }
+
+    //###############################################################################
+    // NEED TO BE TESTED
+//###############################################################################
 }
