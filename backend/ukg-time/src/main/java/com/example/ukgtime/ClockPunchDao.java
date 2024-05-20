@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Clock;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -85,9 +84,10 @@ public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
     }
 
     @Override
-    public void delete(long id) {
+    public boolean delete(long id) {
         String sql = "DELETE FROM clock_punch WHERE punch_id = " + id;
         jdbcTemplate.execute(sql);
+        return false;
     }
     // insert a 'IN' punch for the given employee
     public boolean employeeClockIn(long id) {

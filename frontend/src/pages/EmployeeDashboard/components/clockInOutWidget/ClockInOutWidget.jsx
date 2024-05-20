@@ -52,7 +52,13 @@ const ClockInOutWidget = () => {
         };
         navigator.geolocation.getCurrentPosition(showPosition);
     }
-    const handleClockIn = (e) => {
+    const handleClockIn = async (e) => {
+        e.preventDefault();
+        
+        const emp = {
+            email: "john@gmail.com",
+            employeeId: 4
+        };
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             type: 'IN',
@@ -60,12 +66,12 @@ const ClockInOutWidget = () => {
         };
         endpoints.addTimestamp(timeStampInfo);
         geolocation(e);
-        e.preventDefault();
         setClockedIn(true);
         setClockInStartTime(new Date());
         setCurrentTime("");
     };
     const handleClockOut = (e) => {
+        e.preventDefault();
         let comments = document.getElementById('comments').value;
         if (comments === "") {
             comments = null;
@@ -83,7 +89,8 @@ const ClockInOutWidget = () => {
         setCurrentTime(getFormattedTime());
         setShowOffcanvas(false);
     };
-    const handleBreak = () => {
+    const handleBreak = (e) => {
+        e.preventDefault();
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             dateTime: getDateTime(),
@@ -97,7 +104,8 @@ const ClockInOutWidget = () => {
             return prevElapsedTime;
         });
     };
-    const handleEndBreak = () => {
+    const handleEndBreak = (e) => {
+        e.preventDefault();
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             type: 'BREAK-OUT',

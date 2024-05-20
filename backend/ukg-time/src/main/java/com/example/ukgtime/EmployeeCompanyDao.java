@@ -1,8 +1,6 @@
 package com.example.ukgtime;
 
-import com.example.ukgtime.Company.CompanyAddress;
 import com.example.ukgtime.Employee.EmployeeCompany;
-import com.example.ukgtime.Employee.EmployeeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,8 +70,9 @@ public class EmployeeCompanyDao implements CorporateEventDao<EmployeeCompany>{
     }
 
     @Override
-    public void delete(long id) {
+    public boolean delete(long id) {
         String sql = "DELETE FROM employee_company WHERE e_id = " + id;
         jdbcTemplate.execute(sql);
+        return false;
     }
 }

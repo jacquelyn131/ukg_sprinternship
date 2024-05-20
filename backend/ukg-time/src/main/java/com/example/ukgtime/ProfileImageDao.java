@@ -1,6 +1,5 @@
 package com.example.ukgtime;
 
-import com.example.ukgtime.Company.CompanyAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,9 +75,10 @@ public class ProfileImageDao implements CorporateEventDao<ProfileImage>{
     }
 
     @Override
-    public void delete(long id) {
+    public boolean delete(long id) {
         String sql = "DELETE FROM profile_image WHERE e_id = " + id;
         jdbcTemplate.update(sql);
+        return false;
     }
     public byte[] handleBlob(Blob blob) throws SQLException {
         if (blob == null) {
