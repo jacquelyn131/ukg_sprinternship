@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class EmployeeCompanyDao implements CorporateEventDao<EmployeeCompany>{
     private static Logger logger = LoggerFactory.getLogger(CompanyAddressDao.class);
     private JdbcTemplate jdbcTemplate;

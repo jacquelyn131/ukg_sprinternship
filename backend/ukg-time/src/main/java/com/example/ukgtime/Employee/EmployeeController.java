@@ -19,11 +19,11 @@ import java.util.Optional;
 @RestController
 public class EmployeeController {
 
-    private static CorporateEventDao<Employee> dao;
+    private static JdbcCorporateEventDao dao;
     private static CorporateEventDao<Company> companyDao;
     private static ClockPunchDao clockPunchDao;
 
-    public EmployeeController(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao, ClockPunchDao clockPunchDao) {
+    public EmployeeController(JdbcCorporateEventDao dao, CorporateEventDao<Company> companyDao, ClockPunchDao clockPunchDao) {
         this.dao = dao;
         this.companyDao = companyDao;
 
@@ -145,4 +145,17 @@ public class EmployeeController {
         // return response with status 200 ok and the most recent shift data
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(shiftData));
     }
+    // check if an employee is a manager given an employee object, returns true if the employee
+    //  is a manager for at least one employee in the database and false otherwise
+    @GetMapping("/api/user/checkManager")
+    public ResponseEntity<Boolean> checkIsManager(@RequestParam long id) {
+        Boolean isManager = null;
+        if (dao.checkIsManager(id) ) {
+            isManager = true;
+        } else {
+            isManager = false;
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(isManager);
+    }
+
 }

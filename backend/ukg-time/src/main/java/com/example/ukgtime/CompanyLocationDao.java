@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
-
+@Component
 public class CompanyLocationDao implements CorporateEventDao<CompanyLocation> {
 
     private static Logger logger = LoggerFactory.getLogger(CompanyLocationDao.class);
