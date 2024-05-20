@@ -71,6 +71,7 @@ public class UkgTimeApplication implements CommandLineRunner {
 		log.info("recent punch type: " + (clockPunchDao.getRecentPunchType(1)).get());
 		log.info("recent punch time: " + (clockPunchDao.getRecentPunchTime(1, "IN")).get());
 		log.info("test employeePunchList: " + clockPunchDao.employeePunchList(1));
+
 	}
 	@Autowired
 	JdbcTemplate jdbcTemplate;

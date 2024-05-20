@@ -53,13 +53,13 @@ public class CompanyLocationDao implements CorporateEventDao<CompanyLocation> {
 
     @Override
     public List<CompanyLocation> list() {
-        String sql = "SELECT company_office_id, location, radius FROM company_location";
+        String sql = "SELECT company_office_id, ST_ASTEXT(location), radius FROM company_location";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
     public Optional<CompanyLocation> get(long id) {
-        String sql = "SELECT company_office_id, location, radius FROM company_location " +
+        String sql = "SELECT company_office_id, ST_ASTEXT(location), radius FROM company_location " +
                 "WHERE company_office_id = ?";
         CompanyLocation companyLocation = null;
         try {
@@ -87,5 +87,17 @@ public class CompanyLocationDao implements CorporateEventDao<CompanyLocation> {
         String sql = "DELETE FROM company_location WHERE company_office_id = id";
         jdbcTemplate.execute(sql);
         return false;
+    }
+
+    public double[] convertWKTStringToDouble(String wktString) {
+        char ch;
+        int index = 0;
+        double[] arr = new double[2];
+        String num = "";
+        while (index < wktString.length()) {
+            // check if current character is digit or minus sign or decimal
+            if (wktString.charAt(index) >=48 && wktString.charAt(index) )
+        }
+        return arr;
     }
 }
