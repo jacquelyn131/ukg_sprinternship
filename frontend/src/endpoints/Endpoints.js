@@ -44,6 +44,50 @@ class Endpoints {
         }
     }    
 
+    addUser = async (emp) => {
+        try {
+            const bodyData = {
+                email: emp.email,
+                employeeId: emp.employeeId
+            };
+
+            const response = await fetch('http://localhost:8080/api/user/add', {
+                method: 'POST', 
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyData)
+            }) 
+            const jsonResponse = await response.json()
+            return jsonResponse;
+        } catch (error) {
+            console.error('There was some kind of issue!', error)
+        }
+    }
+
+    deleteUser = async (emp) => {
+        try {
+            const bodyData = {
+                email: emp.email,
+                employeeId: emp.employeeId
+            };
+
+            const response = await fetch('http://localhost:8080/api/user/delete', {
+                method: 'POST', 
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyData)
+            }) 
+            const jsonResponse = await response.json()
+            return jsonResponse;
+        } catch (error) {
+            console.error('There was some kind of issue!', error)
+        }
+    }
+
     viewRecentShift = async (userId) => {
         try {
             const bodyData = {

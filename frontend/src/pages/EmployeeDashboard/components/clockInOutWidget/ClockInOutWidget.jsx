@@ -54,11 +54,13 @@ const ClockInOutWidget = () => {
     }
     const handleClockIn = async (e) => {
         e.preventDefault();
+        
         const emp = {
-            email: userInfo.email,
-            employeeId: userInfo.employeeId
+            email: "john@gmail.com",
+            employeeId: 4
         };
-        console.log(await endpoints.viewRecentShift(emp))
+        // console.log(await endpoints.deleteUser(emp));
+        // console.log(await endpoints.viewRecentShift(emp))
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             type: 'IN',

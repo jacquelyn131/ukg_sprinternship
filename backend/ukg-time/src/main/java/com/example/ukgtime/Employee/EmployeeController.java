@@ -29,6 +29,14 @@ public class EmployeeController {
 
         this.clockPunchDao = clockPunchDao;
     }
+
+    public static boolean isWithinRange(double userLocation, double businessLocation, double range) {
+        // Calculate the absolute difference
+        double difference = Math.abs(userLocation - businessLocation);
+        // Check if the difference is within the specified range
+        return difference <= range;
+    }
+
     // helper method to calculate length of a shift
     public static float calculateShiftDuration(String startTime, String endTime) {
         SimpleDateFormat sdf = new SimpleDateFormat();
@@ -97,13 +105,16 @@ public class EmployeeController {
         return ResponseEntity.ok(true);
     }
 
-    @PostMapping("/api/user/location")
+    /* NEEDS TO GET BUSINESS LOCATION */
+    @PostMapping("/api/user/checkLocation")
     public ResponseEntity<Boolean> updateUserLocation(@RequestBody Coordinates userLoc) {
+        boolean latCheck = isWithinRange(userLoc.getLatitude(), /* business lat */, 0.0002899);
+        boolean longCheck = isWithinRange(userLoc.getLongitude(), /* business lat */, 0.0002899);
+        boolean nearLocation = latCheck&&longCheck;
+        System.out.println("Is the user witin the range? " + nearLocation);
 
-        System.out.println(userLoc);
 
-
-        return ResponseEntity.ok(true);
+        return ResponseEntity.ok(nearLocation);
     }
 
     @GetMapping("/api/user/viewRecentPunch")
@@ -149,15 +160,17 @@ public class EmployeeController {
 //###############################################################################
     // NEED TO BE TESTED
 //###############################################################################
+
     @PostMapping("/api/user/add")
     public ResponseEntity<Boolean> addEmployee(@RequestBody Employee employee) {
         boolean result = dao.add(employee);
 
         if (!result) {
+            System.out.println("Could not add: " + employee);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
-        } else {
-            return ResponseEntity.status(HttpStatus.OK).body(true);
         }
+        System.out.println("Successfully added user: " + employee);
+        return ResponseEntity.ok(true);
     }
 
     @PostMapping("/api/user/delete")
@@ -165,10 +178,11 @@ public class EmployeeController {
         boolean result = dao.delete(employee.getEmployeeId());
 
         if (!result) {
+            System.out.println("Could not delete: " + employee);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
-        } else {
-            return ResponseEntity.status(HttpStatus.OK).body(true);
         }
+        System.out.println("Successfully deleted user: " + employee);
+        return ResponseEntity.ok(true);
     }
 
     //###############################################################################
