@@ -97,4 +97,11 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
         String sql = "DELETE FROM employees WHERE employee_id =" + id;
         jdbcTemplate.execute(sql);
     }
+    public boolean checkIsManager(long id) {
+        // select the number of employees
+        String sql = "SELECT COUNT(*) FROM employees " +
+                "WHERE manager_id = ? ";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, id);
+        return (count > 0);
+    }
 }
