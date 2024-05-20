@@ -32,13 +32,15 @@ public class UkgTimeApplication implements CommandLineRunner {
 	private static CorporateEventDao<Employee> dao;
 	private static CorporateEventDao<Company> companyDao;
 	private static ClockPunchDao clockPunchDao;
+	private static CompanyLocationDao companyLocationDao;
 	private static final Logger log = LoggerFactory.getLogger(UkgTimeApplication.class);
 
 	public UkgTimeApplication(CorporateEventDao<Employee> dao, CorporateEventDao<Company> companyDao,
-							  ClockPunchDao clockPunchDao) {
+							  ClockPunchDao clockPunchDao, CompanyLocationDao companyLocationDao) {
 		this.dao = dao;
 		this.companyDao = companyDao;
 		this.clockPunchDao = clockPunchDao;
+		this.companyLocationDao = companyLocationDao;
 	}
 
 	public static void main(String[] args) {
@@ -71,7 +73,8 @@ public class UkgTimeApplication implements CommandLineRunner {
 		log.info("recent punch type: " + (clockPunchDao.getRecentPunchType(1)).get());
 		log.info("recent punch time: " + (clockPunchDao.getRecentPunchTime(1, "IN")).get());
 		log.info("test employeePunchList: " + clockPunchDao.employeePunchList(1));
-
+		log.info("test companyLocationDao list: " + companyLocationDao.list());
+		log.info("test convertwkt: " + companyLocationDao.convertWKTStringToDouble("POINT(26.089835 -80.366919)"));
 	}
 	@Autowired
 	JdbcTemplate jdbcTemplate;
