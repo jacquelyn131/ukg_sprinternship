@@ -9,7 +9,7 @@ import offcanvasStyles from './ClockOutOffcanvasStyles.module.css'
 
 import Utils from '../../../../Utils.js';
 
-const ClockInOutWidget = () => {
+const ClockInOutWidget = (props) => {
     const { userInfo } = useUser();
 
     const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -69,6 +69,8 @@ const ClockInOutWidget = () => {
         setClockedIn(true);
         setClockInStartTime(new Date());
         setCurrentTime("");
+        props.setShowAlert(true);
+        props.setAlertMessage("New timestamp recorded! You clocked in at " + getFormattedTime() + ".");
     };
     const handleClockOut = (e) => {
         e.preventDefault();
@@ -88,7 +90,10 @@ const ClockInOutWidget = () => {
         setOnBreak(false);
         setCurrentTime(getFormattedTime());
         setShowOffcanvas(false);
+           props.setShowAlert(true);
+             props.setAlertMessage("New timestamp recorded! You clocked out at " + getFormattedTime() + ".");
     };
+
     const handleBreak = (e) => {
         e.preventDefault();
         const timeStampInfo = {
@@ -103,6 +108,9 @@ const ClockInOutWidget = () => {
             setBreakElapsedTime(prevElapsedTime);
             return prevElapsedTime;
         });
+
+          props.setShowAlert(true);
+          props.setAlertMessage("New timestamp recorded! You started your break at " + getFormattedTime() + ".");
     };
     const handleEndBreak = (e) => {
         e.preventDefault();
@@ -118,6 +126,8 @@ const ClockInOutWidget = () => {
             const breakDuration = new Date() - breakStartTime;
             return new Date(prevStartTime.getTime() + breakDuration);
         });
+     props.setShowAlert(true);
+              props.setAlertMessage("New timestamp recorded! You ended your break at " + getFormattedTime() + ".");
     };
     useEffect(() => {
         let clockInInterval;
@@ -273,6 +283,8 @@ const ClockInOutWidget = () => {
              </div>
        </Offcanvas.Body>
       </Offcanvas>
+
+
         </>
     );
 }
