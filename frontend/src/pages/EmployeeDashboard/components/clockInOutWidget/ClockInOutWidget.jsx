@@ -11,6 +11,7 @@ import { Offcanvas } from 'react-bootstrap';
 import offcanvasStyles from './ClockOutOffcanvasStyles.module.css'
 
 import Utils from '../../../../Utils.js';
+import utils from "../../../../Utils.js";
 
 const ClockInOutWidget = (props) => {
     const { userInfo } = useUser();
