@@ -177,6 +177,24 @@ class Endpoints {
             console.error('There was an error!', error);
         }
     }
+    viewRecentShift = async (employee) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/user/viewRecentShift`, {
+                    method: 'POST', 
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(employee)
+                });
+            console.log(response);
+            const jsonResponse = await response.json();
+            return jsonResponse;
+    
+        } catch (error) {
+            console.error('There was some kind of issue!', error);
+        }
+    }
 
 
 }
