@@ -38,9 +38,10 @@ const EmployeeList = () => {
                 const imageUrl = `./images/${user.firstName || 'default'} ${user.lastName || 'default'} - Profile.jpg`;
 
                 return (
-                    <EmployeeCard 
-                        key={user.employeeId} 
-                        employeeName={employeeName} 
+                    <EmployeeCard
+                        key={user.employeeId}
+                        employeeName={employeeName}
+                        employeeId={user.employeeId}
                     />
                 );
             })}
