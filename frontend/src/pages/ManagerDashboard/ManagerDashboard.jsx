@@ -9,6 +9,7 @@ import styles from '../../pages/ManagerDashboard/ManagerDashboard.module.css';
 import { useUser } from '../../UserContext';
 import endpoints from '../../endpoints/Endpoints.js';
 import utils from '../../Utils.js';
+import EmployeeList from './components/employeeCard/EmployeeList.jsx';
 
 const ManagerDashboard = () => {
     const { userInfo } = useUser();
@@ -63,14 +64,15 @@ const ManagerDashboard = () => {
             <section className={styles.managerDashboard}>
                 <h2 className={styles.dashboardTitle}>My Employees</h2>
                 <div className={styles.employeeCardContainer}>
-                    <EmployeeCard employeeName="John Woo" imageUrl="./images/John Woo - Profile.jpg" />
+                    {/* <EmployeeCard employeeName="John Woo" imageUrl="./images/John Woo - Profile.jpg" />
                     <EmployeeCard employeeName="Jeff Dean" imageUrl="./images/Jeff Dean - Profile.jpg" />
                     <EmployeeCard employeeName="Josh Bloke" imageUrl="./images/Josh Bloke - Profile.jpg" />
                     <EmployeeCard employeeName="Josh Long" imageUrl="./images/Josh Long - Profile.jpg" />
                     <EmployeeCard employeeName="Emily Stone" imageUrl="./images/Emily Stone - Profile.jpg" />
                     <EmployeeCard employeeName="Jane Doe" imageUrl="./images/Jane Doe - Profile.jpg" />
                     <EmployeeCard employeeName="John Smith" imageUrl="./images/John Smith - Profile.jpg" />
-                    <EmployeeCard employeeName="Michael Roe" imageUrl="./images/Michael Roe - Profile.jpg" />
+                    <EmployeeCard employeeName="Michael Roe" imageUrl="./images/Michael Roe - Profile.jpg" /> */}
+                    <EmployeeList></EmployeeList>
                     
                 </div>
             </section>
