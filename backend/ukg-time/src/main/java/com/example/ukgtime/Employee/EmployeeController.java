@@ -41,8 +41,11 @@ public class EmployeeController {
     }
 
     public static boolean isWithinRange(double[] empCoords, double[] compCoords, double range) {
-        double longitudeDifference = empCoords[0] - compCoords[0];
-        double latitudeDifference = empCoords[1] - compCoords[1];
+        double longitudeDifference = empCoords[0] - compCoords[1];
+        double latitudeDifference = empCoords[1] - compCoords[0];
+
+        System.out.println("Employee Coords" + empCoords[0] + " " + empCoords[1]);
+        System.out.println("Comp Coords" + compCoords[1] + " " + compCoords[0]);
 
         double distance = Math.sqrt(Math.pow(longitudeDifference, 2) + Math.pow(latitudeDifference, 2));
 
@@ -125,39 +128,39 @@ public class EmployeeController {
     }
 
     /* NEEDS TO GET BUSINESS LOCATION */
-//    @PostMapping("/api/user/checkLocation")
-//    public ResponseEntity<Boolean>checkUserLocation(@RequestBody EmployeeCheckLocation empCheckLocation) {
-//        // Gets the company ID based on the employees company ID
-//        Optional<EmployeeCompany> empComp = employeeCompanyDao.get(empCheckLocation.getEmployeeId());
-//        long compId = empComp.get().getCompanyId();
-//
-//        // List to iterate through every company
-//        List<CompanyAddress> compList = companyAddressDao.list();
-//
-//        long comp_office_id = 1;
-//        for (CompanyAddress address : compList) {
-//            // If the current companyID matches the employees company ID match is found.
-//            if (address.getCompanyId() == compId)
-//                comp_office_id = address.getCompanyOfficeId();
-//        }
-//        System.out.println("comp_office_id: " + comp_office_id);
-//
-//        Optional<CompanyLocation> compLoc = companyLocationDao.get(comp_office_id);
-//        System.out.println(compLoc.get().toString());
-//        double[] compCoords = compLoc.get().getLocation();
-//        double[] empCoords = new double[]{empCheckLocation.getLongitude(), empCheckLocation.getLatitude()};
-//
-//        boolean withinRange = isWithinRange(empCoords, compCoords, 0.0002899);
-//
-//        if (withinRange) {
-//            System.out.println("The points are within the specified range.");
-//            return ResponseEntity.status(HttpStatus.OK).body(true);
-//        } else {
-//            System.out.println("The points are not within the specified range.");
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
-//        }
-//
-//    }
+    @PostMapping("/api/user/checkLocation")
+    public ResponseEntity<Boolean>checkUserLocation(@RequestBody EmployeeCheckLocation empCheckLocation) {
+        // Gets the company ID based on the employees company ID
+        Optional<EmployeeCompany> empComp = employeeCompanyDao.get(empCheckLocation.getEmployeeId());
+        long compId = empComp.get().getCompanyId();
+
+        // List to iterate through every company
+        List<CompanyAddress> compList = companyAddressDao.list();
+
+        long comp_office_id = 1;
+        for (CompanyAddress address : compList) {
+            // If the current companyID matches the employees company ID match is found.
+            if (address.getCompanyId() == compId)
+                comp_office_id = address.getCompanyOfficeId();
+        }
+        System.out.println("comp_office_id: " + comp_office_id);
+
+        Optional<CompanyLocation> compLoc = companyLocationDao.get(comp_office_id);
+        System.out.println(compLoc.get().toString());
+        double[] compCoords = compLoc.get().getLocation();
+        double[] empCoords = new double[]{empCheckLocation.getLongitude(), empCheckLocation.getLatitude()};
+
+        boolean withinRange = isWithinRange(empCoords, compCoords, 0.015);
+
+        if (withinRange) {
+            System.out.println("The points are within the specified range.");
+            return ResponseEntity.status(HttpStatus.OK).body(true);
+        } else {
+            System.out.println("The points are not within the specified range.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+        }
+
+    }
 
     @GetMapping("/api/user/viewRecentPunch")
     public ResponseEntity<Optional<ClockPunch>> viewRecentPunch(@RequestParam long id ) {

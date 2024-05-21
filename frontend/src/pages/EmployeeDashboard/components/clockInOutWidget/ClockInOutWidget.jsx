@@ -46,7 +46,10 @@ const ClockInOutWidget = (props) => {
         const showPosition = async (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-            const userLoc = { latitude: lat, longitude: lon };
+            const userLoc = { 
+                employeeId: userInfo.employeeId,
+                latitude: lat, 
+                longitude: lon };
             const locationResponse = await endpoints.locationChecker(userLoc);
             setWithinReach(locationResponse);
         };
