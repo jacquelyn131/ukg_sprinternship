@@ -7,6 +7,7 @@ import {
 import App from './App.jsx';
 import Layout from './layout/Layout.jsx';
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
+import DashboardRouter from './routes/DashboardRouter.jsx';
 
 import EmployeeDashboard from './pages/EmployeeDashboard/EmployeeDashboard.jsx'
 import MyAttendance from './pages/MyAttendance/MyAttendance.jsx'
@@ -29,8 +30,8 @@ const router = createBrowserRouter([
       { path: '/attendance', element: <PrivateRoutes><MyAttendance />
        </PrivateRoutes>},
       { path: '/dashboard', element: <PrivateRoutes>
-        <EmployeeDashboard />
-          </PrivateRoutes>}, { path: '/managerdashboard', element: <ManagerDashboard/>}
+        <DashboardRouter />
+          </PrivateRoutes>}
     ],
   },
 ]);
