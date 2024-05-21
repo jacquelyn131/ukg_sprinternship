@@ -104,7 +104,7 @@ const ClockInOutWidget = (props) => {
     //         };
     //         navigator.geolocation.getCurrentPosition(showPosition);
     //     }
-
+  
     const handleClockIn = async (e) => {
         e.preventDefault();
 
