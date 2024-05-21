@@ -36,7 +36,6 @@ const Layout = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className={classNames("ms-auto", styles.navlinksContainer)}>
                         <Nav.Link as={Link} to="/" className={classNames(styles.navLink)}>Home</Nav.Link>
-                        <Nav.Link as={Link} to="/managerdashboard" className={classNames(styles.navLink)}>ManagerDashboard</Nav.Link>
                         {loginToken ? (
                             <>
                                 <Nav.Link as={Link} to="/dashboard" className={classNames(styles.navLink)}>Dashboard</Nav.Link>
