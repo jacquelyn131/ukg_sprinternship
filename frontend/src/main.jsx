@@ -13,6 +13,7 @@ import EmployeeDashboard from './pages/EmployeeDashboard/EmployeeDashboard.jsx'
 import MyAttendance from './pages/MyAttendance/MyAttendance.jsx'
 
 import ManagerDashboard from './pages/ManagerDashboard/ManagerDashboard.jsx'
+import EmployeeDetailPage from './pages/ManagerDashboard/components/employeeDetailPage/EmployeeDetailPage.jsx'
 
 import SignInPage from './pages/SignIn/SignInPage.jsx';
 import { UserProvider } from './UserContext.jsx';
@@ -31,7 +32,13 @@ const router = createBrowserRouter([
        </PrivateRoutes>},
       { path: '/dashboard', element: <PrivateRoutes>
         <DashboardRouter />
-          </PrivateRoutes>}
+          </PrivateRoutes>},
+          { path: '/employee/:id', element:
+            <PrivateRoutes>
+                <EmployeeDetailPage />
+                </PrivateRoutes>
+                },
+
     ],
   },
 ]);
