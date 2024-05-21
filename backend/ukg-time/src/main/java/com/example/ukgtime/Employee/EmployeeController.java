@@ -74,40 +74,47 @@ public class EmployeeController {
         return hours;
     }
 
-        @PostMapping("/api/auth/login")
-        public ResponseEntity<Boolean> loginUser(@RequestBody Employee employee) {
+    @PostMapping("/api/auth/login")
+    public ResponseEntity<Boolean> loginUser(@RequestBody Employee employee) {
+        System.out.println(dao.list());
 
-            String empEmail = employee.getEmail();
-            long empId = employee.getEmployeeId();
+        String empEmail = employee.getEmail();
+        long empId = employee.getEmployeeId();
 
-            if (!dao.find(empId)) {
+        if (!dao.find(empId)) {
+            System.out.println("Failed to log in!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+        } else {
+            Optional<Employee> empInfo = dao.get(empId);
+
+            if (!empInfo.get().getEmail().equals(empEmail)) {
                 System.out.println("Failed to log in!");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
             } else {
-                Optional<Employee> empInfo = dao.get(empId);
+                System.out.println("Successfully logged in!");
+                return ResponseEntity.status(HttpStatus.OK).body(true);
 
-                if (!empInfo.get().getEmail().equals(empEmail)) {
-                    System.out.println("Failed to log in!");
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
-                } else {
-                    System.out.println("Successfully logged in!");
-                    return ResponseEntity.status(HttpStatus.OK).body(true);
-
-                }
             }
-
         }
 
-        @PostMapping("/api/user/info")
-        public ResponseEntity<Optional<Employee>> createUserInfo(@RequestBody Employee employee) {
-            System.out.println(employee);
-            System.out.println(dao.get(employee.getEmployeeId()));
+    }
 
-            Optional<Employee> getEmp = dao.get(employee.getEmployeeId());
+    @PostMapping("/api/user/info")
+    public ResponseEntity<Optional<Employee>> createUserInfo(@RequestBody Employee employee) {
+        System.out.println(employee);
+        System.out.println(dao.get(employee.getEmployeeId()));
 
-            // Return response with status 200 (OK) and the created employee object in the body
-            return ResponseEntity.status(HttpStatus.OK).body(getEmp);
-        }
+        Optional<Employee> getEmp = dao.get(employee.getEmployeeId());
+
+        // Return response with status 200 (OK) and the created employee object in the bod
+        return ResponseEntity.status(HttpStatus.OK).body(getEmp);
+    }
+
+
+    @GetMapping("/api/listusers")
+    public ResponseEntity<List<Employee>> loginUser() {
+        return ResponseEntity.ok(dao.list());
+    }
 
     @PostMapping("/api/add/timestamp")
     public ResponseEntity<Boolean> addTimeStamp(@RequestBody ClockPunch timeStamp) {

@@ -30,6 +30,22 @@ class Utils {
             console.error('There was an error!', error);
         }
     };
+
+    listusers = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/api/listusers');
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const jsonResponse = await response.json();
+
+            return jsonResponse;
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    }
 }
 const utils = new Utils();
 export default utils;

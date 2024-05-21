@@ -2,15 +2,6 @@ package com.example.ukgtime;
 
 import com.example.ukgtime.Employee.Employee;
 import com.example.ukgtime.Company.Company;
-import com.example.ukgtime.Employee.EmployeeCompany;
-import com.example.ukgtime.Company.CompanyAddress;
-import com.example.ukgtime.Company.CompanyLocation;
-
-import com.example.ukgtime.*;
-import com.example.ukgtime.ProfileImage;
-
-
-import org.checkerframework.checker.units.qual.C;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-//import org.apache.commons.dbcp2.BasicDataSource;
-import javax.sql.DataSource;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Arrays;

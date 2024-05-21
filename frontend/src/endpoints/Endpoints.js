@@ -46,10 +46,6 @@ class Endpoints {
 
     addUser = async (emp) => {
         try {
-            const bodyData = {
-                email: emp.email,
-                employeeId: emp.employeeId
-            };
 
             const response = await fetch('http://localhost:8080/api/user/add', {
                 method: 'POST', 
@@ -57,7 +53,7 @@ class Endpoints {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(bodyData)
+                body: JSON.stringify(emp)
             }) 
             const jsonResponse = await response.json()
             return jsonResponse;
