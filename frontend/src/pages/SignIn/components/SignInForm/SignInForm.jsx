@@ -10,6 +10,7 @@ import Endpoints from '../../../../endpoints/Endpoints';
 import { useNavigate } from 'react-router-dom';
 
 import { useUser } from '../../../../UserContext';
+import utils from '../../../../Utils';
 
 const SignInForm = () => {
     const { setLoginToken, setUserInfo, loginToken } = useUser();
@@ -22,7 +23,6 @@ const SignInForm = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
         if (!email || !password) {
             setMissingInfoMessage('Please fill out all the fields!');
             return;

@@ -1,5 +1,6 @@
 package com.example.ukgtime;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,9 +54,15 @@ public class JdbcCorporateEventDao implements CorporateEventDao<Employee>{
 
     @Override
     public List<Employee> list() {
-        String sql = "SELECT employee_id, first_name, last_name, ssn, dob, manager_id, email " +
-                "FROM employees";
-        return jdbcTemplate.query(sql, rowMapper);
+        String sql = "SELECT employee_id, first_name, last_name, ssn, dob, manager_id, email FROM employees";
+        try {
+            List<Employee> employees = jdbcTemplate.query(sql, rowMapper);
+            logger.info("Retrieved list of employees: {}", employees);
+            return employees;
+        } catch (DataAccessException e) {
+            logger.error("Error retrieving list of employees", e);
+            return Collections.emptyList();
+        }
     }
 
     @Override
