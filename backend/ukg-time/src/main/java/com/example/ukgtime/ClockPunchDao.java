@@ -207,24 +207,26 @@ public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
     }
     // check if an employee can insert a specific type of clock pucnh
     public boolean checkIfCanClockPunch(long employeeId, String punchType) {
-        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("db_example")
-                .withCatalogName("com.example.ukgtime")
-                .withProcedureName("insert_clock_punch");
-        jdbcCall.addDeclaredParameter(new SqlParameter("e_id", Types.BIGINT));
-        jdbcCall.addDeclaredParameter((new SqlParameter("new_punch_type", Types.VARCHAR)));
-        jdbcCall.execute();
+//        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+//                .withSchemaName("db_example")
+//                .withCatalogName("com.example.ukgtime")
+//                .withProcedureName("insert_clock_punch");
+//        jdbcCall.addDeclaredParameter(new SqlParameter("e_id", Types.BIGINT));
+//        jdbcCall.addDeclaredParameter((new SqlParameter("new_punch_type", Types.VARCHAR)));
+//        jdbcCall.execute();
 
-        String sql = "CALL insert_clock_punch(?, '?', @recentPunch, @canPunch)";
+        String sql = "CALL insert_clock_punch(?, ?, @recentPunch, @canPunch)";
         String sqlResult = "SELECT @canPunch";
         Boolean b = null;
         jdbcTemplate.update(sql, employeeId, punchType);
         try {
+            b = jdbcTemplate.queryForObject(sqlResult, Boolean.class);
+            logger.info("b " + b);
 
         } catch(DataAccessException e) {
-            logger.info("")
+            logger.info("Employee not found: " + employeeId);
         }
-        return false;
+        return b;
     }
 
 }

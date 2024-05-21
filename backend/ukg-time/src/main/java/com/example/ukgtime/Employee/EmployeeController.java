@@ -42,10 +42,12 @@ public class EmployeeController {
 
     public static boolean isWithinRange(double[] empCoords, double[] compCoords, double range) {
         double longitudeDifference = empCoords[0] - compCoords[0];
+        System.out.println("longitudeDifference: " + longitudeDifference);
         double latitudeDifference = empCoords[1] - compCoords[1];
-
+        System.out.println("latitudeDifference: " + latitudeDifference);
         double distance = Math.sqrt(Math.pow(longitudeDifference, 2) + Math.pow(latitudeDifference, 2));
-
+        System.out.println("distance: " + distance);
+        System.out.println("range: " + range);
         return distance <= range;
     }
 
@@ -120,7 +122,14 @@ public class EmployeeController {
     public ResponseEntity<Boolean> addTimeStamp(@RequestBody ClockPunch timeStamp) {
         System.out.println(timeStamp);
         timeStamp.setOfficeId(3);
-        System.out.println(clockPunchDao.add(timeStamp));
+        long id = timeStamp.getEmployeeId();
+        String type = timeStamp.getType();
+        if (clockPunchDao.checkIfCanClockPunch(id, type) == true) {
+            System.out.println(clockPunchDao.add(timeStamp));
+        } else {
+            System.out.println("Unable to make requested punch: " + id);
+            return ResponseEntity.ok(false);
+        }
         return ResponseEntity.ok(true);
     }
 
@@ -130,6 +139,7 @@ public class EmployeeController {
         // Gets the company ID based on the employees company ID
         Optional<EmployeeCompany> empComp = employeeCompanyDao.get(empCheckLocation.getEmployeeId());
         long compId = empComp.get().getCompanyId();
+        System.out.println("compId: " + compId);
 
         // List to iterate through every company
         List<CompanyAddress> compList = companyAddressDao.list();
@@ -139,14 +149,16 @@ public class EmployeeController {
             // If the current companyID matches the employees company ID match is found.
             if (address.getCompanyId() == compId)
                 comp_office_id = address.getCompanyOfficeId();
+                System.out.println("comp_office_id: " + comp_office_id);
         }
         System.out.println("comp_office_id: " + comp_office_id);
 
         Optional<CompanyLocation> compLoc = companyLocationDao.get(comp_office_id);
         System.out.println(compLoc.get().toString());
         double[] compCoords = compLoc.get().getLocation();
-        double[] empCoords = new double[]{empCheckLocation.getLongitude(), empCheckLocation.getLatitude()};
-
+        System.out.println("compCoords: " + compCoords[0] + ", " + compCoords[1]);
+        double[] empCoords = new double[]{empCheckLocation.getLatitude(), empCheckLocation.getLongitude()};
+        System.out.println("empCoords: " + empCoords[0] + ", " + empCoords[1]); // error
         boolean withinRange = isWithinRange(empCoords, compCoords, 0.0002899);
 
         if (withinRange) {
