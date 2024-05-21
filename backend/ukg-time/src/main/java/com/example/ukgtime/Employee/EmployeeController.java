@@ -237,7 +237,7 @@ public class EmployeeController {
 
   // check if an employee is a manager given an employee object, returns true if the employee
     //  is a manager for at least one employee in the database and false otherwise
-    @GetMapping("/api/user/checkManager")
+    @GetMapping("/api/user/checkmanager")
     public ResponseEntity<Boolean> checkIsManager(@RequestParam long id) {
         Boolean isManager = null;
         if (dao.checkIsManager(id) ) {
