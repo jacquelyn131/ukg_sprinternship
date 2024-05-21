@@ -1,12 +1,17 @@
 package com.example.ukgtime;
 
+import org.hibernate.dialect.MySQLDialect;
+import org.hibernate.dialect.OracleTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Component;
+import java.sql.Types;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -199,6 +204,27 @@ public class ClockPunchDao implements CorporateEventDao<ClockPunch>{
     // return break length given two punch id's
     public float getBreakLength(long startId, long endId) {
         return (float) 0.0;
+    }
+    // check if an employee can insert a specific type of clock pucnh
+    public boolean checkIfCanClockPunch(long employeeId, String punchType) {
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("db_example")
+                .withCatalogName("com.example.ukgtime")
+                .withProcedureName("insert_clock_punch");
+        jdbcCall.addDeclaredParameter(new SqlParameter("e_id", Types.BIGINT));
+        jdbcCall.addDeclaredParameter((new SqlParameter("new_punch_type", Types.VARCHAR)));
+        jdbcCall.execute();
+
+        String sql = "CALL insert_clock_punch(?, '?', @recentPunch, @canPunch)";
+        String sqlResult = "SELECT @canPunch";
+        Boolean b = null;
+        jdbcTemplate.update(sql, employeeId, punchType);
+        try {
+
+        } catch(DataAccessException e) {
+            logger.info("")
+        }
+        return false;
     }
 
 }
