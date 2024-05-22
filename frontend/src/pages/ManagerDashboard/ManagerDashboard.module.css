@@ -140,3 +140,12 @@ border-radius: 12px;
 .modal {
 margin: 0 auto;
 }
+
+
+.alert {
+position: fixed;
+bottom: 0;
+margin: auto;
+z-index: 1000;
+width: 100%;
+}
