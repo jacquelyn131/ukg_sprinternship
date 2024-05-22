@@ -55,6 +55,26 @@ const ClockInOutWidget = (props) => {
 
     // Function to get user's current location
     const getUserLocation = () => {
+
+//       navigator.geolocation.getCurrentPosition(
+//           position => {
+//               const newLocation = {
+//                   employeeId: userInfo.employeeId,
+//                   latitude: position.coords.latitude,
+//                   longitude: position.coords.longitude
+//               };
+//               setUserLocation(newLocation);
+//               console.log(newLocation);
+//               console.log('Location retrieved successfully.');
+//           },
+//           error => {
+//               console.error(error);
+//               // alert('Unable to retrieve your location. Please enable location services and try again.');
+//               console.log('Error retrieving location:', error.message);
+//           }
+//       );
+//   };
+  
         navigator.geolocation.getCurrentPosition(
             position => {
                 const newLocation = {

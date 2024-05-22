@@ -56,13 +56,13 @@ public class UkgTimeApplication implements CommandLineRunner {
 //		log.info("update company with id  3");
 //		companyDao.delete(4);
 //		log.info("delete company with id 4");
-		log.info("test get: " + clockPunchDao.get(1));
-
-		log.info("recent punch type: " + (clockPunchDao.getRecentPunchType(1)).get());
-		log.info("recent punch time: " + (clockPunchDao.getRecentPunchTime(1, "IN")).get());
-		log.info("test employeePunchList: " + clockPunchDao.employeePunchList(1));
-		log.info("test companyLocationDao list: " + companyLocationDao.list());
-		log.info("test convertwkt: " + companyLocationDao.convertWKTStringToDouble("POINT(26.089835 -80.366919)"));
+//		log.info("test get: " + clockPunchDao.get(1));
+//
+//		log.info("recent punch type: " + (clockPunchDao.getRecentPunchType(1)).get());
+//		log.info("recent punch time: " + (clockPunchDao.getRecentPunchTime(1, "IN")).get());
+//		log.info("test employeePunchList: " + clockPunchDao.employeePunchList(1));
+//		log.info("test companyLocationDao list: " + companyLocationDao.list());
+//		log.info("test convertwkt: " + companyLocationDao.convertWKTStringToDouble("POINT(26.089835 -80.366919)"));
 	}
 	@Autowired
 	JdbcTemplate jdbcTemplate;

@@ -17,7 +17,7 @@ const AttendanceCard = (props) => {
                      <span className={styles.totalHours}>
                         {props.totalHours}
                      </span>
-                   <span className={styles.totalHoursLabel}>Total Hours</span>
+                   <span className={styles.totalHoursLabel}>Type</span>
                    </div>
 
                     <div className={styles.punch}>

@@ -4,10 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { Alert } from "react-bootstrap";
 import styles from "./EmployeeDetailPage.module.css";
-
 import AttendanceCard from "../../../EmployeeDashboard/components/attendanceCard/AttendanceCard.jsx"
 import Utils from "../../../../Utils";
 import Endpoints from "../../../../endpoints/Endpoints";
+import PunchList from "../../../EmployeeDashboard/components/attendanceCard/PunchList.jsx";
 
 
 const EmployeeDetailPage = () => {
@@ -127,6 +127,7 @@ const EmployeeDetailPage = () => {
             </div>
 
 
+        <PunchList employeeId={id} />
 
 {showAlert && (
                         <Alert variant={alertType} className={styles.alert} onClose={toggleShowAlert} dismissible>
