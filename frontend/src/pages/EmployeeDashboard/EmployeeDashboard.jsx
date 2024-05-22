@@ -14,13 +14,14 @@ import { useUser } from '../../UserContext';
 const EmployeeDashboard = () => {
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState('success');
 
 
     const toggleShowAlert = () => setShowAlert(!showAlert);
 
         useEffect(() => {
             let timer;
-            if (showAlert) {
+            if (showAlert && alertType !== 'danger') {
                 timer = setTimeout(() => {
                     toggleShowAlert();
                 }, 10000); // 10 seconds
@@ -50,7 +51,7 @@ const EmployeeDashboard = () => {
                 </div>
                 <div className={styles.dashboardContent}>
                     <div className={styles.clockInOutWidget}>
-                        <ClockInOutWidget setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} />
+                        <ClockInOutWidget setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertType={setAlertType} />
                     </div>
                     <div className={styles.attendanceSection}>
                         <div className={styles.attendanceHeader}>
@@ -65,7 +66,7 @@ const EmployeeDashboard = () => {
             </div>
 
                   {showAlert && (
-                           <Alert variant="success" className={styles.alert} onClose={toggleShowAlert} dismissible>
+                           <Alert variant={alertType} className={styles.alert} onClose={toggleShowAlert} dismissible>
                                {alertMessage}
                            </Alert>
                            )
