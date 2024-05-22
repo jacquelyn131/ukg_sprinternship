@@ -13,6 +13,7 @@ import offcanvasStyles from './ClockOutOffcanvasStyles.module.css'
 import Utils from '../../../../Utils.js';
 import utils from "../../../../Utils.js";
 
+import WeatherMessage from '../weatherMessage/WeatherMessage.jsx';
 
 const ClockInOutWidget = (props) => {
     const { userInfo } = useUser();
@@ -236,7 +237,9 @@ const ClockInOutWidget = (props) => {
     )}
     {!clockedIn && (
       <div className={styles.personal}>
-        <h5>Sunny day, bright vibes</h5>
+        {userLocation && (
+            <WeatherMessage userLocation={userLocation}/>
+            )}
       </div>
     )}
     {!clockedIn && (
