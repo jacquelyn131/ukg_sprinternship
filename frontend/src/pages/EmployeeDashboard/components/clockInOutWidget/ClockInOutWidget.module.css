@@ -4,6 +4,7 @@ align-items: center;
 justify-content: center;
 flex-direction: column;
 gap: 6px;
+width: 100%;
 }
 
 .clock h1 {
@@ -45,7 +46,9 @@ font-family: 'Volte Rounded';
 font-weight: 500;
 font-kerning: 13%;
 text-align: center;
-color: black;}
+color: black;
+width: 100%;
+}
 
 .button {
 font-family: 'Volte Rounded';
@@ -54,9 +57,9 @@ font-size: 22px;
 color: white;
 background-color: #005151;
 border-radius: 16px;
-width: 12em;
 padding: 12px 30px;
 border: none;
+width: 16em;
 }
 
 .button:hover {
@@ -65,6 +68,36 @@ background-color:  #107E7E;
 
 .button:active {
 background-color: #002c2c !important;
+}
+
+.button:disabled, .endbreakButton:disabled, .breakButton:disabled {
+background-color: #C4C4C4;
+opacity: 0.5;
+
+}
+
+
+.locationIcon {
+height: 1em;
+opacity: 0.6;
+border: none;
+
+}
+
+.location {
+display: flex;
+max-width: 100%;
+gap: 1em;
+justify-content: center;
+align-items: center;
+background-color: #ceddf5;
+border-color: #C9ECB9;
+border: thin;
+border-radius: 16px;
+word-wrap: break-word;
+padding: 1em;
+
+margin-bottom: 1em;
 }
 
 .personal {
@@ -85,32 +118,6 @@ margin-bottom: auto;
 
 }
 
-.locationIcon {
-height: 22px;
-width: 18px;
-opacity: 0.6;
-border: none;
-align-items: center;
-justify-content: center;
-margin-left: auto;
-}
-
-.location {
-display: flex;
-height: 2.5em;
-width: 20em;
-gap: 8px;
-background-color: #E4FAD9;
-border-color: #C9ECB9;
-border: thin;
-align-items: center;
-justify-content: center;
-flex-direction: row;
-padding: auto;
-border-radius: 30px;
-margin-bottom: 8px;
-}
-
 .clockLocation {
 position: relative;
 display: flex;
@@ -122,10 +129,31 @@ align-items: center;
 
 .buttonContainer {
 display:flex;
-flex-direction: row;
+flex-direction: column;
 justify-content: center;
 gap: 12px;
+width: 100%;
 }
+
+.clockInButtonContainer {
+display: flex;
+flex-direction: column;
+gap: .5em;
+width: 100%;
+}
+
+.breakClockOutButtonContainer {
+display: flex;
+flex-direction: row;
+gap: .5em;
+}
+
+.shareLocationContainer {
+display: flex;
+flex-direction: column;
+gap: .5em;
+}
+
 
 .endbreakButton {
 position: relative;
@@ -158,7 +186,6 @@ font-size: 20px;
 color: white;
 background-color: #0BBFDF;
 border-radius: 16px;
-width:9em;
 max-width: 8em;
 height: 2.8em;
 padding: 12px 30px;
@@ -195,6 +222,3 @@ background-color:  #107E7E;
 background-color: #002c2c !important;
 }
 
-.officeReach {
-margin-right: auto;
-}

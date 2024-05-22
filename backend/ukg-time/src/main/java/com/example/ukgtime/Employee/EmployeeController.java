@@ -41,10 +41,12 @@ public class EmployeeController {
     }
 
     public static boolean isWithinRange(double[] empCoords, double[] compCoords, double range) {
-        double longitudeDifference = empCoords[0] - compCoords[0];
-        System.out.println("longitudeDifference: " + longitudeDifference);
-        double latitudeDifference = empCoords[1] - compCoords[1];
-        System.out.println("latitudeDifference: " + latitudeDifference);
+        double longitudeDifference = empCoords[0] - compCoords[1];
+        double latitudeDifference = empCoords[1] - compCoords[0];
+
+        System.out.println("Employee Coords" + empCoords[0] + " " + empCoords[1]);
+        System.out.println("Comp Coords" + compCoords[1] + " " + compCoords[0]);
+      
         double distance = Math.sqrt(Math.pow(longitudeDifference, 2) + Math.pow(latitudeDifference, 2));
         System.out.println("distance: " + distance);
         System.out.println("range: " + range);
@@ -139,7 +141,6 @@ public class EmployeeController {
         // Gets the company ID based on the employees company ID
         Optional<EmployeeCompany> empComp = employeeCompanyDao.get(empCheckLocation.getEmployeeId());
         long compId = empComp.get().getCompanyId();
-        System.out.println("compId: " + compId);
 
         // List to iterate through every company
         List<CompanyAddress> compList = companyAddressDao.list();
@@ -149,17 +150,16 @@ public class EmployeeController {
             // If the current companyID matches the employees company ID match is found.
             if (address.getCompanyId() == compId)
                 comp_office_id = address.getCompanyOfficeId();
-                System.out.println("comp_office_id: " + comp_office_id);
+
         }
         System.out.println("comp_office_id: " + comp_office_id);
 
         Optional<CompanyLocation> compLoc = companyLocationDao.get(comp_office_id);
         System.out.println(compLoc.get().toString());
         double[] compCoords = compLoc.get().getLocation();
-        System.out.println("compCoords: " + compCoords[0] + ", " + compCoords[1]);
-        double[] empCoords = new double[]{empCheckLocation.getLatitude(), empCheckLocation.getLongitude()};
-        System.out.println("empCoords: " + empCoords[0] + ", " + empCoords[1]); // error
-        boolean withinRange = isWithinRange(empCoords, compCoords, 0.0002899);
+        double[] empCoords = new double[]{empCheckLocation.getLongitude(), empCheckLocation.getLatitude()};
+
+        boolean withinRange = isWithinRange(empCoords, compCoords, 0.015);
 
         if (withinRange) {
             System.out.println("The points are within the specified range.");
@@ -246,7 +246,7 @@ public class EmployeeController {
 
   // check if an employee is a manager given an employee object, returns true if the employee
     //  is a manager for at least one employee in the database and false otherwise
-    @GetMapping("/api/user/checkManager")
+    @GetMapping("/api/user/checkmanager")
     public ResponseEntity<Boolean> checkIsManager(@RequestParam long id) {
         Boolean isManager = null;
         if (dao.checkIsManager(id) ) {

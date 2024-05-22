@@ -8,12 +8,12 @@ public class EmployeeCheckLocation {
     private long employeeId;
 
     @JsonProperty("latitude")
-    private long latitude;
+    private double latitude;
 
     @JsonProperty("longitude")
-    private long longitude;
+    private double longitude;
 
-    public EmployeeCheckLocation(long employeeId, long latitude, long longitude) {
+    public EmployeeCheckLocation(long employeeId, double latitude, double longitude) {
         this.employeeId = employeeId;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -25,11 +25,11 @@ public class EmployeeCheckLocation {
         return employeeId;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
