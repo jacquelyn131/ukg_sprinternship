@@ -59,7 +59,7 @@ const EmployeeDashboard = () => {
                             <button type="button" onClick={navigateToMyAttendance} className={styles.forwardButtonContainer}><img src="./././public/images/ForwardArrow.svg" className={styles.forwardButton} /></button>
                         </div>
 
-                        <PunchList employeeId={sessionStorage.getItem('login_token')} />
+                        <PunchList employeeId='3' />
 
                         {/* <AttendanceCard punchDate="10/1/24" totalHours="8" punchTimeIn="4:00pm" punchTimeOut="8:00pm" />
                         <AttendanceCard punchDate="10/1/24" totalHours="8" punchTimeIn="4:00pm" punchTimeOut="8:00pm" />

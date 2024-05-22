@@ -34,10 +34,10 @@ const PunchList = ({ employeeId }) => {
             
             {Object.entries(punchesByDay).map(([date, punches]) => (
                 <div key={date}>
-                    <h3>Date: {date}</h3>
+                    {/* <h3>Date: {date}</h3> */}
                     <ul>
                         {punches.map(punch => (
-                            <AttendanceCard key="punch.punchId" punchDate={punch.dateTime.split(" ")[1]}  totalHours={punch.type} punchTimeIn={punch.comments} punchTimeOut="8:00pm" />
+                            <AttendanceCard key="punch.punchId" punchDate={punch.dateTime.split(" ")[0]}  totalHours={punch.type} punchTimeIn={punch.valid ? 'Yes' : 'No'} punchTimeOut={punch.dateTime.split(" ")[1]} />
                             // <li key={punch.punchId}>
                             //     <div>Time: {punch.dateTime.split(" ")[1]}</div>
                             //     <div>Punch ID: {punch.punchId}</div>
