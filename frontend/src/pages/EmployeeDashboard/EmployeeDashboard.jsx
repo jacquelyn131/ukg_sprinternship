@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import { useUser } from '../../UserContext';
+import PunchList from './components/attendanceCard/PunchList.jsx';
 
 const EmployeeDashboard = () => {
     const [showAlert, setShowAlert] = useState(false);
@@ -57,9 +58,12 @@ const EmployeeDashboard = () => {
                             <h2>My Attendance</h2>
                             <button type="button" onClick={navigateToMyAttendance} className={styles.forwardButtonContainer}><img src="./././public/images/ForwardArrow.svg" className={styles.forwardButton} /></button>
                         </div>
+
+                        <PunchList employeeId={sessionStorage.getItem('login_token')} />
+
+                        {/* <AttendanceCard punchDate="10/1/24" totalHours="8" punchTimeIn="4:00pm" punchTimeOut="8:00pm" />
                         <AttendanceCard punchDate="10/1/24" totalHours="8" punchTimeIn="4:00pm" punchTimeOut="8:00pm" />
-                        <AttendanceCard punchDate="10/1/24" totalHours="8" punchTimeIn="4:00pm" punchTimeOut="8:00pm" />
-                        <AttendanceCard punchDate="10/1/24" totalHours="8" punchTimeIn="4:00pm" punchTimeOut="8:00pm" />
+                        <AttendanceCard punchDate="10/1/24" totalHours="8" punchTimeIn="4:00pm" punchTimeOut="8:00pm" /> */}
                     </div>
                 </div>
             </div>

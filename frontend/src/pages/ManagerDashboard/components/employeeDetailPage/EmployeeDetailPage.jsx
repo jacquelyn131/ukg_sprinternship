@@ -1,10 +1,10 @@
 import React, { Component, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-
 import AttendanceCard from "../../../EmployeeDashboard/components/attendanceCard/AttendanceCard.jsx"
 import Utils from "../../../../Utils";
 import Endpoints from "../../../../endpoints/Endpoints";
+import PunchList from "../../../EmployeeDashboard/components/attendanceCard/PunchList.jsx";
 
 
 const EmployeeDetailPage = () => {
@@ -78,7 +78,7 @@ const EmployeeDetailPage = () => {
 
         <button onClick={handleDelete}>Delete Employee</button>
 
-        <AttendanceCard />
+        <PunchList employeeId={id} />
 
         </>
         );
