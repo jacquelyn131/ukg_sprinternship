@@ -29,7 +29,7 @@ const MyAttendance = () => {
 
 
                                <div className={styles.attendanceCard1}>
-                                    <PunchList employeeId='3'/>
+                                    <PunchList employeeId={sessionStorage.getItem('login_token')}/>
                                </div>
                            </div>
 
