@@ -35,13 +35,17 @@ const EmployeeList = () => {
         <div className={styles.employeeList}>
             {listUsers.map((user) => {
                 const employeeName = `${user.firstName || ''} ${user.lastName || ''}`.trim();
-                const imageUrl = `./images/${user.firstName || 'default'} ${user.lastName || 'default'} - Profile.jpg`;
-
+                const imageUrl =
+//                  user.firstName && user.lastName
+//                                     ? `./images/${user.firstName} ${user.lastName} - Profile.jpg`
+//                                     :
+                            './images/default-icon.svg';
                 return (
                     <EmployeeCard
                         key={user.employeeId}
                         employeeName={employeeName}
                         employeeId={user.employeeId}
+                        imageUrl={imageUrl}
                     />
                 );
             })}

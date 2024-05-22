@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import GreetingMessage from '../../pages/EmployeeDashboard/components/greetingMessage/GreetingMessage.jsx';
 import CustomDate from '../../pages/EmployeeDashboard/components/customDate/CustomDate.jsx';
 import EmployeeCard from '../../pages/ManagerDashboard/components/employeeCard/EmployeeCard.jsx';
@@ -11,8 +11,29 @@ import endpoints from '../../endpoints/Endpoints.js';
 import utils from '../../Utils.js';
 import EmployeeList from './components/employeeCard/EmployeeList.jsx';
 
+
 const ManagerDashboard = () => {
     const { userInfo } = useUser();
+
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState('success');
+
+     const toggleShowAlert = () => setShowAlert(!showAlert);
+
+            useEffect(() => {
+                let timer;
+                if (showAlert && alertType !== 'danger') {
+                    timer = setTimeout(() => {
+                        toggleShowAlert();
+                    }, 10000); // 10 seconds
+                }
+
+                return () => {
+                    clearTimeout(timer);
+                };
+            }, [showAlert]);
+
     const [showModal, setShowModal] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -39,7 +60,13 @@ const ManagerDashboard = () => {
         // Handle form submission logic here
         console.log(formData);
         
-        console.log(await endpoints.addUser(formData))
+        console.log(await endpoints.addUser(formData));
+
+        // Show alert after submission
+        setAlertMessage('Employee added successfully');
+        setAlertType('success');
+        setShowAlert(true);
+
         // Reset form data after submission
         setFormData({
             firstName: '',
@@ -49,21 +76,25 @@ const ManagerDashboard = () => {
             email: '',
             managerId: '' // Include managerId here
         });
-        setShowModal(false);
+
+        handleCloseModal();
     };
 
     return (
+        <>
         <div className={styles.dashboardWrapper}>
             <div className={styles.dashboardGreeting}>
                 <div className={styles.greetingContainer}>
-                    <h2 className={styles.customGreeting}>Good Morning, Jesse!</h2>
+
+            {userInfo && <GreetingMessage firstName={userInfo.firstName} />}
+
                     <CustomDate className={styles.customDate} />
                 </div>
             </div>
 
             <section className={styles.managerDashboard}>
                 <h2 className={styles.dashboardTitle}>My Employees</h2>
-                <div className={styles.employeeCardContainer}>
+
                     {/* <EmployeeCard employeeName="John Woo" imageUrl="./images/John Woo - Profile.jpg" />
                     <EmployeeCard employeeName="Jeff Dean" imageUrl="./images/Jeff Dean - Profile.jpg" />
                     <EmployeeCard employeeName="Josh Bloke" imageUrl="./images/Josh Bloke - Profile.jpg" />
@@ -72,9 +103,11 @@ const ManagerDashboard = () => {
                     <EmployeeCard employeeName="Jane Doe" imageUrl="./images/Jane Doe - Profile.jpg" />
                     <EmployeeCard employeeName="John Smith" imageUrl="./images/John Smith - Profile.jpg" />
                     <EmployeeCard employeeName="Michael Roe" imageUrl="./images/Michael Roe - Profile.jpg" /> */}
-                    <EmployeeList></EmployeeList>
+                    <div>
+                        <EmployeeList />
+                    </div>
                     
-                </div>
+
             </section>
 
             <div className={styles.divider}></div>
@@ -119,7 +152,18 @@ const ManagerDashboard = () => {
                     </Modal>
                 </section>
             </div>
+
+
         </div>
+
+         {showAlert && (
+                        <Alert variant={alertType} className={styles.alert} onClose={toggleShowAlert} dismissible>
+                            {alertMessage}
+                           </Alert>
+                         )
+                        }
+
+        </>
     );
 };
 
