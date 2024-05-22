@@ -3,16 +3,25 @@ import EmployeeCard from './EmployeeCard';
 import styles from './EmployeeCard.module.css'
 import utils from '../../../../Utils.js';
 
+import { useUser } from '../../../../UserContext';
+
 const EmployeeList = () => {
     const [listUsers, setListUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const { userInfo } = useUser();
+
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const users = await utils.listusers();
+//                 const filteredUsers = users.filter((user) => user.managerId === userInfo.employeeId);
+//                 setListUsers(filteredUsers);
+
                 setListUsers(users);
+
+
                 setLoading(false);
             } catch (error) {
                 setError(error);
@@ -35,13 +44,17 @@ const EmployeeList = () => {
         <div className={styles.employeeList}>
             {listUsers.map((user) => {
                 const employeeName = `${user.firstName || ''} ${user.lastName || ''}`.trim();
-                const imageUrl = `./images/${user.firstName || 'default'} ${user.lastName || 'default'} - Profile.jpg`;
-
+                const imageUrl =
+//                  user.firstName && user.lastName
+//                                     ? `./images/${user.firstName} ${user.lastName} - Profile.jpg`
+//                                     :
+                            './images/default-icon.svg';
                 return (
                     <EmployeeCard
                         key={user.employeeId}
                         employeeName={employeeName}
                         employeeId={user.employeeId}
+                        imageUrl={imageUrl}
                     />
                 );
             })}

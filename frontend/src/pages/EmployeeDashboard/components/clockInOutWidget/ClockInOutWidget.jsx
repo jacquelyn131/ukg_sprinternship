@@ -13,6 +13,8 @@ import offcanvasStyles from './ClockOutOffcanvasStyles.module.css'
 import Utils from '../../../../Utils.js';
 import utils from "../../../../Utils.js";
 
+import WeatherMessage from '../weatherMessage/WeatherMessage.jsx';
+
 const ClockInOutWidget = (props) => {
     const { userInfo } = useUser();
 
@@ -22,7 +24,7 @@ const ClockInOutWidget = (props) => {
     const [currentLocation, setCurrentLocation] = useState("");
     const [clockedIn, setClockedIn] = useState(false);
     const [onBreak, setOnBreak] = useState(false);
-    const [withinReach, setWithinReach] = useState('true');
+    const [withinReach, setWithinReach] = useState(false); // Set to false by default
     const [clockInStartTime, setClockInStartTime] = useState(null);
     const [breakStartTime, setBreakStartTime] = useState(null);
     const [clockOutTime, setClockOutTime] = useState(null);
@@ -53,25 +55,46 @@ const ClockInOutWidget = (props) => {
 
     // Function to get user's current location
     const getUserLocation = () => {
-      navigator.geolocation.getCurrentPosition(
-          position => {
-              const newLocation = {
-                  employeeId: userInfo.employeeId,
-                  latitude: position.coords.latitude,
-                  longitude: position.coords.longitude
-              };
-              setUserLocation(newLocation);
-              console.log(newLocation);
-              console.log('Location retrieved successfully.');
-          },
-          error => {
-              console.error(error);
-              // alert('Unable to retrieve your location. Please enable location services and try again.');
-              console.log('Error retrieving location:', error.message);
-          }
-      );
-  };
+
+//       navigator.geolocation.getCurrentPosition(
+//           position => {
+//               const newLocation = {
+//                   employeeId: userInfo.employeeId,
+//                   latitude: position.coords.latitude,
+//                   longitude: position.coords.longitude
+//               };
+//               setUserLocation(newLocation);
+//               console.log(newLocation);
+//               console.log('Location retrieved successfully.');
+//           },
+//           error => {
+//               console.error(error);
+//               // alert('Unable to retrieve your location. Please enable location services and try again.');
+//               console.log('Error retrieving location:', error.message);
+//           }
+//       );
+//   };
   
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const newLocation = {
+                    employeeId: userInfo.employeeId,
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                };
+                setUserLocation(newLocation);
+                console.log(newLocation);
+            },
+            error => {
+                console.error(error);
+                props.setShowAlert(true);
+                props.setAlertMessage("Failed to get location. Please enable location services and try again.");
+                props.setAlertType("danger");
+            }
+        );
+
+        console.log('Getting location...');
+    };
 
     useEffect(() => {
         getUserLocation();
@@ -85,50 +108,42 @@ const ClockInOutWidget = (props) => {
     const checkUserLocation = async () => {
         const locationResponse = await endpoints.locationChecker(userLocation);
         setWithinReach(locationResponse);
-        console.log('User is within reach:', withinReach);
+        console.log('User is within reach:', locationResponse);
+        return locationResponse; // Return the result of the check
     };
-
 
     useEffect(() => {
         checkUserLocation();
-    }, []);
-
-
-
-    //     const geolocation = async (e) => {
-    //         e.preventDefault();
-    //         const showPosition = async (position) => {
-    //             const lat = position.coords.latitude;
-    //             const lon = position.coords.longitude;
-    //             const userLoc = { latitude: lat, longitude: lon };
-    //             const locationResponse = await endpoints.locationChecker(userLoc);
-    //             setWithinReach(locationResponse);
-    //         };
-    //         navigator.geolocation.getCurrentPosition(showPosition);
-    //     }
+        console.log('User is within reach:', withinReach);
+    }, [userLocation]);
 
     const handleClockIn = async (e) => {
         e.preventDefault();
 
-        const emp = {
-            email: "john@gmail.com",
-            employeeId: 4
-        };
+        // Ensure the user is within reach before proceeding with clock in
+        const isWithinReach = await checkUserLocation();
+
+        if (!isWithinReach) {
+            props.setShowAlert(true);
+            props.setAlertMessage("You are not within the required location to clock in.");
+            props.setAlertType("danger");
+            return; // Exit the function if the user is not within reach
+        }
+
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             type: 'IN',
             dateTime: getDateTime(),
         };
-        endpoints.addTimestamp(timeStampInfo);
-        getUserLocation(e);
-        checkUserLocation();
+        await endpoints.addTimestamp(timeStampInfo); // Ensure the timestamp is recorded successfully
         setClockedIn(true);
         setClockInStartTime(new Date());
         setCurrentTime("");
         props.setShowAlert(true);
         props.setAlertMessage("New timestamp recorded! You clocked in at " + getFormattedTime() + ".");
     };
-    const handleClockOut = (e) => {
+
+    const handleClockOut = async (e) => {
         e.preventDefault();
         let comments = document.getElementById('comments').value;
         if (comments === "") {
@@ -140,24 +155,25 @@ const ClockInOutWidget = (props) => {
             dateTime: getDateTime(),
             comments: comments,
         };
-        endpoints.addTimestamp(timeStampInfo);
+        await endpoints.addTimestamp(timeStampInfo); // Ensure the timestamp is recorded successfully
         setClockedIn(false);
         setClockInElapsedTime(0);
         setOnBreak(false);
         setCurrentTime(getFormattedTime());
+
         setShowOffcanvas(false);
         props.setShowAlert(true);
         props.setAlertMessage("New timestamp recorded! You clocked out at " + getFormattedTime() + ".");
     };
 
-    const handleBreak = (e) => {
+    const handleBreak = async (e) => {
         e.preventDefault();
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             dateTime: getDateTime(),
             type: 'BREAK-IN',
         };
-        endpoints.addTimestamp(timeStampInfo);
+        await endpoints.addTimestamp(timeStampInfo); // Ensure the timestamp is recorded successfully
         setOnBreak(true);
         setBreakStartTime(new Date());
         setClockInElapsedTime((prevElapsedTime) => {
@@ -168,14 +184,15 @@ const ClockInOutWidget = (props) => {
         props.setShowAlert(true);
         props.setAlertMessage("New timestamp recorded! You started your break at " + getFormattedTime() + ".");
     };
-    const handleEndBreak = (e) => {
+
+    const handleEndBreak = async (e) => {
         e.preventDefault();
         const timeStampInfo = {
             employeeId: userInfo.employeeId,
             type: 'BREAK-OUT',
             dateTime: getDateTime(),
         };
-        endpoints.addTimestamp(timeStampInfo);
+        await endpoints.addTimestamp(timeStampInfo); // Ensure the timestamp is recorded successfully
         setOnBreak(false);
         setBreakElapsedTime(0);
         setClockInStartTime((prevStartTime) => {
@@ -229,7 +246,6 @@ const ClockInOutWidget = (props) => {
     }
 
 
-
     return (
 <>
   <div className={styles.clockinComponents}>
@@ -241,7 +257,9 @@ const ClockInOutWidget = (props) => {
     )}
     {!clockedIn && (
       <div className={styles.personal}>
-        <h5>Sunny day, bright vibes</h5>
+        {userLocation && (
+            <WeatherMessage userLocation={userLocation}/>
+            )}
       </div>
     )}
     {!clockedIn && (
