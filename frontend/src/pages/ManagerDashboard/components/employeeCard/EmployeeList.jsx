@@ -3,16 +3,25 @@ import EmployeeCard from './EmployeeCard';
 import styles from './EmployeeCard.module.css'
 import utils from '../../../../Utils.js';
 
+import { useUser } from '../../../../UserContext';
+
 const EmployeeList = () => {
     const [listUsers, setListUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const { userInfo } = useUser();
+
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const users = await utils.listusers();
+//                 const filteredUsers = users.filter((user) => user.managerId === userInfo.employeeId);
+//                 setListUsers(filteredUsers);
+
                 setListUsers(users);
+
+
                 setLoading(false);
             } catch (error) {
                 setError(error);
