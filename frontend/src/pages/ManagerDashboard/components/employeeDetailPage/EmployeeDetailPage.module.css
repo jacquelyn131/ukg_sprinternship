@@ -1,0 +1,89 @@
+.pageContainer {
+  display: flex;
+  padding: 1% 10%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.employeeInfoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 1;
+  width: 100%;
+
+}
+
+.employeeInfoContainer h1 {
+  font-family: 'Volte Rounded';
+  font-weight: 600;
+  color: var(--dark-teal);
+  flex: 1;
+}
+
+.subtitle {
+font-weight: 400;
+display: block;
+}
+
+.employeeImage {
+  object-fit: cover;
+  border-radius: 50%;
+  clip-path: circle();
+  max-width: 25%;
+  max-height: 25%;
+}
+
+.backArrow {
+  color: var(--dark-teal);
+  cursor: pointer;
+  height: 2em;
+  }
+
+.backButton {
+  border: none;
+  background: none;
+  padding: 1em;
+}
+
+.deleteButton {
+  background-color: #D45656;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: .5em 1em;
+  cursor: pointer;
+  font-family: 'Volte Rounded';
+}
+
+.deleteButton:hover {
+  filter: brightness(1.1);
+}
+
+.attendanceList {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+  padding: 1em;
+  }
+
+  .divider {
+      height: 1px;
+      background-color: #BDBDBD;
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 3%;
+      margin-bottom: 2%;
+  }
+
+  .alert {
+  position: fixed;
+  bottom: 0;
+  margin: auto;
+  z-index: 1000;
+  width: 100%;
+  }

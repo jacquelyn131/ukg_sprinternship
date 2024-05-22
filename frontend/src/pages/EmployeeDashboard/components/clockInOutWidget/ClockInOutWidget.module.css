@@ -59,7 +59,8 @@ background-color: #005151;
 border-radius: 16px;
 padding: 12px 30px;
 border: none;
-width: 16em;
+width: 100% !important;
+max-width: 100%;
 }
 
 .button:hover {
@@ -221,4 +222,3 @@ background-color:  #107E7E;
 .clockoutButton:active {
 background-color: #002c2c !important;
 }
-

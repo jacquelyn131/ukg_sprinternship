@@ -1,8 +1,7 @@
 .employeeCard {
-    width: 22em;
-    height: 7em;
+
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     background-color: white;
@@ -16,13 +15,25 @@
     font-family: 'Volte Rounded';
     font-weight: 600;
     color: var(--dark-teal);
-    font-size: 1.9em;
-    margin-right: 53px;
+    font-size: 1.75em;
+    flex: 1;
 }
 
 .employeeCard img {
-    width: 5em;
-    height: 5em;
+    max-width: 33%;
     object-fit: cover;
     border-radius: 50%;
+}
+
+.employeeList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5em 2em;
+    justify-items: center;
+}
+
+@media (max-width: 768px) {
+    .employeeList {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

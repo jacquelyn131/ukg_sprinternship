@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 const EmployeeCard = (props) => {
 
     const navigate = useNavigate();
-    console.log(props)
 
     const handleClick = (e) => {
         e.preventDefault();

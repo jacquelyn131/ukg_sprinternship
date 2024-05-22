@@ -1,33 +1,24 @@
 h6 {
 font-family: 'Volte Rounded';
 font-weight: regular;
-font-size: 14px;
+font-size: 1em;
 color: #757575;
 text-align: center;
-justify-content: center;
-margin-top: auto;
-margin-bottom: auto;
-
 }
 
 .locationIcon {
-height: 22px;
-width: 18px;
+height: 1em;
 opacity: 0.6;
-border: none;
-
 }
 
 .location {
 display: flex;
-height: 2.5em;
 width: 100%;
 gap: 1em;
-justify-content: center;
-align-items: center;
-background-color: #E4FAD9;
 border-color: #C9ECB9;
 border: thin;
 border-radius: 30px;
 margin-bottom: 8px;
+padding: .5em 1em;
+justify-content: center;
 }
