@@ -46,9 +46,10 @@ public class EmployeeController {
 
         System.out.println("Employee Coords" + empCoords[0] + " " + empCoords[1]);
         System.out.println("Comp Coords" + compCoords[1] + " " + compCoords[0]);
-
+      
         double distance = Math.sqrt(Math.pow(longitudeDifference, 2) + Math.pow(latitudeDifference, 2));
-
+        System.out.println("distance: " + distance);
+        System.out.println("range: " + range);
         return distance <= range;
     }
 
@@ -123,7 +124,14 @@ public class EmployeeController {
     public ResponseEntity<Boolean> addTimeStamp(@RequestBody ClockPunch timeStamp) {
         System.out.println(timeStamp);
         timeStamp.setOfficeId(3);
-        System.out.println(clockPunchDao.add(timeStamp));
+        long id = timeStamp.getEmployeeId();
+        String type = timeStamp.getType();
+        if (clockPunchDao.checkIfCanClockPunch(id, type) == true) {
+            System.out.println(clockPunchDao.add(timeStamp));
+        } else {
+            System.out.println("Unable to make requested punch: " + id);
+            return ResponseEntity.ok(false);
+        }
         return ResponseEntity.ok(true);
     }
 
@@ -142,6 +150,7 @@ public class EmployeeController {
             // If the current companyID matches the employees company ID match is found.
             if (address.getCompanyId() == compId)
                 comp_office_id = address.getCompanyOfficeId();
+
         }
         System.out.println("comp_office_id: " + comp_office_id);
 
