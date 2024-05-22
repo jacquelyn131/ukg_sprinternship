@@ -23,6 +23,7 @@ const SignInForm = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        console.log(await utils.getPunchByDay(1));
         if (!email || !password) {
             setMissingInfoMessage('Please fill out all the fields!');
             return;

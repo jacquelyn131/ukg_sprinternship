@@ -1,6 +1,7 @@
 import styles from './MyAttendance.module.css';
 import AttendanceCard from '../EmployeeDashboard/components/attendanceCard/AttendanceCard';
 import { useNavigate } from 'react-router-dom';
+import PunchList from '../EmployeeDashboard/components/attendanceCard/PunchList';
 
 
 const MyAttendance = () => {
@@ -28,10 +29,7 @@ const MyAttendance = () => {
 
 
                                <div className={styles.attendanceCard1}>
-                                   <AttendanceCard className={styles.test} />
-
-                                   <AttendanceCard className={styles.test} />
-                                   <AttendanceCard className={styles.test} />
+                                    <PunchList employeeId={sessionStorage.getItem('login_token')}/>
                                </div>
                            </div>
 
