@@ -17,6 +17,7 @@ How can we use geolocation to make clocking in easier for everyone?
 - **Entity Relation Diagram:**
 - <img src="https://i.imgur.com/SngqiZx.jpeg">
 - <img src="https://i.imgur.com/IxjgOsX.jpeg">
+- <img src="https://i.imgur.com/iwI4dd8.png">
 -**Database Normalization**
 - <img src="https://i.imgur.com/1io8gIN.jpeg">
 - <img src="https://i.imgur.com/BJkLMJd.jpeg">
