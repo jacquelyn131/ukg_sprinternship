@@ -13,6 +13,14 @@ How can we use geolocation to make clocking in easier for everyone?
 ### Tech Stack
 - Spring boot and Java on the backend, React.js on the frontend, MySQL as the database
 
+### Diagrams: 
+- **Entity Relation Diagram:**
+- <img src="https://i.imgur.com/SngqiZx.jpeg">
+- <img src="https://i.imgur.com/IxjgOsX.jpeg">
+-**Database Normalization**
+- <img src="">
+- <img src="">
+
 ## Hurdles/Challenges we faced
 
 ## Documentation
