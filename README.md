@@ -18,8 +18,8 @@ How can we use geolocation to make clocking in easier for everyone?
 - <img src="https://i.imgur.com/SngqiZx.jpeg">
 - <img src="https://i.imgur.com/IxjgOsX.jpeg">
 -**Database Normalization**
-- <img src="">
-- <img src="">
+- <img src="https://i.imgur.com/1io8gIN.jpeg">
+- <img src="https://i.imgur.com/BJkLMJd.jpeg">
 
 ## Hurdles/Challenges we faced
 
