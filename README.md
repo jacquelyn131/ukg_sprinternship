@@ -25,6 +25,11 @@ How can we use geolocation to make clocking in easier for everyone?
 
 ## Documentation
 - <a href = "https://docs.google.com/document/d/14i9RaOdrNy_cNW0_49LfPq5_J1xCI8eTaeR626Ou1GY/edit?usp=sharing​">link</a>
+- <img src="https://i.imgur.com/NXLWw3q.png">
+- <img src="https://i.imgur.com/4c9neN7.png">
+- <img src="https://i.imgur.com/mJ0rl1U.png">
+- <img src="https://i.imgur.com/QGfAGI0.png">
+- <img src="https://i.imgur.com/mnUMxDv.png">
 
 ## Demo
 <img src="https://imgur.com/a/{YOUR_GIF_HERE}">
