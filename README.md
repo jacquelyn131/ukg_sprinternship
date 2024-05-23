@@ -1,6 +1,7 @@
 # UKG Time
 <img src="https://i.imgur.com/SOxsarB.png">
 Amarise Rodriguez, Folasade Goddard, Jacquelyn Shelby, Rafael Ojeda Matos, Xiomara Campos
+
 ## Initial prompt:
 How can we use geolocation to make clocking in easier for everyone?
 
@@ -14,6 +15,8 @@ How can we use geolocation to make clocking in easier for everyone?
 
 ## Hurdles/Challenges we faced
 
+## Documentation
+- <a href = "https://docs.google.com/document/d/14i9RaOdrNy_cNW0_49LfPq5_J1xCI8eTaeR626Ou1GY/edit?usp=sharing​">link</a>
 
 ## Demo
 <img src="https://imgur.com/a/{YOUR_GIF_HERE}">
