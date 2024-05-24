@@ -35,3 +35,15 @@ How can we use geolocation to make clocking in easier for everyone?
 ## Demo
 <img src="https://imgur.com/a/{YOUR_GIF_HERE}">
 <a href="https://www.youtube.com/watch?v=C6j-NU6pCp4">video demo link</a>
+
+### Screenshots
+<img src="https://i.imgur.com/tEyp2Ne.png">
+<img src="https://i.imgur.com/65Rfxjj.png">
+<img src="https://i.imgur.com/tOHDPHC.png">
+<img src="https://i.imgur.com/2hnJxTz.png">
+<img src="https://i.imgur.com/YiHAPpP.png">
+<img src="https://i.imgur.com/iPatsh4.png">
+<img src="https://i.imgur.com/PyeMGYw.png">
+<img src="https://i.imgur.com/6k8mSEC.png">
+<img src="https://i.imgur.com/QrX5A0g.png">
+<img src="https://i.imgur.com/TzMS5Xl.png">
