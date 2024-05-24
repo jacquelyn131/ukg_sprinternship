@@ -33,7 +33,7 @@ How can we use geolocation to make clocking in easier for everyone?
 - <img src="https://i.imgur.com/mnUMxDv.png">
 
 ## Demo
-<img src="https://imgur.com/a/{YOUR_GIF_HERE}">
+<img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnd2MmtkM3pwMjk1ZGxya3R3d2M5bDdjNzlhYTJubHlnMDhub2J2biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RPVkkGdIlLNW9ipXPV/giphy.gif">
 <a href="https://www.youtube.com/watch?v=C6j-NU6pCp4">video demo link</a>
 
 ### Screenshots
